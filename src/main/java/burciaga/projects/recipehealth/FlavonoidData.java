@@ -11,9 +11,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
- * Class contains methods for setting up CsvWriter and CsvParser settings
+ * FlavonoidData class is called from ParseCSV class in ParseCSV.java.
+ * This class sets CsvParser and CsvWriter settings for UniVocity Parser library, and
+ * overrides the parser's row processing methods for custom CSV parsing
+ * processor methods.
  */
-public class FlavanoidData {
+public class FlavonoidData {
 
     // private class variable declaration
     private File outFile;
@@ -21,15 +24,17 @@ public class FlavanoidData {
 
 
     //  public constructor
-    public FlavanoidData(File outFile, String inFileName) {
+    public FlavonoidData(File outFile, String inFileName) {
         this.outFile = outFile;
         this.inFileName = inFileName;
     }
 
+    // Returns new BufferedReader for each input file
     public BufferedReader getReader(String inFileName) throws Exception {
         return new BufferedReader(new FileReader(inFileName));
     }
 
+    // Uses switch statement to set CsvWriter settings before returning CsvWriter object
     public CsvWriterSettings setWriterSettings() throws Exception {
         CsvWriterSettings writerSettings = new CsvWriterSettings();
         switch (this.inFileName) {
@@ -62,12 +67,14 @@ public class FlavanoidData {
         return writerSettings;
     }
 
+    // Returns new CsvWriter object using settings indicated in setWriterSettings()
     public CsvWriter generateCsvWriter() throws Exception {
         OutputStreamWriter outStreamWriter = new OutputStreamWriter(new FileOutputStream(this.outFile));
         CsvWriterSettings writerSettings = setWriterSettings();
         return new CsvWriter(outStreamWriter, writerSettings);
     }
 
+    // Uses switch statement to set CsvParser settings before returning CsvParserSettings object
     public CsvParserSettings setParserSettings() throws Exception {
         CsvParserSettings parserSettings = new CsvParserSettings();
         switch (this.inFileName) {
@@ -106,6 +113,11 @@ public class FlavanoidData {
         return parserSettings;
     }
 
+    /**
+     * Returns new AbstractRowProcessor() after overriding rowProcessed() and processEnded()
+     * UnivocityParser methods. Adds logic for whether row should be processed or written depending
+     * on file input.
+     */
     public RowProcessor createRowProcessor() throws Exception {
         final CsvWriter csvWriter = generateCsvWriter();
         csvWriter.writeHeaders();
