@@ -34,7 +34,7 @@ public class ParseCSV {
                         if (!fileString.endsWith(".out")) {
                             File outFile = new File(fileString + ".out");
                             String fileName = flavFile.toString().substring(flavFile.toString().lastIndexOf('/') + 1);
-                            FlavanoidData flavData = new FlavanoidData(outFile, fileName);
+                            FlavonoidData flavData = new FlavonoidData(outFile, fileName);
                             CsvParserSettings parserSettings = flavData.setParserSettings();
                             CsvParser csvParser = new CsvParser(parserSettings);
 
