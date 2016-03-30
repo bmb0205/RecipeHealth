@@ -6,7 +6,12 @@ import java.io.IOException;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
-
+/**
+ * ParseCSV class Uses UniVocity Parser CsvWriter and CsvParser to parse
+ * through files of subdirectories in the top level source root directory.
+ * main() lists subdirs from top directory, and iterates files within them according to respective class
+ * within this package.
+ */
 public class ParseCSV {
 
     public static void main(String[] args) throws Exception {
