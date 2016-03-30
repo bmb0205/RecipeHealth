@@ -69,6 +69,6 @@ public class ParseCSV {
             }
         }
         final Long endTime = System.currentTimeMillis();
-        System.out.println("Execution time: " + (endTime - startTime));
+        System.out.println("Execution time: " + (endTime - startTime) + " milliseconds.");
     }
 }

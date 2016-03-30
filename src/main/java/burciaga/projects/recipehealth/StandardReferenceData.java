@@ -74,7 +74,6 @@ public class StandardReferenceData {
     // Uses switch statement to set CsvParser settings before returning CsvParserSettings object
     public CsvParserSettings setParserSettings() throws Exception {
         CsvParserSettings parserSettings = new CsvParserSettings();
-        System.out.println(this.inFileName);
         switch (this.inFileName) {
             case "FOOD_DES.txt":
                 parserSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc", "Shrt_Desc", "ComName", "ManufacName",
