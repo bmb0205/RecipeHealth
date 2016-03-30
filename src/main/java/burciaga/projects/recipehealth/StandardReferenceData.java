@@ -9,7 +9,6 @@ import com.univocity.parsers.csv.CsvWriter;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import org.apache.commons.lang3.StringUtils;
 
-//import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -111,7 +110,6 @@ public class StandardReferenceData {
      * UnivocityParser methods. Adds logic for whether row should be processed or written depending
      * on file input.
      */
-
     public RowProcessor createRowProcessor() throws Exception {
         final CsvWriter csvWriter = generateCsvWriter();
         csvWriter.writeHeaders();
