@@ -45,6 +45,26 @@ public class ParseCSV {
                             }
                         }
                     }
+                } else if (subDirName.equals("StandardReference")) {
+                    File[] srFiles = subDir.listFiles();
+
+                    for (File srFile : srFiles) {
+                        String fileString = srFile.toString();
+
+                        if (!fileString.endsWith(".out")) {
+                            File outFile = new File(fileString + ".out");
+                            String fileName = srFile.toString().substring(srFile.toString().lastIndexOf('/') + 1);
+                            StandardReferenceData srData = new StandardReferenceData(outFile, fileName);
+                            CsvParserSettings parserSettings = srData.setParserSettings();
+                            CsvParser csvParser = new CsvParser(parserSettings);
+
+                            try {
+                                csvParser.parse(srData.getReader(fileString));
+                            } catch (IOException e) {
+                                throw new IllegalStateException("Cannot parse file " + fileString, e);
+                            }
+                        }
+                    }
                 }
             }
         }
