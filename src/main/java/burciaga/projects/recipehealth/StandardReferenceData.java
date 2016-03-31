@@ -45,13 +45,16 @@ public class StandardReferenceData {
         CsvWriterSettings writerSettings = new CsvWriterSettings();
         switch (this.inFileName) {
             case "FOOD_DES.txt":
-                writerSettings.setHeaders("NDB_No", "FdGrp_Cd");
+                writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
             case "NUT_DATA.txt":
-                writerSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val");
+                writerSettings.setHeaders("NDB_No", "Nutr_No");
                 break;
             case "NUTR_DEF.txt":
                 writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
+                break;
+            case "WEIGHT.txt":
+                writerSettings.setHeaders("NDB_No", "Amount", "Msre_Desc", "Gm_Wgt");
                 break;
             default:
                 if (this.inFileName.endsWith(".out")) {
@@ -78,17 +81,21 @@ public class StandardReferenceData {
             case "FOOD_DES.txt":
                 parserSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc", "Shrt_Desc", "ComName", "ManufacName",
                         "Survey", "Ref_desc", "Refuse", "SciName", "N_Factor", "Pro_Factor", "Fat_Factor", "CHO_Factor");
-                parserSettings.selectFields("NDB_No", "FdGrp_Cd");
+                parserSettings.selectFields("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
             case "NUT_DATA.txt":
                 parserSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val", "Num_Data_Pts", "Std_Error", "Src_Cd",
                         "Deriv_Cd", "Ref_NDB_No", "Add_Nutr_Mark", "Num_Studies", "Min", "Max", "DF", "Low_EB", "Up_EB",
                         "Stat_cmt", "AddMod_Date", "CC");
-                parserSettings.selectFields("NDB_No", "Nutr_No", "Nutr_Val");
+                parserSettings.selectFields("NDB_No", "Nutr_No");
                 break;
             case "NUTR_DEF.txt":
                 parserSettings.setHeaders("Nutr_No", "Units", "Tagname", "NutrDesc", "Num_Desc", "SR_Order");
                 parserSettings.selectFields("Nutr_No", "Units", "NutrDesc");
+                break;
+            case "WEIGHT.txt":
+                parserSettings.setHeaders("NDB_No", "Seq", "Amount", "Msre_Desc", "Gm_Wgt", "Num_Data_Pts");
+                parserSettings.selectFields("NDB_No", "Amount", "Msre_Desc", "Gm_Wgt");
                 break;
             default:
                 if (this.inFileName.endsWith(".out")) {
@@ -133,6 +140,8 @@ public class StandardReferenceData {
                 } else if (inFileName.equals("NUT_DATA.txt")) {
                     return true;
                 } else if (inFileName.equals("NUTR_DEF.txt")) {
+                    return true;
+                } else if (inFileName.equals("WEIGHT.txt")) {
                     return true;
                 } else {
                     return true;

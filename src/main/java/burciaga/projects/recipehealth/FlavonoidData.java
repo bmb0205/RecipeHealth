@@ -1,8 +1,11 @@
 package burciaga.projects.recipehealth;
 
-import java.io.*;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
-
 import com.univocity.parsers.common.ParsingContext;
 import com.univocity.parsers.csv.*;
 import com.univocity.parsers.common.processor.*;
@@ -54,7 +57,7 @@ public class FlavonoidData {
                 writerSettings.setHeaders("FdGrp_Cd", "FdGrp_Desc");
                 break;
             case "DATA_SRC.txt":
-                writerSettings.setHeaders("DataSrc_ID", "Title", "Journal", "Year");
+                writerSettings.setHeaders("DataSrc_ID", "Title", "Year", "Journal");
                 break;
             default:
                 if (this.inFileName.endsWith(".out")) {

@@ -16,7 +16,7 @@ public class ParseCSV {
 
     public static void main(String[] args) throws Exception {
 
-        File[] subDirs = new File("/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA").listFiles();
+        File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
 
         final Long startTime = System.currentTimeMillis();
 
