@@ -37,7 +37,7 @@ public class StandardReferenceData {
 
     // Returns new BufferedReader for each input file
     public BufferedReader getReader(String inFileName) throws Exception {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(inFileName), "ISO-8859-7"));
+        return new BufferedReader(new InputStreamReader(new FileInputStream(inFileName), "UTF-8"));
     }
 
     // Uses switch statement to set CsvWriter settings before returning CsvWriter object
@@ -48,7 +48,7 @@ public class StandardReferenceData {
                 writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
             case "NUT_DATA.txt":
-                writerSettings.setHeaders("NDB_No", "Nutr_No");
+                writerSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val");
                 break;
             case "NUTR_DEF.txt":
                 writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
@@ -69,7 +69,7 @@ public class StandardReferenceData {
 
     // Returns new CsvWriter object using settings indicated in setWriterSettings()
     public CsvWriter generateCsvWriter() throws Exception {
-        OutputStreamWriter outStreamWriter = new OutputStreamWriter(new FileOutputStream(this.outFile), "ISO-8859-7");
+        OutputStreamWriter outStreamWriter = new OutputStreamWriter(new FileOutputStream(this.outFile), "UTF-8");
         CsvWriterSettings writerSettings = setWriterSettings();
         return new CsvWriter(outStreamWriter, writerSettings);
     }
@@ -87,7 +87,7 @@ public class StandardReferenceData {
                 parserSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val", "Num_Data_Pts", "Std_Error", "Src_Cd",
                         "Deriv_Cd", "Ref_NDB_No", "Add_Nutr_Mark", "Num_Studies", "Min", "Max", "DF", "Low_EB", "Up_EB",
                         "Stat_cmt", "AddMod_Date", "CC");
-                parserSettings.selectFields("NDB_No", "Nutr_No");
+                parserSettings.selectFields("NDB_No", "Nutr_No", "Nutr_Val");
                 break;
             case "NUTR_DEF.txt":
                 parserSettings.setHeaders("Nutr_No", "Units", "Tagname", "NutrDesc", "Num_Desc", "SR_Order");
@@ -126,6 +126,7 @@ public class StandardReferenceData {
                 if (shouldWriteRow(row)) {
                     for (int i = 0; i < row.length; i++) {
                         row[i] = StringUtils.strip(row[i], "~");
+                        row[i] = StringUtils.strip(row[i], "\"");
                     }
                     String joined = StringUtils.join(row, "|");
                     csvWriter.writeRow(joined);
