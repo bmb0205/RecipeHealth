@@ -15,33 +15,6 @@ import com.univocity.parsers.csv.CsvParserSettings;
  */
 public class ParseCSV {
 
-    public static void joinFiles(List<String> joinedFileList) throws Exception {
-        System.out.println(joinedFileList);
-        String weightString = joinedFileList.get(0);
-        String nutDataString = joinedFileList.get(1);
-        BufferedReader weightReader = null;
-        BufferedReader nutDataReader = null;
-        try {
-            JoinFiles joinObject = new JoinFiles();
-
-            weightReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(weightString)), "UTF-8"));
-            nutDataReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(nutDataString)), "UTF-8"));
-
-            CsvParser weightParser = joinObject.createWeightParser();
-            CsvParser nutDataParser = joinObject.createNutDataParser();
-
-
-
-
-            String line;
-            while ((line = dataReader.readLine()) != null) {
-//                System.out
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) throws Exception {
 
         File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
@@ -104,7 +77,7 @@ public class ParseCSV {
                                 joinFileList.add(fileString);
                             }
                         }
-                        joinFiles(joinFileList);
+//                        joinFiles(joinFileList);
                     }
                 }
             }
