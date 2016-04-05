@@ -47,10 +47,10 @@ public class StandardReferenceData {
             case "FOOD_DES.txt":
                 writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
-            case "NUT_DATA.txt":
+            case "SR_NUT_DATA.txt":
                 writerSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val");
                 break;
-            case "NUTR_DEF.txt":
+            case "SR_NUTR_DEF.txt":
                 writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
                 break;
             case "WEIGHT.txt":
@@ -83,13 +83,13 @@ public class StandardReferenceData {
                         "Survey", "Ref_desc", "Refuse", "SciName", "N_Factor", "Pro_Factor", "Fat_Factor", "CHO_Factor");
                 parserSettings.selectFields("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
-            case "NUT_DATA.txt":
+            case "SR_NUT_DATA.txt":
                 parserSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val", "Num_Data_Pts", "Std_Error", "Src_Cd",
                         "Deriv_Cd", "Ref_NDB_No", "Add_Nutr_Mark", "Num_Studies", "Min", "Max", "DF", "Low_EB", "Up_EB",
                         "Stat_cmt", "AddMod_Date", "CC");
                 parserSettings.selectFields("NDB_No", "Nutr_No", "Nutr_Val");
                 break;
-            case "NUTR_DEF.txt":
+            case "SR_NUTR_DEF.txt":
                 parserSettings.setHeaders("Nutr_No", "Units", "Tagname", "NutrDesc", "Num_Desc", "SR_Order");
                 parserSettings.selectFields("Nutr_No", "Units", "NutrDesc");
                 break;
@@ -138,9 +138,9 @@ public class StandardReferenceData {
             private boolean shouldWriteRow(String[] row) {
                 if (inFileName.equals("FOOD_DES.txt")) {
                     return true;
-                } else if (inFileName.equals("NUT_DATA.txt")) {
+                } else if (inFileName.equals("SR_NUT_DATA.txt")) {
                     return true;
-                } else if (inFileName.equals("NUTR_DEF.txt")) {
+                } else if (inFileName.equals("SR_NUTR_DEF.txt")) {
                     return true;
                 } else if (inFileName.equals("WEIGHT.txt")) {
                     return true;
