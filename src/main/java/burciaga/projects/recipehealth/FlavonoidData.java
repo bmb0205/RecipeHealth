@@ -47,8 +47,8 @@ public class FlavonoidData {
             case "FLAV_IND.txt":
                 writerSettings.setHeaders("NDB_No", "DataSrc_ID", "Food_No", "Food_Indiv_Desc", "Cmpd_Val");
                 break;
-            case "NUTR_DEF.txt":
-                writerSettings.setHeaders("Nutr_No", "Description", "Flav_CLass", "Unit");
+            case "FLAV_NUTR_DEF.txt":
+                writerSettings.setHeaders("Nutr_No", "Description", "Flav_Class", "Units");
                 break;
             case "FOOD_DES.txt":
                 writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
@@ -58,6 +58,9 @@ public class FlavonoidData {
                 break;
             case "DATA_SRC.txt":
                 writerSettings.setHeaders("DataSrc_ID", "Title", "Year", "Journal");
+                break;
+            case "DATSRCLN.txt":
+                writerSettings.setHeaders("NDB_No", "Nutr_No", "DataSrc_ID");
                 break;
             default:
                 if (this.inFileName.endsWith(".out")) {
@@ -92,7 +95,7 @@ public class FlavonoidData {
                         "Cmpd_StdDev");
                 parserSettings.selectFields("NDB_No", "DataSrc_ID", "Food_No", "Food_Indiv_Desc", "Cmpd_Name", "Cmpd_Val");
                 break;
-            case "NUTR_DEF.txt":
+            case "FLAV_NUTR_DEF.txt":
                 parserSettings.setHeaders("Nutr_No", "Description", "Flav_Class", "Tag_Name", "Unit");
                 parserSettings.selectFields("Nutr_No", "Description", "Flav_Class", "Unit");
                 break;
@@ -107,6 +110,10 @@ public class FlavonoidData {
             case "DATA_SRC.txt":
                 parserSettings.setHeaders("DataSrc_ID", "Authors", "Title", "Year", "Journal", "Vol", "Start_Page", "End_Page");
                 parserSettings.selectFields("DataSrc_ID", "Title", "Journal", "Year");
+                break;
+            case "DATSRCLN.txt":
+                parserSettings.setHeaders("NDB_No", "Nutr_No", "DaraSrc_ID");
+                parserSettings.selectFields("NDB_No", "Nutr_No", "DaraSrc_ID");
                 break;
             default:
                 throw new IllegalArgumentException("Invalid file type!");
@@ -145,13 +152,15 @@ public class FlavonoidData {
                     }
                 } else if (inFileName.equals("FLAV_DAT.txt")) {
                     return true;
-                } else if (inFileName.equals("NUTR_DEF.txt")) {
+                } else if (inFileName.equals("FLAV_NUTR_DEF.txt")) {
                     return true;
                 } else if (inFileName.equals("FOOD_DES.txt")) {
                     return true;
                 } else if (inFileName.equals("FD_GROUP.txt")) {
                     return true;
                 } else if (inFileName.equals("DATA_SRC.txt")) {
+                    return true;
+                } else if (inFileName.equals("DATSRCLN.txt")) {
                     return true;
             } else {
                     return true;
@@ -165,25 +174,6 @@ public class FlavonoidData {
             }
         };
     }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (!(obj instanceof FlavanoidData))
-//            return false;
-//        if (obj == this)
-//            return true;
-//
-//        FlavanoidData fd = (FlavanoidData) obj;
-//        return new EqualsBuilder().
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return new HashCodeBuilder(5, 11).
-//                append(inFileName).
-//                append("FLAV_IND.txt").
-//                toHashCode();
-//    }
 
     public static void main(String[] args) throws Exception {
 

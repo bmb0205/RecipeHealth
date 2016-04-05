@@ -28,24 +28,39 @@ public class ParseCSV {
 
                 if (subDirName.equals("Flavonoid")) {
                     File[] flavFiles = subDir.listFiles();
+                    try {
+                        for (File flavFile : flavFiles) {
+                            String fileString = flavFile.toString();
 
-                    for (File flavFile : flavFiles) {
-                        String fileString = flavFile.toString();
+                            if (!fileString.endsWith(".out")) {
+                                File outFile = new File(fileString + ".out");
+                                String fileName = flavFile.toString().substring(flavFile.toString().lastIndexOf('/') + 1);
+                                FlavonoidData flavData = new FlavonoidData(outFile, fileName);
+                                CsvParserSettings parserSettings = flavData.setParserSettings();
+                                CsvParser csvParser = new CsvParser(parserSettings);
 
-                        if (!fileString.endsWith(".out")) {
-                            File outFile = new File(fileString + ".out");
-                            String fileName = flavFile.toString().substring(flavFile.toString().lastIndexOf('/') + 1);
-                            FlavonoidData flavData = new FlavonoidData(outFile, fileName);
-                            CsvParserSettings parserSettings = flavData.setParserSettings();
-                            CsvParser csvParser = new CsvParser(parserSettings);
+                                try {
+                                    csvParser.parse(flavData.getReader(fileString));
 
-                            try {
-                                csvParser.parse(flavData.getReader(fileString));
-                            } catch (IOException e) {
-                                throw new IllegalStateException("Cannot parse file " + fileString, e);
+                                } catch (IOException e) {
+                                    throw new IllegalStateException("Cannot parse file " + fileString, e);
+                                }
                             }
                         }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+
+                    } finally {
+                        List<String> joinedFileList = new ArrayList<String>();
+                        String flavFile1 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FLAV_NUTR_DEF.txt.out";
+                        String flavFile2 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FLAV_DAT.txt.out";
+                        joinedFileList.add(flavFile1);
+                        joinedFileList.add(flavFile2);
+                        JoinFiles joinObject = new JoinFiles(joinedFileList);
+                        joinObject.parseFiles();
                     }
+
                 } else if (subDirName.equals("StandardReference")) {
                     File[] srFiles = subDir.listFiles();
                     try {
@@ -66,18 +81,19 @@ public class ParseCSV {
                                 }
                             }
                         }
+
                     } catch (IOException e) {
                         e.printStackTrace();
+
                     } finally {
-                        System.out.println("!!!!");
-                        List<String> joinFileList = new ArrayList<>();
-                        for (File srFile : srFiles) {
-                            String fileString = srFile.toString();
-                            if (fileString.endsWith("NUT_DATA.txt.out") || fileString.endsWith("WEIGHT.txt.out")) {
-                                joinFileList.add(fileString);
-                            }
-                        }
-//                        joinFiles(joinFileList);
+                        List<String> joinedFileList = new ArrayList<String>();
+
+                        String srFile1 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out";
+                        String srFile2 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out";
+                        joinedFileList.add(srFile1);
+                        joinedFileList.add(srFile2);
+                        JoinFiles joinObject = new JoinFiles(joinedFileList);
+                        joinObject.parseFiles();
                     }
                 }
             }
