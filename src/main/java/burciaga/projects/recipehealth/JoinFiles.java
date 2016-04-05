@@ -20,20 +20,24 @@ public class JoinFiles {
 
     // public constructor
     public JoinFiles(List<String> joinedFileList) throws FileNotFoundException, UnsupportedEncodingException {
+
         this.joinedFileList = joinedFileList;
         this.file1 = joinedFileList.get(0);
         this.file2 = joinedFileList.get(1);
     }
 
     private List<String> getJoinedFileList() {
+
         return this.joinedFileList;
     }
 
     private String getFile1() {
+
         return this.file1;
     }
 
     private String getFile2() {
+
         return this.file2;
     }
 
@@ -76,7 +80,6 @@ public class JoinFiles {
                 dataList.add(attr);
             }
             String dataString = StringUtils.join(dataList, '|');
-//            System.out.println(dataString);
             csvWriter.writeRow(dataString);
         }
         csvWriter.close();
@@ -85,12 +88,12 @@ public class JoinFiles {
     public CsvWriter getCsvWriter() throws IOException {
         CsvWriterSettings writerSettings = new CsvWriterSettings();
         String outFileString;
-        if (this.file1.endsWith("FLAV_NUTR_DEF.txt.out")) {
-            writerSettings.setHeaders("NDB_No", "Nutr_No", "Flav_Val", "Units", "Description");
-            outFileString = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FLAV_MERGED.txt.out";
+        if (this.file1.endsWith("FL_NUTR_DEF.txt.out")) {
+            writerSettings.setHeaders("NDB_No", "Nutr_No", "Flav_Val", "CC", "Description", "Flav_Class", "Units");
+            outFileString = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_MERGED.txt.out";
         } else {
             writerSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val", "Units", "NutrDesc");
-            outFileString = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_MERGED.txt.out";
+            outFileString = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_MERGED.txt.out";
         }
         System.out.println(this.file1);
         System.out.println(this.file2);
@@ -103,7 +106,7 @@ public class JoinFiles {
     public CsvParser getFileParser1() throws IOException { // SR_NUT_DATA.txt.out or FLAV_DAV.txt.out
 
         CsvParserSettings parserSettings1 = new CsvParserSettings();
-        if (this.file1.endsWith("FLAV_DAT.txt.out")) {
+        if (this.file1.endsWith("FL_FLAV_DAT.txt.out")) {
             parserSettings1.setHeaders("NDB_No", "Nutr_No", "Flav_Val", "CC");
             parserSettings1.selectFields("NDB_No", "Nutr_No", "Flav_Val", "CC");
 

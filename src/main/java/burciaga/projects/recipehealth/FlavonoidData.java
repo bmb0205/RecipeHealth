@@ -41,25 +41,25 @@ public class FlavonoidData {
     public CsvWriterSettings setWriterSettings() throws Exception {
         CsvWriterSettings writerSettings = new CsvWriterSettings();
         switch (this.inFileName) {
-            case "FLAV_DAT.txt":
+            case "FL_FLAV_DAT.txt":
                 writerSettings.setHeaders("NDB_No", "Nutr_No", "Flav_Val", "CC");
                 break;
-            case "FLAV_IND.txt":
+            case "FL_FLAV_IND.txt":
                 writerSettings.setHeaders("NDB_No", "DataSrc_ID", "Food_No", "Food_Indiv_Desc", "Cmpd_Val");
                 break;
-            case "FLAV_NUTR_DEF.txt":
+            case "FL_NUTR_DEF.txt":
                 writerSettings.setHeaders("Nutr_No", "Description", "Flav_Class", "Units");
                 break;
-            case "FOOD_DES.txt":
+            case "FL_FOOD_DES.txt":
                 writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
-            case "FD_GROUP.txt":
+            case "FL_FD_GROUP.txt":
                 writerSettings.setHeaders("FdGrp_Cd", "FdGrp_Desc");
                 break;
-            case "DATA_SRC.txt":
+            case "FL_DATA_SRC.txt":
                 writerSettings.setHeaders("DataSrc_ID", "Title", "Year", "Journal");
                 break;
-            case "DATSRCLN.txt":
+            case "FL_DATSRCLN.txt":
                 writerSettings.setHeaders("NDB_No", "Nutr_No", "DataSrc_ID");
                 break;
             default:
@@ -84,34 +84,34 @@ public class FlavonoidData {
     public CsvParserSettings setParserSettings() throws Exception {
         CsvParserSettings parserSettings = new CsvParserSettings();
         switch (this.inFileName) {
-            case "FLAV_DAT.txt":
+            case "FL_FLAV_DAT.txt":
                 parserSettings.setHeaders("NDB_No", "Nutr_No", "Flav_Val", "SE", "n", "Min", "Max", "CC");
                 parserSettings.selectFields("NDB_No", "Nutr_No", "Flav_Val", "CC");
                 break;
-            case "FLAV_IND.txt":
+            case "FL_FLAV_IND.txt":
                 parserSettings.setHeaders("NDB_No", "DataSrc_ID", "Food_No", "Food_Indiv_Desc", "Method", "Cmpd_Name",
                         "Rptd_CmpdVal", "Rptd_StdDev", "Num_Data_Pts", "LT", "Fresh_Dry_Wt", "Rptd_Units",
                         "Quant_Std", "Conv_Factor_G", "Conv_Factor_M", "Conv_Factor_SpGr", "Cmpd_Val",
                         "Cmpd_StdDev");
                 parserSettings.selectFields("NDB_No", "DataSrc_ID", "Food_No", "Food_Indiv_Desc", "Cmpd_Name", "Cmpd_Val");
                 break;
-            case "FLAV_NUTR_DEF.txt":
+            case "FL_NUTR_DEF.txt":
                 parserSettings.setHeaders("Nutr_No", "Description", "Flav_Class", "Tag_Name", "Unit");
                 parserSettings.selectFields("Nutr_No", "Description", "Flav_Class", "Unit");
                 break;
-            case "FOOD_DES.txt":
+            case "FL_FOOD_DES.txt":
                 parserSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 parserSettings.selectFields("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
-            case "FD_GROUP.txt":
+            case "FL_FD_GROUP.txt":
                 parserSettings.setHeaders("FdGrp_Cd", "FdGrp_Desc");
                 parserSettings.selectFields("FdGrp_Cd", "FdGrp_Desc");
                 break;
-            case "DATA_SRC.txt":
+            case "FL_DATA_SRC.txt":
                 parserSettings.setHeaders("DataSrc_ID", "Authors", "Title", "Year", "Journal", "Vol", "Start_Page", "End_Page");
                 parserSettings.selectFields("DataSrc_ID", "Title", "Journal", "Year");
                 break;
-            case "DATSRCLN.txt":
+            case "FL_DATSRCLN.txt":
                 parserSettings.setHeaders("NDB_No", "Nutr_No", "DaraSrc_ID");
                 parserSettings.selectFields("NDB_No", "Nutr_No", "DaraSrc_ID");
                 break;
@@ -144,25 +144,25 @@ public class FlavonoidData {
             }
 
             private boolean shouldWriteRow(String[] row) {
-                if (inFileName.equals("FLAV_IND.txt")) {
+                if (inFileName.equals("FLAV_FLAV_IND.txt")) {
                     if (!row[5].equals("0.00")) {
                         return true;
                     } else {
                         return false;
                     }
-                } else if (inFileName.equals("FLAV_DAT.txt")) {
+                } else if (inFileName.equals("FL_FLAV_DAT.txt")) {
                     return true;
-                } else if (inFileName.equals("FLAV_NUTR_DEF.txt")) {
+                } else if (inFileName.equals("FL_NUTR_DEF.txt")) {
                     return true;
-                } else if (inFileName.equals("FOOD_DES.txt")) {
+                } else if (inFileName.equals("FL_FOOD_DES.txt")) {
                     return true;
-                } else if (inFileName.equals("FD_GROUP.txt")) {
+                } else if (inFileName.equals("FL_FD_GROUP.txt")) {
                     return true;
-                } else if (inFileName.equals("DATA_SRC.txt")) {
+                } else if (inFileName.equals("FL_DATA_SRC.txt")) {
                     return true;
-                } else if (inFileName.equals("DATSRCLN.txt")) {
+                } else if (inFileName.equals("FL_DATSRCLN.txt")) {
                     return true;
-            } else {
+                } else {
                     return true;
             }
         }

@@ -44,7 +44,7 @@ public class StandardReferenceData {
     public CsvWriterSettings setWriterSettings() throws Exception {
         CsvWriterSettings writerSettings = new CsvWriterSettings();
         switch (this.inFileName) {
-            case "FOOD_DES.txt":
+            case "SR_FOOD_DES.txt":
                 writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
             case "SR_NUT_DATA.txt":
@@ -53,7 +53,7 @@ public class StandardReferenceData {
             case "SR_NUTR_DEF.txt":
                 writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
                 break;
-            case "WEIGHT.txt":
+            case "SR_WEIGHT.txt":
                 writerSettings.setHeaders("NDB_No", "Amount", "Msre_Desc", "Gm_Wgt");
                 break;
             default:
@@ -78,7 +78,7 @@ public class StandardReferenceData {
     public CsvParserSettings setParserSettings() throws Exception {
         CsvParserSettings parserSettings = new CsvParserSettings();
         switch (this.inFileName) {
-            case "FOOD_DES.txt":
+            case "SR_FOOD_DES.txt":
                 parserSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc", "Shrt_Desc", "ComName", "ManufacName",
                         "Survey", "Ref_desc", "Refuse", "SciName", "N_Factor", "Pro_Factor", "Fat_Factor", "CHO_Factor");
                 parserSettings.selectFields("NDB_No", "FdGrp_Cd", "Long_Desc");
@@ -93,7 +93,7 @@ public class StandardReferenceData {
                 parserSettings.setHeaders("Nutr_No", "Units", "Tagname", "NutrDesc", "Num_Desc", "SR_Order");
                 parserSettings.selectFields("Nutr_No", "Units", "NutrDesc");
                 break;
-            case "WEIGHT.txt":
+            case "SR_WEIGHT.txt":
                 parserSettings.setHeaders("NDB_No", "Seq", "Amount", "Msre_Desc", "Gm_Wgt", "Num_Data_Pts");
                 parserSettings.selectFields("NDB_No", "Amount", "Msre_Desc", "Gm_Wgt");
                 break;
@@ -136,13 +136,13 @@ public class StandardReferenceData {
             }
 
             private boolean shouldWriteRow(String[] row) {
-                if (inFileName.equals("FOOD_DES.txt")) {
+                if (inFileName.equals("SR_FOOD_DES.txt")) {
                     return true;
                 } else if (inFileName.equals("SR_NUT_DATA.txt")) {
                     return true;
                 } else if (inFileName.equals("SR_NUTR_DEF.txt")) {
                     return true;
-                } else if (inFileName.equals("WEIGHT.txt")) {
+                } else if (inFileName.equals("SR_WEIGHT.txt")) {
                     return true;
                 } else {
                     return true;
