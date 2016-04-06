@@ -13,13 +13,14 @@ import com.univocity.parsers.csv.CsvParserSettings;
  * ParseCSV class Uses UniVocity Parser CsvWriter and CsvParser to parse
  * through files of subdirectories in the top level source root directory.
  * main() lists subdirs from top directory, and iterates files within them according to respective class
- * within this package.
+ * within this package. Renames the files for good convention and also joins selected files into
+ * one csv to lower number of tables in future PostgreSQL database
  */
 public class ParseCSV {
 
+    // Adds FL_ or SR_ prefix to file names for easier identification and consistency
     public static void RenameFiles(File subDir) {
         File[] files = subDir.listFiles();
-        System.out.println(Arrays.toString(files));
         Path source = FileSystems.getDefault().getPath(subDir.toString());
         String sourceType = null;
         if (source.toString().endsWith("Flavonoid")) {
@@ -31,11 +32,10 @@ public class ParseCSV {
             Path oldFilePath = FileSystems.getDefault().getPath(file.toString());
             Path newFilePath = FileSystems.getDefault().getPath(subDir.toString() + sourceType + file.getName());
             File newFile = newFilePath.toFile();
-            if(newFile.exists() || newFile.exists()) {
-                System.out.println("Exists!!!" + newFile.toString());
+            if(file.getName().startsWith("SR_") || file.getName().startsWith("FL_")) {
                 continue;
             } else {
-                System.out.println("Does not exist!! Make it!! " + newFile.toString());
+                System.out.println("Creating outfile: " + newFile.toString());
                 try {
                     Files.move(oldFilePath, newFilePath);
                 } catch (IOException e) {
@@ -47,7 +47,7 @@ public class ParseCSV {
 
     public static void main(String[] args) throws Exception {
 
-        File[] subDirs = new File("/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA").listFiles();
+        File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
 
         final Long startTime = System.currentTimeMillis();
 
@@ -55,7 +55,6 @@ public class ParseCSV {
         if (subDirs != null) {
             for (File subDir : subDirs) {
                 String subDirName = subDir.toString().substring(subDir.toString().lastIndexOf('/') + 1);
-
                 if (subDirName.equals("Flavonoid")) {
                     RenameFiles(subDir);
                     File[] flavFiles = subDir.listFiles();
@@ -84,12 +83,11 @@ public class ParseCSV {
 
                     } finally {
                         List<String> joinedFileList = new ArrayList<String>();
-                        String flavFile1 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out";
-                        String flavFile2 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out";
+                        String flavFile1 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out";
+                        String flavFile2 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out";
                         joinedFileList.add(flavFile1);
                         joinedFileList.add(flavFile2);
                         JoinFiles joinObject = new JoinFiles(joinedFileList);
-                        System.out.println(joinedFileList.toString());
                         joinObject.parseFiles();
                     }
 
@@ -121,8 +119,8 @@ public class ParseCSV {
                     } finally {
                         List<String> joinedFileList = new ArrayList<String>();
 
-                        String srFile1 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out";
-                        String srFile2 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out";
+                        String srFile1 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out";
+                        String srFile2 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out";
                         joinedFileList.add(srFile1);
                         joinedFileList.add(srFile2);
                         JoinFiles joinObject = new JoinFiles(joinedFileList);
