@@ -174,8 +174,4 @@ public class FlavonoidData {
             }
         };
     }
-
-    public static void main(String[] args) throws Exception {
-
-    }
 }

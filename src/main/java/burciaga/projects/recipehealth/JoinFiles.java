@@ -83,21 +83,26 @@ public class JoinFiles {
         csvWriter.close();
     }
 
-    // Returns new CsvWriter after specifying CsvWriterSettings and outfile to write to depending on file inut
+    // Returns new CsvWriter after specifying CsvWriterSettings and outfile to write to depending on file input
     private CsvWriter getCsvWriter() throws IOException {
         CsvWriterSettings writerSettings = new CsvWriterSettings();
         String outFileString;
         if (this.file1.endsWith("FL_NUTR_DEF.txt.out")) {
             writerSettings.setHeaders("NDB_No", "Nutr_No", "Flav_Val", "CC", "Description", "Flav_Class", "Units");
-            outFileString = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_MERGED.txt.out";
+            outFileString = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_MERGED.txt.out";
         } else {
             writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
-            outFileString = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_MERGED.txt.out";
+            outFileString = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_MERGED.txt.out";
         }
         writerSettings.getFormat().setDelimiter('|');
         OutputStreamWriter outStreamWriter = new OutputStreamWriter(new FileOutputStream(new File(outFileString)));
         return new CsvWriter(outStreamWriter, writerSettings);
     }
+
+
+    /*
+    Turn below methods into case switch instead of if else
+     */
 
     // Returns new CsvParser with specified parser settings based on file input
     private CsvParser getFileParser1() throws IOException { // SR_NUTR_DEF.txt.out or FL_NUTR_DEF.txt.out
@@ -133,10 +138,6 @@ public class JoinFiles {
         CsvFormat parserFormat = parserSettings2.getFormat();
         parserFormat.setDelimiter('|');
         return new CsvParser(parserSettings2);
-    }
-
-    public static void main(String[] args) throws Exception {
-
     }
 
 }
