@@ -1,4 +1,4 @@
-package burciaga.projects.recipehealth;
+package burciaga.projects.recipehealth.csv;
 
 import com.univocity.parsers.common.ParsingContext;
 import com.univocity.parsers.common.processor.AbstractRowProcessor;

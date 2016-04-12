@@ -1,6 +1,7 @@
-package burciaga.projects.recipehealth;
+package burciaga.projects.recipehealth.xml;
 
 
+import burciaga.projects.recipehealth.xml.PubmedArticle;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

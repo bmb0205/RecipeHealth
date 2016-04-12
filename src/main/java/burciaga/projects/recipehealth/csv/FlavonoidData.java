@@ -1,4 +1,4 @@
-package burciaga.projects.recipehealth;
+package burciaga.projects.recipehealth.csv;
 
 import java.io.File;
 import java.io.BufferedReader;

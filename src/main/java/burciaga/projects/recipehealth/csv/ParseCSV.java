@@ -1,9 +1,8 @@
-package burciaga.projects.recipehealth;
+package burciaga.projects.recipehealth.csv;
 
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.univocity.parsers.csv.CsvParser;

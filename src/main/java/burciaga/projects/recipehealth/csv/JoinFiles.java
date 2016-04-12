@@ -1,4 +1,4 @@
-package burciaga.projects.recipehealth;
+package burciaga.projects.recipehealth.csv;
 
 import com.google.common.collect.*;
 import com.univocity.parsers.csv.*;
