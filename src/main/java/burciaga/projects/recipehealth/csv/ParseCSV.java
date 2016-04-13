@@ -46,7 +46,7 @@ public class ParseCSV {
 
     public static void main(String[] args) throws Exception {
 
-        File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
+        File[] subDirs = new File("/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA").listFiles();
 
         final Long startTime = System.currentTimeMillis();
 
@@ -80,15 +80,16 @@ public class ParseCSV {
                     } catch (IOException e) {
                         e.printStackTrace();
 
-                    } finally {
-                        List<String> joinedFileList = new ArrayList<String>();
-                        String flavFile1 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out";
-                        String flavFile2 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out";
-                        joinedFileList.add(flavFile1);
-                        joinedFileList.add(flavFile2);
-                        JoinFiles joinObject = new JoinFiles(joinedFileList);
-                        joinObject.parseFiles();
                     }
+//                    finally {
+//                        List<String> joinedFileList = new ArrayList<String>();
+//                        String flavFile1 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out";
+//                        String flavFile2 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out";
+//                        joinedFileList.add(flavFile1);
+//                        joinedFileList.add(flavFile2);
+//                        JoinFiles joinObject = new JoinFiles(joinedFileList);
+//                        joinObject.parseFiles();
+//                    }
 
                 } else if (subDirName.equals("StandardReference")) {
                     RenameFiles(subDir);
@@ -115,16 +116,17 @@ public class ParseCSV {
                     } catch (IOException e) {
                         e.printStackTrace();
 
-                    } finally {
-                        List<String> joinedFileList = new ArrayList<String>();
-
-                        String srFile1 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out";
-                        String srFile2 = "/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out";
-                        joinedFileList.add(srFile1);
-                        joinedFileList.add(srFile2);
-                        JoinFiles joinObject = new JoinFiles(joinedFileList);
-                        joinObject.parseFiles();
                     }
+//                    finally {
+//                        List<String> joinedFileList = new ArrayList<String>();
+//
+//                        String srFile1 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out";
+//                        String srFile2 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out";
+//                        joinedFileList.add(srFile1);
+//                        joinedFileList.add(srFile2);
+//                        JoinFiles joinObject = new JoinFiles(joinedFileList);
+//                        joinObject.parseFiles();
+//                    }
                 }
             }
         }

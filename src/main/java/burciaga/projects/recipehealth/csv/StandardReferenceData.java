@@ -54,7 +54,7 @@ public class StandardReferenceData {
                 writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
                 break;
             case "SR_WEIGHT.txt":
-                writerSettings.setHeaders("NDB_No", "Amount", "Msre_Desc", "Gm_Wgt");
+                writerSettings.setHeaders("NDB_No", "Seq", "Amount", "Msre_Desc", "Gm_Wgt");
                 break;
             default:
                 if (this.inFileName.endsWith(".out")) {
@@ -95,7 +95,7 @@ public class StandardReferenceData {
                 break;
             case "SR_WEIGHT.txt":
                 parserSettings.setHeaders("NDB_No", "Seq", "Amount", "Msre_Desc", "Gm_Wgt", "Num_Data_Pts");
-                parserSettings.selectFields("NDB_No", "Amount", "Msre_Desc", "Gm_Wgt");
+                parserSettings.selectFields("NDB_No", "Seq", "Amount", "Msre_Desc", "Gm_Wgt");
                 break;
             default:
                 if (this.inFileName.endsWith(".out")) {
@@ -118,7 +118,6 @@ public class StandardReferenceData {
      */
     public RowProcessor createRowProcessor() throws Exception {
         final CsvWriter csvWriter = generateCsvWriter();
-        csvWriter.writeHeaders();
         return new AbstractRowProcessor() {
 
             @Override
@@ -127,6 +126,7 @@ public class StandardReferenceData {
                     for (int i = 0; i < row.length; i++) {
                         row[i] = StringUtils.strip(row[i], "~");
                         row[i] = StringUtils.strip(row[i], "\"");
+                        row[i] = StringUtils.replace(row[i], "\"", "inches");
                     }
                     String joined = StringUtils.join(row, "|");
                     csvWriter.writeRow(joined);
