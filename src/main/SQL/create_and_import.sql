@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS SR_Food_Description
 PRIMARY KEY (NDB_No)
 );
 
-\copy SR_Food_Description FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_FOOD_DES.txt.out' DELIMITER '|' CSV;
+\copy SR_Food_Description FROM '/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_FOOD_DES.txt.out' DELIMITER '|' CSV;
 
 -- SR_Nutrient_Definition --
 DROP TABLE IF EXISTS SR_Nutrient_Definition CASCADE;
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS SR_Nutrient_Definition
 PRIMARY KEY (Nutrient_No)
 );
 
-\copy SR_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out' DELIMITER '|' CSV;
+\copy SR_Nutrient_Definition FROM '/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out' DELIMITER '|' CSV;
 
 -- SR_Weight --
 DROP TABLE IF EXISTS SR_Weight CASCADE;
@@ -42,7 +42,7 @@ PRIMARY KEY (NDB_No, Seq),
 CONSTRAINT "fk_NDB_No" FOREIGN KEY (NDB_No) REFERENCES Sr_Food_Description (NDB_No)
 );
 
-\copy SR_WEIGHT FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_WEIGHT.txt.out' DELIMITER '|' CSV;
+\copy SR_WEIGHT FROM '/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_WEIGHT.txt.out' DELIMITER '|' CSV;
 
 -- SR_Nutrient_Data --
 DROP TABLE IF EXISTS SR_Nutrient_Data CASCADE;
@@ -56,4 +56,11 @@ CONSTRAINT "fk_NDB_No" FOREIGN KEY (NDB_No) REFERENCES Sr_Food_Description (NDB_
 CONSTRAINT "fk_Nutrient_No" FOREIGN KEY (Nutrient_No) REFERENCES Sr_Nutrient_Definition (Nutrient_No)
 );
 
-\copy SR_Nutrient_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out' DELIMITER '|' CSV;
+\copy SR_Nutrient_Data FROM '/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out' DELIMITER '|' CSV;
+
+
+-- SELECT SR_Nutrient_Data.NDB_No, SR_Nutrient_Data.Nutrient_No, ndef.Nutrient_Des
+-- FROM SR_Nutrient_Definition AS ndef
+--   INNER JOIN SR_Nutrient_Data
+--     ON SR_Nutrient_Data.Nutrient_No = ndef.Nutrient_No
+-- WHERE SR_Nutrient_Data.NDB_No = 01001;
