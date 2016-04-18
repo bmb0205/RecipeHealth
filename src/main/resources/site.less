@@ -1,0 +1,107 @@
+// contains all custom CSS selectors and rules
+
+// NAVBAR
+
+// container background
+.navbar-inverse .container-fluid {
+  border-color: #333333;
+  color: #333333;
+  background: #333333;
+}
+
+// RecipeHealth title/header
+.navbar-inverse .navbar,
+.navbar-inverse .navbar-header > a {
+  color: #32cd32;
+  background: #333333;
+  height: 60px;
+  margin-top: 5px;
+  margin-right: 15px;
+  font-weight: bolder;
+  font-size: 48px;
+  text-shadow: 0 3px 3px rgb(0,0,0);
+}
+
+// Slogan beneath title
+.navbar-inverse .navbar-header > p {
+  color: #d9d9d9;
+  font-weight: bolder;
+  font-size: 18px;
+  font-style: italic;
+  margin-left: 20px;
+  line-height: 1.3;
+  text-shadow: 0 2px 2px rgb(0,0,0);
+}
+
+// navbar links
+.navbar-inverse .navbar-nav > li > a {
+  background: #333333;
+  color: #d9d9d9 !important;
+  font-weight: bolder;
+  margin-top: 40px;
+  margin-left: 10px;
+  font-size: 20px;
+  text-shadow: 0 2px 2px rgb(0,0,0,0.8);
+}
+
+// CAROUSEL
+
+.carousel img {
+  min-width: 100%;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+}
+.carousel-inner {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 400px;
+  min-height: 400px;
+  top: 20px;
+  bottom: 20px;
+}
+
+.carousel-caption {
+  background: rgba(51, 51, 51, 0.9);
+  background-size: 800px;
+  max-width: 800px;
+  min-width: 500px;
+  position: static;
+  margin: 0 0 50px 60px;
+  text-align: center;
+}
+
+.carousel-caption h1 {
+  line-height: 1.25;
+  width: 800px;
+  color: #32cd32;
+  font-weight: bolder;
+  margin: 1px 1px 1px;
+  text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
+}
+.carousel-caption .lead {
+  line-height: 1.25;
+  width: 800px;
+  color: #d9d9d9;
+  font-weight: bolder;
+  margin: 10px 1px 1px;
+  text-shadow: 1px 1px rgba(0, 0, 0, .5);
+}
+
+.carousel-caption .btn-primary {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background: none;
+  border-color: transparent;
+  color: #32cd32;
+  font-size: 26px;
+  font-weight: bolder;
+}
+
+.carousel .item {
+  height: 400px;
+  .transition(3s ease-in-out left);
+}
