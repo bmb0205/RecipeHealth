@@ -18,7 +18,7 @@ public class CreateTables {
 
         try {
             Process extProcess = Runtime.getRuntime().exec(
-                    "psql -U bburciag -d recipehealth -f /Users/bburciag/Resume/Java/RecipeHealth/src/main/SQL/create_and_import.sql");
+                    "psql -U bmb0205 -d recipehealth -f /home/bmb0205/Resume/Java/RecipeHealth/src/main/SQL/create_and_import.sql");
             BufferedReader inReader = new BufferedReader(new InputStreamReader(extProcess.getInputStream()));
             BufferedReader errReader = new BufferedReader(new InputStreamReader(extProcess.getErrorStream()));
             String line;

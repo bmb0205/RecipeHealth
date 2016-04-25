@@ -17,36 +17,11 @@ import com.univocity.parsers.csv.CsvParserSettings;
  */
 public class ParseCSV {
 
-    // Adds FL_ or SR_ prefix to file names for easier identification and consistency
-    public static void RenameFiles(File subDir) {
-        File[] files = subDir.listFiles();
-        Path source = FileSystems.getDefault().getPath(subDir.toString());
-        String sourceType = null;
-        if (source.toString().endsWith("Flavonoid")) {
-            sourceType = "/FL_";
-        } else {
-            sourceType = "/SR_";
-        }
-        for (File file : files) {
-            Path oldFilePath = FileSystems.getDefault().getPath(file.toString());
-            Path newFilePath = FileSystems.getDefault().getPath(subDir.toString() + sourceType + file.getName());
-            File newFile = newFilePath.toFile();
-            if(file.getName().startsWith("SR_") || file.getName().startsWith("FL_")) {
-                continue;
-            } else {
-                System.out.println("Creating outfile: " + newFile.toString());
-                try {
-                    Files.move(oldFilePath, newFilePath);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+    public static List<File> foodDescFileList = new ArrayList<File>();
 
     public static void main(String[] args) throws Exception {
 
-        File[] subDirs = new File("/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA").listFiles();
+        File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
 
         final Long startTime = System.currentTimeMillis();
 
@@ -55,82 +30,140 @@ public class ParseCSV {
             for (File subDir : subDirs) {
                 String subDirName = subDir.toString().substring(subDir.toString().lastIndexOf('/') + 1);
                 if (subDirName.equals("Flavonoid")) {
-                    RenameFiles(subDir);
-                    File[] flavFiles = subDir.listFiles();
-                    try {
-                        for (File flavFile : flavFiles) {
-                            String fileString = flavFile.toString();
-
-                            if (!fileString.endsWith(".out")) {
-                                File outFile = new File(fileString + ".out");
-                                String fileName = flavFile.toString().substring(flavFile.toString().lastIndexOf('/') + 1);
-                                FlavonoidData flavData = new FlavonoidData(outFile, fileName);
-                                CsvParserSettings parserSettings = flavData.setParserSettings();
-                                CsvParser csvParser = new CsvParser(parserSettings);
-
-                                try {
-                                    csvParser.parse(flavData.getReader(fileString));
-
-                                } catch (IOException e) {
-                                    throw new IllegalStateException("Cannot parse file " + fileString, e);
-                                }
-                            }
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-
-                    }
-//                    finally {
-//                        List<String> joinedFileList = new ArrayList<String>();
-//                        String flavFile1 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out";
-//                        String flavFile2 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out";
-//                        joinedFileList.add(flavFile1);
-//                        joinedFileList.add(flavFile2);
-//                        JoinFiles joinObject = new JoinFiles(joinedFileList);
-//                        joinObject.parseFiles();
-//                    }
-
+                    parseFlavonoidData(subDir);
                 } else if (subDirName.equals("StandardReference")) {
-                    RenameFiles(subDir);
-                    File[] srFiles = subDir.listFiles();
-                    try {
-                        for (File srFile : srFiles) {
-                            String fileString = srFile.toString();
-
-                            if (!fileString.endsWith(".out")) {
-                                File outFile = new File(fileString + ".out");
-                                String fileName = srFile.toString().substring(srFile.toString().lastIndexOf('/') + 1);
-                                StandardReferenceData srData = new StandardReferenceData(outFile, fileName);
-                                CsvParserSettings parserSettings = srData.setParserSettings();
-                                CsvParser csvParser = new CsvParser(parserSettings);
-
-                                try {
-                                    csvParser.parse(srData.getReader(fileString));
-                                } catch (IOException e) {
-                                    throw new IllegalStateException("Cannot parse file " + fileString, e);
-                                }
-                            }
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-
-                    }
-//                    finally {
-//                        List<String> joinedFileList = new ArrayList<String>();
-//
-//                        String srFile1 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out";
-//                        String srFile2 = "/Users/bburciag/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out";
-//                        joinedFileList.add(srFile1);
-//                        joinedFileList.add(srFile2);
-//                        JoinFiles joinObject = new JoinFiles(joinedFileList);
-//                        joinObject.parseFiles();
-//                    }
+                    parseStandardReferenceData(subDir);
+                } else if (subDirName.equals("Isoflavone")) {
+                    parseIsoflavoneData(subDir);
                 }
             }
         }
+        CombineFiles combineFiles = new CombineFiles((ArrayList<File>) foodDescFileList);
+        combineFiles.appendFiles();
         final Long endTime = System.currentTimeMillis();
         System.out.println("Execution time: " + (endTime - startTime) + " milliseconds.");
+    }
+
+    // Adds FL_, SR_, or ISO_ prefix to file names for easier identification and consistency
+    private static void RenameFiles(File subDir) {
+        File[] files = subDir.listFiles();
+        Path source = FileSystems.getDefault().getPath(subDir.toString());
+        String sourceType = null;
+        if (source.toString().endsWith("Flavonoid")) {
+            sourceType = "/FL_";
+        } else if (source.toString().endsWith("Isoflavone")){
+            sourceType = "/ISO_";
+        } else {
+            sourceType = "/SR_";
+        }
+        for (File file : files) {
+            try {
+                Path oldFilePath = FileSystems.getDefault().getPath(file.toString());
+                Path newFilePath = FileSystems.getDefault().getPath(subDir.toString() + sourceType + file.getName());
+                File newFile = newFilePath.toFile();
+
+                if (file.getName().startsWith("SR_") || file.getName().startsWith("FL_") || file.getName().startsWith("ISO_")) {
+                    //  do nothing
+                } else {
+                    System.out.println("Creating outfile: " + newFile.toString());
+                    try {
+                        Files.move(oldFilePath, newFilePath);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void parseIsoflavoneData(File subDir) throws Exception {
+        RenameFiles(subDir);
+        File[] isoFiles = subDir.listFiles();
+        try {
+            for (File isoFile : isoFiles) {
+                String fileString = isoFile.toString();
+                System.out.println(fileString);
+                if (!fileString.endsWith(".out")) {
+                    File outFile = new File(fileString + ".out");
+                    if (fileString.endsWith("ISO_FOOD_DES.csv")) {
+                        foodDescFileList.add(outFile);
+                    }
+                    String fileName = isoFile.toString().substring(isoFile.toString().lastIndexOf('/') + 1);
+                    IsoflavoneData isoData = new IsoflavoneData(outFile, fileName);
+                    CsvParserSettings parserSettings = isoData.setParserSettings();
+                    CsvParser csvParser = new CsvParser(parserSettings);
+                    try {
+                        csvParser.parse(isoData.getReader(fileString));
+                    } catch (IOException e) {
+                        throw new IllegalStateException("Cannot parse file " + fileString, e);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void parseFlavonoidData(File subDir) throws Exception {
+        RenameFiles(subDir);
+        File[] flavFiles = subDir.listFiles();
+        try {
+            for (File flavFile : flavFiles) {
+                String fileString = flavFile.toString();
+
+                if (!fileString.endsWith(".out")) {
+                    File outFile = new File(fileString + ".out");
+                    if (fileString.endsWith("FL_FOOD_DES.txt")) {
+                        foodDescFileList.add(outFile);
+                    }
+                    String fileName = flavFile.toString().substring(flavFile.toString().lastIndexOf('/') + 1);
+                    FlavonoidData flavData = new FlavonoidData(outFile, fileName);
+                    CsvParserSettings parserSettings = flavData.setParserSettings();
+                    CsvParser csvParser = new CsvParser(parserSettings);
+
+                    try {
+                        csvParser.parse(flavData.getReader(fileString));
+                    } catch (IOException e) {
+                        throw new IllegalStateException("Cannot parse file " + fileString, e);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    private static void parseStandardReferenceData(File subDir) throws Exception {
+        RenameFiles(subDir);
+        File[] srFiles = subDir.listFiles();
+        try {
+            for (File srFile : srFiles) {
+                String fileString = srFile.toString();
+
+                if (!fileString.endsWith(".out")) {
+                    File outFile = new File(fileString + ".out");
+                    if (fileString.endsWith("SR_FOOD_DES.txt")) {
+                        foodDescFileList.add(outFile);
+                    }
+                    String fileName = srFile.toString().substring(srFile.toString().lastIndexOf('/') + 1);
+                    StandardReferenceData srData = new StandardReferenceData(outFile, fileName);
+                    CsvParserSettings parserSettings = srData.setParserSettings();
+                    CsvParser csvParser = new CsvParser(parserSettings);
+
+                    try {
+                        csvParser.parse(srData.getReader(fileString));
+                    } catch (IOException e) {
+                        throw new IllegalStateException("Cannot parse file " + fileString, e);
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 }

@@ -10,6 +10,7 @@ import com.univocity.parsers.common.ParsingContext;
 import com.univocity.parsers.csv.*;
 import com.univocity.parsers.common.processor.*;
 import org.apache.commons.lang3.StringUtils;
+import java.util.UUID;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
@@ -130,19 +131,36 @@ public class FlavonoidData {
      */
     public RowProcessor createRowProcessor() throws Exception {
         final CsvWriter csvWriter = generateCsvWriter();
-        csvWriter.writeHeaders();
+//        csvWriter.writeHeaders();
         return new AbstractRowProcessor() {
 
             @Override
             public void rowProcessed(String[] row, ParsingContext context) {
+                StringBuilder builder = new StringBuilder();
                 if (shouldWriteRow(row)) {
-                    String joined = StringUtils.join(row, "|");
-                    csvWriter.writeRow(joined);
+                    for (int i = 0; i < row.length; i++) {
+                        row[i] = StringUtils.replace(row[i], "\"", "inches");
+                    }
+                    if ( inFileName.equals("FL_FLAV_IND.txt") ) {
+                        builder.append(StringUtils.join(row, "|"));
+                        builder.append("|");
+                        builder.append(UUID.randomUUID());
+                        csvWriter.writeRow(builder.toString());
+                    } else if ( inFileName.equals("FL_DATSRCLN.txt")){
+                        builder.append(StringUtils.join(row, "|"));
+                        builder.append("|");
+                        builder.append(UUID.randomUUID());
+                        csvWriter.writeRow(builder.toString());
+                    } else {
+                        String joined = StringUtils.join(row, "|");
+                        csvWriter.writeRow(joined);
+                    }
                 } else {
                     // do nothing
                 }
             }
 
+            // add logic for if row should be written/filtered
             private boolean shouldWriteRow(String[] row) {
                 if (inFileName.equals("FLAV_FLAV_IND.txt")) {
                     if (!row[5].equals("0.00")) {
@@ -167,7 +185,6 @@ public class FlavonoidData {
             }
         }
 
-//
             @Override
             public void processEnded(ParsingContext context) {
                 csvWriter.close();
