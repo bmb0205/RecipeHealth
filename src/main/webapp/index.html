@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="RecipeHealth Web Application">
+    <meta name="author" content="Brandon Burciaga">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RecipeHealth</title>
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="site.less" type="text/css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<link href="./resources/dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="js/carousel.js" rel="stylesheet">
+</head>
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">RecipeHealth</a>
+            <p>"Supporting your food choices <br> with science based evidence"</p>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="middle">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Why RecipeHealth?</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phytochemicals<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Flavonoids</a></li>
+                        <li><a href="#">Proanthocyanidins</a></li>
+                        <li><a href="#">Isoflavones</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">RecipeHealth Database</a></li>
+                <li><a href="#">For Scientists</a></li>
+                <li><a href="#">Meet Our Team</a></li>
+                <li><a href="#">Contact us</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="img-responsive center-block" src="https://visualizedrecipes.files.wordpress.com/2014/08/blueberries.jpg" width="700" height="300" align="middle" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption" align="top">
+                    <h1>Why RecipeHealth?</h1>
+                    <p class="lead">
+                        Ever wonder about the health benefits of the foods you eat?
+                        Are you tired of inaccurate nutritional health information and want something
+                        that goes beyond your typical macro and micro nutrients reports?
+                    </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Find out more</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="img-responsive center-block" src="http://i.imgur.com/BCV69oO.png?1" width="700" height="300" align="middle" alt="Second slide">
+            <div class="container" align="center">
+                <div class="carousel-caption" align="top">
+                    <h1>Real food. Real data. Real science.</h1>
+                    <p class="lead">
+                        No rumors, myths, or personal anecdotes.
+                        We support our data using published, peer reviewed science
+                        in order to be on the cutting edge of nutritional health information.
+                    </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Choose team science</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="img-responsive center-block" src="http://marilynmckenna.com/wp-content/uploads/2016/01/Dollarphotoclub_79609037.jpg" width="700" height="300" align="middle" alt="Third slide">
+            <div class="container">
+                <div class="carousel-caption" align="top">
+                    <h1>About our team</h1>
+                    <p class="lead">
+                        Fitness and nutrition enthusiasts, <br>food lovers, biologists, and computer scientists.
+                        <br>Our team is just like you.
+                    </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more about us</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div><!-- /.carousel -->
+
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row" align="center">
+        <div class="col-lg-4">
+            <img class="img-circle" src="data:image/jpeg;base64,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" alt="Generic placeholder image" width="140" height="140">
+            <h2>Flavonoids</h2>
+            <p>Flavonoids are found in blueberries and....</p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="data:image/jpeg;base64,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" alt="Generic placeholder image" width="140" height="140">
+            <h2>Proanthocyanidins</h2>
+            <p>Proanthocyanidins have been known for....blah blah blah blah blah</p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="https://pbs.twimg.com/profile_images/694950704243322880/NeXYEPru.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>Isoflavones</h2>
+            <p>Isoflavones are found in high concentrations....blah saidjadjoaisjd</p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading"> What Makes RecipeHealth Different?<br> <span class="text-muted"> Beyond your typical nutrition application</span></h2>
+            <p class="lead">NUTRIENT AND PLANTS AND PHYTOCHEMICALS AND STUFF LIKE THAT!!! SCIENCE!!!</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="http://sciencelearn.org.nz/var/sciencelearn/storage/images/contexts/food-function-and-structure/sci-media/video/phytochemicals-plants-chemical-treasure-trove/381733-4-eng-NZ/Phytochemicals-plants-chemical-treasure-trove.jpg" alt="Generic plallololololr image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading"> No Psuedoscience Here.<br><span class="text-muted"> Say NO To "Food Babe"</span></h2>
+            <p class="lead">Food babe is dumb. Don't listen to her. Listen to us. Listen to science. </p>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+            <img class="featurette-image img-responsive center-block" src="https://www.geneticliteracyproject.org/wp-content/uploads/2015/01/Screen-Shot-2014-07-13-at-7.12.28-AM.jpg" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading"> Who We Are<br><span class="text-muted">We work for you </span></h2>
+            <p class="lead">RecipeHealth was created by Brandon Burciaga and he is awesome blahh blah blah blah blah</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+
+</div><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../resources/docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="docs/assets/js/ie10-viewport-bug-workaround.js"></script>-->
+</body>
+</html>
