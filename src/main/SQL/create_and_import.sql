@@ -235,7 +235,8 @@ CREATE TABLE IF NOT EXISTS ISO_Data_Srcln
   PRIMARY KEY (iso_uuid),
   -- CONSTRAINT fk_Nutr_No FOREIGN KEY (NDB_no, Nutrient_No) REFERENCES ISO_Isfl_Dat (NDB_No, Nutrient_No),
   CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
-  CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES ISO_Data_Src (DataSrc_ID)
+  CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES ISO_Data_Src (DataSrc_ID),
+  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ISO_Nutrient_Definition (Nutrient_No)
 );
 
 INSERT INTO ISO_Data_Srcln
