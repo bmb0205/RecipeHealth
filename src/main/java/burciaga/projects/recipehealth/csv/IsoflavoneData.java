@@ -126,7 +126,6 @@ public class IsoflavoneData {
                         row[i] = StringUtils.replace(row[i], "\"", "inches");
                     }
                     if ( inFileName.equals("ISO_DATA_SRCLN.csv")) {
-                        //  if ndb not in food des dont write
                         builder.append(StringUtils.join(row, "|"));
                         builder.append("|");
                         builder.append(UUID.randomUUID());

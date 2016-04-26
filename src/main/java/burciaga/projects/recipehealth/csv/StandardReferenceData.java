@@ -48,7 +48,7 @@ public class StandardReferenceData {
                 writerSettings.setHeaders("NDB_No", "FdGrp_Cd", "Long_Desc");
                 break;
             case "SR_NUT_DATA.txt":
-                writerSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val");
+                writerSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val", "CC");
                 break;
             case "SR_NUTR_DEF.txt":
                 writerSettings.setHeaders("Nutr_No", "Units", "NutrDesc");
@@ -87,7 +87,7 @@ public class StandardReferenceData {
                 parserSettings.setHeaders("NDB_No", "Nutr_No", "Nutr_Val", "Num_Data_Pts", "Std_Error", "Src_Cd",
                         "Deriv_Cd", "Ref_NDB_No", "Add_Nutr_Mark", "Num_Studies", "Min", "Max", "DF", "Low_EB", "Up_EB",
                         "Stat_cmt", "AddMod_Date", "CC");
-                parserSettings.selectFields("NDB_No", "Nutr_No", "Nutr_Val");
+                parserSettings.selectFields("NDB_No", "Nutr_No", "Nutr_Val", "CC");
                 break;
             case "SR_NUTR_DEF.txt":
                 parserSettings.setHeaders("Nutr_No", "Units", "Tagname", "NutrDesc", "Num_Desc", "SR_Order");

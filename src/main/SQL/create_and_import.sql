@@ -34,17 +34,27 @@ CREATE TABLE IF NOT EXISTS ALL_Food_Description
 \copy ALL_Food_Description FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_FOOD_DES.csv.out' DELIMITER '|' CSV;
 
 
-
--- SR_Nutrient_Definition --
--- DROP TABLE IF EXISTS SR_Nutrient_Definition CASCADE;
-CREATE TABLE IF NOT EXISTS SR_Nutrient_Definition
+-- ALL_NUTR_DEF.csv.out --
+CREATE TABLE IF NOT EXISTS ALL_Nutrient_Definition
 (
   Nutrient_No INT NOT NULL,
-  Units VARCHAR NOT NULL,
+  Unit VARCHAR NOT NULL,
   Nutrient_Des VARCHAR NOT NULL,
-PRIMARY KEY (Nutrient_No)
+  PRIMARY KEY (Nutrient_No)
 );
-\copy SR_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out' DELIMITER '|' CSV;
+\copy ALL_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_NUTR_DEF.csv.out' DELIMITER '|' CSV;
+
+
+-- -- SR_Nutrient_Definition --
+-- -- DROP TABLE IF EXISTS SR_Nutrient_Definition CASCADE;
+-- CREATE TABLE IF NOT EXISTS SR_Nutrient_Definition
+-- (
+--   Nutrient_No INT NOT NULL,
+--   Units VARCHAR NOT NULL,
+--   Nutrient_Des VARCHAR NOT NULL,
+-- PRIMARY KEY (Nutrient_No)
+-- );
+-- \copy SR_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out' DELIMITER '|' CSV;
 
 
 -- SR_Weight --
@@ -62,33 +72,34 @@ CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES All_Food_Description (NDB_N
 \copy SR_WEIGHT FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_WEIGHT.txt.out' DELIMITER '|' CSV;
 
 
--- SR_Nutrient_Data --
--- DROP TABLE IF EXISTS SR_Nutrient_Data CASCADE;
-CREATE TABLE IF NOT EXISTS SR_Nutrient_Data
-(
-  NDB_No INT NOT NULL,
-  Nutrient_No INT NOT NULL,
-  Nutrient_Val VARCHAR NOT NULL,
-PRIMARY KEY (NDB_No, Nutrient_No),
-CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
-CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES SR_Nutrient_Definition (Nutrient_No)
-);
-\copy SR_Nutrient_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out' DELIMITER '|' CSV;
+-- -- SR_Nutrient_Data --
+-- -- DROP TABLE IF EXISTS SR_Nutrient_Data CASCADE;
+-- CREATE TABLE IF NOT EXISTS SR_Nutrient_Data
+-- (
+--   NDB_No INT NOT NULL,
+--   Nutrient_No INT NOT NULL,
+--   Nutrient_Val VARCHAR NOT NULL,
+--   CC VARCHAR,
+-- PRIMARY KEY (NDB_No, Nutrient_No),
+-- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
+-- CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES SR_Nutrient_Definition (Nutrient_No)
+-- );
+-- \copy SR_Nutrient_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out' DELIMITER '|' CSV;
 
 
 -- FLAVONOID DATA --
 
--- FL_NUTRIENT_DEFINITION --
--- DROP TABLE IF EXISTS FL_Nutrient_Definition CASCADE;
-CREATE TABLE IF NOT EXISTS FL_Nutrient_Definition
-(
-  Nutrient_No INT NOT NULL,
-  Description VARCHAR NOT NULL,
-  Flav_Class VARCHAR NOT NULL,
-  Units VARCHAR NOT NULL,
-PRIMARY KEY (Nutrient_No)
-);
-\copy FL_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out' DELIMITER '|' CSV;
+-- -- FL_NUTRIENT_DEFINITION --
+-- -- DROP TABLE IF EXISTS FL_Nutrient_Definition CASCADE;
+-- CREATE TABLE IF NOT EXISTS FL_Nutrient_Definition
+-- (
+--   Nutrient_No INT NOT NULL,
+--   Description VARCHAR NOT NULL,
+--   Flav_Class VARCHAR NOT NULL,
+--   Units VARCHAR NOT NULL,
+-- PRIMARY KEY (Nutrient_No)
+-- );
+-- \copy FL_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out' DELIMITER '|' CSV;
 
 
 -- FL_Fd_Group --
@@ -130,17 +141,17 @@ PRIMARY KEY (DataSrc_ID)
 
 -- FL_FLAV_DATA --
 -- DROP TABLE IF EXISTS FL_Flav_Data CASCADE;
-CREATE TABLE IF NOT EXISTS FL_Flav_Data
-(
-  NDB_No INT NOT NULL,
-  Nutrient_No INT NOT NULL,
-  Flav_Val VARCHAR NOT NULL,
-  CC VARCHAR,
-PRIMARY KEY (NDB_No, Nutrient_No),
-CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
-CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES FL_Nutrient_Definition (Nutrient_No)
-);
-\copy FL_Flav_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out' DELIMITER '|' CSV;
+-- CREATE TABLE IF NOT EXISTS FL_Flav_Data
+-- (
+--   NDB_No INT NOT NULL,
+--   Nutrient_No INT NOT NULL,
+--   Flav_Val VARCHAR NOT NULL,
+--   CC VARCHAR,
+-- PRIMARY KEY (NDB_No, Nutrient_No),
+-- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
+-- CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES FL_Nutrient_Definition (Nutrient_No)
+-- );
+-- \copy FL_Flav_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out' DELIMITER '|' CSV;
 
 
 -- -- FL_FLAV_IND --
@@ -188,27 +199,27 @@ PRIMARY KEY (DataSrc_ID)
 \copy ISO_Data_Src FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_DATA_SRC.csv.out' DELIMITER '|' CSV;
 
 
--- ISO_NUTR_DEF.csv.out --
-CREATE TABLE IF NOT EXISTS ISO_Nutrient_Definition
-(
-  Nutrient_No INT NOT NULL,
-  Nutrient_Des VARCHAR NOT NULL,
-  Unit VARCHAR NOT NULL,
-  PRIMARY KEY (Nutrient_No)
-);
-\copy ISO_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_NUTR_DEF.csv.out' DELIMITER '|' CSV;
+-- -- ISO_NUTR_DEF.csv.out --
+-- CREATE TABLE IF NOT EXISTS ISO_Nutrient_Definition
+-- (
+--   Nutrient_No INT NOT NULL,
+--   Nutrient_Des VARCHAR NOT NULL,
+--   Unit VARCHAR NOT NULL,
+--   PRIMARY KEY (Nutrient_No)
+-- );
+-- \copy ISO_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_NUTR_DEF.csv.out' DELIMITER '|' CSV;
 
--- ISO_ISFL_DAT --
-CREATE TABLE IF NOT EXISTS ISO_Isfl_Dat
-(
-  NDB_No INT NOT NULL,
-  Nutrient_No INT NOT NULL,
-  Isfl_Val VARCHAR NOT NULL,
-  CC VARCHAR,
-  PRIMARY KEY (NDB_No, Nutrient_No),
-  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ISO_Nutrient_Definition (Nutrient_No)
-);
-\copy ISO_Isfl_Dat FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_ISFL_DAT.csv.out' DELIMITER '|' CSV;
+-- -- ISO_ISFL_DAT --
+-- CREATE TABLE IF NOT EXISTS ISO_Isfl_Dat
+-- (
+--   NDB_No INT NOT NULL,
+--   Nutrient_No INT NOT NULL,
+--   Isfl_Val VARCHAR NOT NULL,
+--   CC VARCHAR,
+--   PRIMARY KEY (NDB_No, Nutrient_No),
+--   CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ISO_Nutrient_Definition (Nutrient_No)
+-- );
+-- \copy ISO_Isfl_Dat FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_ISFL_DAT.csv.out' DELIMITER '|' CSV;
 
 
 -- ISO_DATA_SRCLN --
@@ -236,7 +247,7 @@ CREATE TABLE IF NOT EXISTS ISO_Data_Srcln
   -- CONSTRAINT fk_Nutr_No FOREIGN KEY (NDB_no, Nutrient_No) REFERENCES ISO_Isfl_Dat (NDB_No, Nutrient_No),
   CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
   CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES ISO_Data_Src (DataSrc_ID),
-  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ISO_Nutrient_Definition (Nutrient_No)
+  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Definition (Nutrient_No)
 );
 
 INSERT INTO ISO_Data_Srcln
@@ -247,6 +258,22 @@ INSERT INTO ISO_Data_Srcln
           SELECT NDB_No FROM ALL_FOOD_DESCRIPTION
         );
 DROP TABLE IF EXISTS ISO_Data_Srcln_temp;
+
+
+-- ALL_FOOD_DATA.csv.out --
+CREATE TABLE IF NOT EXISTS ALL_Food_Data
+(
+  NDB_No INT NOT NULL,
+  Nutrient_No INT NOT NULL,
+  Nutrient_Val VARCHAR NOT NULL,
+  CC VARCHAR,
+  PRIMARY KEY (NDB_No, Nutrient_No),
+  CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
+  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Definition (Nutrient_No)
+--   CONSTRAINT fk_Nutrient_No_sr FOREIGN KEY (Nutrient_No) REFERENCES SR_Nutrient_Definition (Nutrient_No)
+);
+\copy ALL_Food_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_FOOD_DATA.csv.out' DELIMITER '|' CSV;
+
 
 -- -- ISO_FOOD_DES --
 -- CREATE TABLE IF NOT EXISTS ISO_Food_Description
@@ -259,13 +286,6 @@ DROP TABLE IF EXISTS ISO_Data_Srcln_temp;
 -- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES SR_Food_Description (NDB_No)
 -- );
 -- \copy ISO_Food_Description FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_FOOD_DES.csv.out' DELIMITER '|' CSV;
-
-
--- ALTER TABLE SR_Food_Description ADD FOREIGN KEY (NDB_No) REFERENCES ISO_Food_Description (NDB_No);
--- ALTER TABLE SR_Food_Description ADD FOREIGN KEY (NDB_No) REFERENCES FL_Food_Description (NDB_No);
---
--- ALTER TABLE FL_Food_Description ADD FOREIGN KEY (NDB_No) REFERENCES SR_Food_Description (NDB_No);
--- ALTER TABLE FL_Food_Description ADD FOREIGN KEY (NDB_No) REFERENCES ISO_Food_Description (NDB_No);
 
 
 -- TEST QUERIES --

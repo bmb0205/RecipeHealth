@@ -8,14 +8,14 @@ import java.util.*;
 /**
  * Created by bmb0205 on 4/23/16.
  */
-public class CombineFiles {
+public class CombineFoodDescFiles {
 
     private List<File> foodDescFileList;
     private File f1;
     private File f2;
     private File f3;
 
-    public CombineFiles(ArrayList<File> foodDescFileList) {
+    public CombineFoodDescFiles(ArrayList<File> foodDescFileList) {
         this.foodDescFileList = foodDescFileList;
         this.f1 = this.foodDescFileList.get(0);
         this.f2 = this.foodDescFileList.get(1);

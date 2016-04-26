@@ -18,6 +18,8 @@ import com.univocity.parsers.csv.CsvParserSettings;
 public class ParseCSV {
 
     public static List<File> foodDescFileList = new ArrayList<File>();
+    public static List<File> foodDataFileList = new ArrayList<File>();
+    public static List<File> foodDefFileList = new ArrayList<File>();
 
     public static void main(String[] args) throws Exception {
 
@@ -38,8 +40,12 @@ public class ParseCSV {
                 }
             }
         }
-        CombineFiles combineFiles = new CombineFiles((ArrayList<File>) foodDescFileList);
+        CombineFoodDescFiles combineFiles = new CombineFoodDescFiles((ArrayList<File>) foodDescFileList);
+        CombineDataFiles combineDataFiles = new CombineDataFiles((ArrayList<File>) foodDataFileList);
+        CombineDataFiles combineDefFiles = new CombineDataFiles((ArrayList<File>) foodDefFileList);
         combineFiles.appendFiles();
+        combineDataFiles.appendDataFiles();
+        combineDefFiles.appendDataFiles();
         final Long endTime = System.currentTimeMillis();
         System.out.println("Execution time: " + (endTime - startTime) + " milliseconds.");
     }
@@ -89,6 +95,10 @@ public class ParseCSV {
                     File outFile = new File(fileString + ".out");
                     if (fileString.endsWith("ISO_FOOD_DES.csv")) {
                         foodDescFileList.add(outFile);
+                    } else if (fileString.endsWith("ISO_ISFL_DAT.csv")) {
+                        foodDataFileList.add(outFile);
+                    } else if (fileString.endsWith("ISO_NUTR_DEF.csv")) {
+                        foodDefFileList.add(outFile);
                     }
                     String fileName = isoFile.toString().substring(isoFile.toString().lastIndexOf('/') + 1);
                     IsoflavoneData isoData = new IsoflavoneData(outFile, fileName);
@@ -117,6 +127,10 @@ public class ParseCSV {
                     File outFile = new File(fileString + ".out");
                     if (fileString.endsWith("FL_FOOD_DES.txt")) {
                         foodDescFileList.add(outFile);
+                    } else if (fileString.endsWith("FL_FLAV_DAT.txt")) {
+                        foodDataFileList.add(outFile);
+                    } else if (fileString.endsWith("FL_NUTR_DEF.txt")) {
+                        foodDefFileList.add(outFile);
                     }
                     String fileName = flavFile.toString().substring(flavFile.toString().lastIndexOf('/') + 1);
                     FlavonoidData flavData = new FlavonoidData(outFile, fileName);
@@ -147,6 +161,10 @@ public class ParseCSV {
                     File outFile = new File(fileString + ".out");
                     if (fileString.endsWith("SR_FOOD_DES.txt")) {
                         foodDescFileList.add(outFile);
+                    } else if (fileString.endsWith("SR_NUT_DATA.txt")) {
+                        foodDataFileList.add(outFile);
+                    } else if (fileString.endsWith("SR_NUTR_DEF.txt")) {
+                        foodDefFileList.add(outFile);
                     }
                     String fileName = srFile.toString().substring(srFile.toString().lastIndexOf('/') + 1);
                     StandardReferenceData srData = new StandardReferenceData(outFile, fileName);
