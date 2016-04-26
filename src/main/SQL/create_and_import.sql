@@ -275,17 +275,59 @@ CREATE TABLE IF NOT EXISTS ALL_Food_Data
 \copy ALL_Food_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_FOOD_DATA.csv.out' DELIMITER '|' CSV;
 
 
--- -- ISO_FOOD_DES --
--- CREATE TABLE IF NOT EXISTS ISO_Food_Description
--- (
---   NDB_No INT NOT NULL,
---   FdGrp_Cd INT NOT NULL,
---   Long_Desc VARCHAR NOT NULL,
--- PRIMARY KEY (NDB_No),
--- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES FL_Food_Description (NDB_No),
--- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES SR_Food_Description (NDB_No)
--- );
--- \copy ISO_Food_Description FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_FOOD_DES.csv.out' DELIMITER '|' CSV;
+
+CREATE TABLE IF NOT EXISTS pubmed_info
+(
+  PMID INT NOT NULL,
+  Title VARCHAR NOT NULL,
+  Abstract VARCHAR NOT NULL,
+  PRIMARY KEY(PMID)
+);
+\copy pubmed_info FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_info.out' DELIMITER '|' CSV;
+
+CREATE TABLE IF NOT EXISTS pmid_mesh_temp
+(
+  MeshTerm VARCHAR NOT NULL,
+  PMID INT,
+  pubmed_uuid uuid NOT NULL,
+  PRIMARY KEY(pubmed_uuid)
+);
+\copy pmid_mesh_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_meshTerms.out' DELIMITER '|' CSV;
+
+CREATE TABLE IF NOT EXISTS pmid_mesh
+(
+  MeshTerm VARCHAR NOT NULL,
+  PMID INT,
+  pubmed_uuid uuid NOT NULL,
+  PRIMARY KEY(pubmed_uuid),
+  CONSTRAINT fk_PMID FOREIGN KEY (PMID) REFERENCES pubmed_info (PMID)
+);
+
+CREATE TABLE IF NOT EXISTS mesh
+(
+  MeshID VARCHAR NOT NULL,
+  MeshTerm VARCHAR NOT NULL,
+  PRIMARY KEY (MeshID)
+);
+\copy mesh FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/csv_out/meshNodeOut.csv.out' DELIMITER '|' CSV;
+
+CREATE INDEX mesh_meshterm_lc
+  ON mesh (LOWER(meshterm));
+
+INSERT INTO pmid_mesh
+  SELECT MeshTerm, PMID, pubmed_uuid
+  FROM pmid_mesh_temp
+  WHERE pmid_mesh_temp.meshterm IN
+        (
+          SELECT meshterm FROM mesh
+        );
+
+CREATE INDEX pmid_mesh_meshterm_lc
+  ON pmid_mesh (LOWER(meshterm));
+
+DROP TABLE IF EXISTS pmid_mesh_temp;
+
+-- ALTER TABLE mesh ADD CONSTRAINT fk_MeshTerm FOREIGN KEY (MeshTerm) REFERENCES pmid_mesh (MeshTerm)
 
 
 -- TEST QUERIES --
