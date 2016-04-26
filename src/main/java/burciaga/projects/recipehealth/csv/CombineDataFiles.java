@@ -10,19 +10,20 @@ import static org.apache.commons.lang3.ArrayUtils.remove;
 
 /**
  * Created by bmb0205 on 4/25/16.
+ * Combines three pairs of files:
+ *     * ALL_FOOD_DATA.csv.out
+ *     * ALL_NUTR_DEF.csv.out
  */
 public class CombineDataFiles {
 
-    private List<File> fileList;
     private File f1;
     private File f2;
     private File f3;
 
     public CombineDataFiles(ArrayList<File> fileList) {
-        this.fileList = fileList;
-        this.f1 = this.fileList.get(0);
-        this.f2 = this.fileList.get(1);
-        this.f3 = this.fileList.get(2);
+        this.f1 = fileList.get(0);
+        this.f2 = fileList.get(1);
+        this.f3 = fileList.get(2);
     }
 
     public void appendDataFiles() throws Exception {
@@ -50,7 +51,7 @@ public class CombineDataFiles {
             splitLine = StringUtils.split(flavLine, "|");
             if (f2.toString().contains("DEF")) {
                 if (splitLine.length == 4) {
-                    List<String> choppedList = new ArrayList<String>();
+                    List<String> choppedList = new ArrayList<>();
                     splitLine = ArrayUtils.remove(splitLine, 2);
                     choppedList.add(splitLine[0]);
                     choppedList.add(splitLine[2]);
@@ -68,7 +69,7 @@ public class CombineDataFiles {
         while ((isoLine = f3Reader.readLine()) != null) {
             splitLine = StringUtils.split(isoLine, "|");
             if (f3.toString().contains("DEF")) {
-                    List<String> choppedList = new ArrayList<String>();
+                    List<String> choppedList = new ArrayList<>();
                     choppedList.add(splitLine[0]);
                     choppedList.add(splitLine[2]);
                     choppedList.add(splitLine[1]);

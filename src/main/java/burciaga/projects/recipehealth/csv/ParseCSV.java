@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * ParseCSV class Uses UniVocity Parser CsvWriter and CsvParser to parse
@@ -21,13 +23,32 @@ public class ParseCSV {
     public static List<File> foodDataFileList = new ArrayList<File>();
     public static List<File> foodDefFileList = new ArrayList<File>();
 
-    public static void main(String[] args) throws Exception {
+    public static void parseMeSH(File meshFile) throws Exception {
+        BufferedReader meshReader = new BufferedReader(new FileReader(meshFile));
+        BufferedWriter meshWriter = new BufferedWriter(new FileWriter(meshFile + ".out"));
+        String line;
+        while((line = meshReader.readLine()) != null) {
+            StringBuilder builder = new StringBuilder();
+            String[] columns = StringUtils.split(line, "|");
+            builder.append(columns[0]);
+            builder.append("|");
+            builder.append(columns[2]);
+            meshWriter.write(builder.toString() + "\n");
+        }
+        meshWriter.close();
+        meshReader.close();
+    }
 
-        File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
+    public static void main(String[] args) throws Exception {
 
         final Long startTime = System.currentTimeMillis();
 
-        // differentiate sources
+        // parse meshNodeOut.csv which is output from previous python script
+        File meshFile = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/csv_out/meshNodeOut.csv");
+        parseMeSH(meshFile);
+
+        // differentiate sources within USDA and parse
+        File[] subDirs = new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA").listFiles();
         if (subDirs != null) {
             for (File subDir : subDirs) {
                 String subDirName = subDir.toString().substring(subDir.toString().lastIndexOf('/') + 1);
