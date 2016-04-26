@@ -1,0 +1,4 @@
+﻿CREATE OR REPLACE VIEW query2 SELECT fl_flav_ind.datasrc_id, fl_flav_ind.food_indiv_description, fl_flav_ind.ndb_no, fl_flav_ind.compound_name, fl_flav_ind.compound_val, fl_data_src.datasrc_id, fl_data_src.year, fl_data_src.title
+FROM fl_flav_ind
+	JOIN fl_data_src
+		ON fl_flav_ind.datasrc_id = fl_data_src.datasrc_id;
