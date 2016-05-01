@@ -12,7 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="site.less" type="text/css" rel="stylesheet">
+    <link href="customurl.css" type="text/css" rel="stylesheet">
 
 
     <!-- jQuery -->
@@ -66,41 +66,46 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="jumbotron" id="jumboframe">
-        <div class="container">
-            <img class="main-img" src="http://i.imgur.com/FNTvAsn.jpg?1" width="auto" height="auto" align="middle">
+    <nav class="jumbo_bg">
+        <div class="bgContainer">
+            <div class="jumbotron" id="jumboframe">
+                <h1>Enter your recipe URL below</h1>
+                <input class="txtUrl" type="text" id="txtUrl" value="...."/>
+                <p><a class="btn btn-lg submitButton" href="#" onclick="getURL()" role="button">Start searching!</a></p>
+            </div>
+
+            <script>
+                function getURL() {
+                    var http = new XMLHttpRequest();
+                    http.open("POST", "url.html", true);
+                    var param = document.getElementById("txtUrl").value;
+                    http.onreadystatechange = function () {
+                        if (http.readyState = 4 && http.status == 200) {
+    //                        alert(http.responseText);
+                        }
+                    };
+                    window.alert(param);
+                    http.send(param);
+                }
+            </script>
         </div>
-    </div>
+    </nav>
 
 
-    <div class="url-input">
+    <!--<div class="url-input">-->
         <!--<form method ="post" action="url.html">-->
         <!--<input type="text" id="txtUrl" value="Paste recipe website URL here" align="middle">-->
         <!--<input type="button" value="Start!" onclick="getURL()" id="myId" >-->
 
-        <form id="userInput">
-            <label for="txtUrl">Please paste a recipe URL: </label>
-            <input type="text" id="txtUrl" value=""/>
-            <input type="button" id="submit" onclick="getURL()" value="Go!" />
-            <br />
-            <br />
-            <div id="welcometext"></div>
-        </form>
+        <!--<form id="userInput" class="unique">-->
+            <!--<label for="txtUrl">Please paste a recipe URL: </label>-->
+            <!--<input type="text" id="txtUrl" value=""/>-->
+            <!--<input type="button" id="submit" onclick="getURL()" value="Go!" />-->
+            <!--<br />-->
+            <!--<br />-->
+            <!--<div id="welcometext"></div>-->
+        <!--</form>-->
 
-        <script>
-            function getURL() {
-                var http = new XMLHttpRequest();
-                http.open("POST", "url.html", true);
-                var param = document.getElementById("txtUrl").value;
-                http.onreadystatechange = function () {
-                    if (http.readyState = 4 && http.status == 200) {
-//                        alert(http.responseText);
-                    }
-                };
-//                window.alert(param);
-                http.send(param);
-            }
-        </script>
 
 
         <!--<script>-->
@@ -155,7 +160,21 @@
                 <!--xmlHttp.send(url);-->
             <!--}-->
         <!--</script>-->
-    </div>
+    <!--</div>-->
 
+
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="docs/assets/js/ie10-viewport-bug-workaround.js"></script>-->
 </body>
 </html>
