@@ -16,17 +16,22 @@ import java.util.Set;
  */
 public class QueryIngredients {
 
+    public QueryIngredients() {}
+
     public static void main(String[] args) throws Exception {
 
-        Connection conn = connectToDstabase();
-
-        queryRecipe(conn);
+        QueryIngredients url = new QueryIngredients();
+        Connection conn = url.connectToDatabase();
+        String holder = "";
+        url.queryRecipe(conn, holder);
     }
 
-    private static void queryRecipe(Connection conn) {
-        Document recipeDoc = null;
+    public String queryRecipe(Connection conn, String url) {
+        Document recipeDoc;
+        Set<String> bbSet = new HashSet<>();
+
         try {
-            recipeDoc = Jsoup.connect("http://allrecipes.com/recipe/12196/blueberry-pie/").get();
+            recipeDoc = Jsoup.connect(url).get();
             Elements ingredientElements = recipeDoc.select("li > label > span.recipe-ingred_txt.added");
             RecipeParser rp = new RecipeParser();
             rp.setIngredients(ingredientElements);
@@ -62,30 +67,25 @@ public class QueryIngredients {
                     Statement statement = conn.createStatement();
                     ResultSet resultSet = statement.executeQuery(query);
 
-                    Set<String> bbSet = new HashSet<>();
-
                     //  gather types of this specific ingredient (raw, frozen, etc) for USER to choose from
                     while (resultSet.next()) {
                         bbSet.add(resultSet.getString(5));
                     }
-
-
-                    //  USER can select out of found ingredient options from dropdown
-                    //  once specific ingredient type (raw, frozen etc) is chosen, query is re-run
-
-//                    System.out.println(bbSet.size());
-//                    for (String bb : bbSet) {
-//                        System.out.println(bb);
-//                    }
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        StringBuilder sb = new StringBuilder();
+        for (String option : bbSet) {
+            sb.append(option);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
-    private static Connection connectToDstabase() {
+    public Connection connectToDatabase() {
         Connection conn = null;
         try {
             Class.forName("org.postgresql.Driver");

@@ -13,12 +13,12 @@
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="customurl.css" type="text/css" rel="stylesheet">
+    <!--<link href="site_variables.less" type="text/css" rel="stylesheet">-->
 
 
     <!-- jQuery -->
     <!--<link href="/webjars/jquery/3.0.0-alpha1/jquery.min.js">-->
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0-alpha1.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="./resources/dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
 
@@ -65,115 +65,109 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
+    <!--btn btn-lg-->
     <nav class="jumbo_bg">
         <div class="bgContainer">
             <div class="jumbotron" id="jumboframe">
                 <h1>Enter your recipe URL below</h1>
-                <input class="txtUrl" type="text" id="txtUrl" value="...."/>
-                <p><a class="btn btn-lg submitButton" href="#" onclick="getURL()" role="button">Start searching!</a></p>
+                <input class="txtUrl" type="text" id="txtUrl" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
+                <p><a class="btn-submit" href="#" onclick="getURL()" role="button">Start searching!</a></p>
+
+
+                <!--<div class="content"><span class="value"></span></div>-->
+
+                <select id="foodChoices" value="Please select a food option"></select>
+                <p><a class="btn-chooseFood" href="#" onclick="listSecondOptions()" role="button">Select food!</a></p>
+
+
+                <!--<li class="dropdown" id="foodChoices">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phytochemicals<span class="caret"></span></a>-->
+                    <!--<ul class="dropdown-menu">-->
+
+                    <!--</ul>-->
+                <!--</li>-->
             </div>
 
             <script>
+
                 function getURL() {
-                    var http = new XMLHttpRequest();
-                    http.open("POST", "url.html", true);
-                    var param = document.getElementById("txtUrl").value;
-                    http.onreadystatechange = function () {
-                        if (http.readyState = 4 && http.status == 200) {
-    //                        alert(http.responseText);
+                    var urlString = document.getElementById("txtUrl").value;
+                    var params = {url: urlString};
+
+                    var jsonDataString = JSON.stringify(params);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "GetRecipeURL.do",
+                        contentType: "application/json",
+                        dataType: "text",
+                        data: jsonDataString,
+                        success: function(data) {
+                            alert(data);
+                            listOptions(data);
+                        },
+                        error: function(data) {
+                            alert("oh no");
                         }
-                    };
-                    window.alert(param);
-                    http.send(param);
+                    });
                 }
+
+                function listOptions(data) {
+                    var foodArray = data.split('\n');
+                    var select = document.getElementById('foodChoices');
+                    var fragment = document.createDocumentFragment();
+
+                    foodArray.forEach(function(food) {
+                        var foodOption = document.createElement('option');
+                        foodOption.innerHTML = food;
+                        foodOption.value = food;
+                        fragment.appendChild(foodOption);
+                    });
+                    select.appendChild(fragment);
+                }
+
+                function listSecondOptions() {
+                    var secondOption = document.getElementById('foodChoices').value;
+
+                    var foodParams = {selectedFood: secondOption};
+
+                    var jsonFoodString = JSON.stringify(foodParams);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "GetRecipeURL.do",
+                        contentType: "application/json",
+                        dataType: "text",
+                        data: jsonFoodString,
+                        success: function(data) {
+                            alert("did it!");
+                            alert(data);
+                        },
+                        error: function(data) {
+                            alert("oh no");
+                        }
+                    });
+                }
+
             </script>
         </div>
     </nav>
 
 
-    <!--<div class="url-input">-->
-        <!--<form method ="post" action="url.html">-->
-        <!--<input type="text" id="txtUrl" value="Paste recipe website URL here" align="middle">-->
-        <!--<input type="button" value="Start!" onclick="getURL()" id="myId" >-->
-
-        <!--<form id="userInput" class="unique">-->
-            <!--<label for="txtUrl">Please paste a recipe URL: </label>-->
-            <!--<input type="text" id="txtUrl" value=""/>-->
-            <!--<input type="button" id="submit" onclick="getURL()" value="Go!" />-->
-            <!--<br />-->
-            <!--<br />-->
-            <!--<div id="welcometext"></div>-->
-        <!--</form>-->
-
-
-
-        <!--<script>-->
-            <!--$(document).ready(function() {-->
-                <!--$('#submit').click(function(event) {-->
-                    <!--var urlString=$('#txtUrl').val();-->
-                    <!--$.post('GetRecipeURL',{"url":"urlString"},function(responseText) {-->
-                        <!--$('#welcometext').text(responseText);-->
-                    <!--});-->
-                <!--});-->
-            <!--});-->
-        <!--</script>-->
-
-        <!--<script>-->
-<!--//            &lt;!&ndash;function getURL() {&ndash;&gt;-->
-                <!--var http = new XMLHttpRequest();-->
-                <!--&lt;!&ndash;var url = "url";&ndash;&gt;-->
-                <!--&lt;!&ndash;var userInput = document.getElementById("txtUrl").value;&ndash;&gt;-->
-<!--//                &lt;!&ndash;var params = JSON.stringify({ url: userInput });&ndash;&gt;-->
-<!--//                http.open("POST", "/recipehealth/pages/testpage.html", true);-->
-
-                <!--http.onreadystatechange = function() {-->
-                    <!--if(http.readyState == 4 && http.status == 200) {-->
-                        <!--alert("Ready!");-->
-                        <!--document.getElementById("txtUrl").value = http.responseText-->
-<!--//                        alert(http.responseText);-->
-                    <!--} else {-->
-                        <!--alert("Something went wrong!");-->
-                    <!--}-->
-                <!--};-->
-                <!--http.send();-->
-        <!--</script>-->
-
-
-
-            <!--<script>-->
-                <!--function getURL() {-->
-                    <!--document.getElementById("txtUrl").value = xmlHttp.responseText;-->
-                <!--}-->
-            <!--</script>-->
-
-        <!--<script>-->
-            <!--function getURL() {-->
-                <!--var xmlHttp = new XMLHttpRequest();-->
-                <!--var url = document.getElementById("txtUrl").value = xmlHttp.responseText;-->
-                <!--xmlHttp.open('POST', 'WEB-INF/classes/GetRecipeURL.class', true);-->
-                <!--xmlHttp.onreadystatechange = function () {-->
-                    <!--if (xmlHttp.readyState = 4 && xmlHttp.status == 200) {-->
-                        <!--alert(xmlHttp.responseText);-->
-                    <!--}-->
-                <!--};-->
-                <!--xmlHttp.send(url);-->
-            <!--}-->
-        <!--</script>-->
-    <!--</div>-->
-
 
     <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2016 Brandon Burciaga &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
     </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="./docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <!--<script>window.jQuery || document.write('<script src="./docs/assets/js/vendor/jquery.min.js"><\/script>')</script>-->
     <script src="./dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0-alpha1.min.js"></script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="docs/assets/js/ie10-viewport-bug-workaround.js"></script>-->
 </body>

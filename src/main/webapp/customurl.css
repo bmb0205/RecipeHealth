@@ -1,3 +1,5 @@
+/* JUMBOTRON */
+
 .jumbo_bg {
     height: 750px;
     position: relative;
@@ -36,38 +38,58 @@
     border-radius: 15px;
     z-index: 0;
     font-size: 24px;
+    text-align: center;
 }
 
-#jumboframe .submitButton {
-    font-size: 32px;
+.btn-submit, .btn-submit:hover {
+    font-size: 28px;
     font-weight: 900;
     color: #32cd32;
     background-color: #333333;
-    border-radius: 15px;
-    border-color: #32cd32;
+    border-radius: 10px;
     margin-top: 15px;
-    box-shadow: 1px 1px 5px #32cd32;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
+    box-shadow: 1px 1px 10px 1px #32cd32;
+    text-decoration: none;
+    padding: 5px 5px;
 }
 
 
-/*.text-box > input {*/
-    /*font-size: 30px;*/
-    /*box-shadow: 1px 1px 5px #32cd32;*/
-    /*margin: 20px 500px;*/
+/* FIRST FOOD OPTION DROP DOWN */
 
-/*}*/
+#jumboframe #foodChoices,
+#jumboframe #foodChoices {
+    width: 500px;
+    height: 30px;
+    background: #333333;
+    font-size:  18px;
+    font-weight: bolder;
+    border-color: #32cd32;
+}
 
-/*#userInput.unique label {*/
-    /*display: inline-block;*/
-    /*max-width: 100%; // Force IE8 to wrap long content (see https://github.com/twbs/bootstrap/issues/13141)*/
-/*min-width: 200px;*/
-    /*margin-bottom: 5px;*/
-    /*font-weight: bold;*/
-    /*font-size: 24px;*/
-    /*height: 50px;*/
-/*}*/
+#foodChoices > option > select {
+    background: #333333;
+    color: #FFFFFF;
+    font-weight: bolder;
+    margin-left: 10px;
+    font-size: 18px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+    border-color: #32cd32;
+    border-bottom: #32cd32;
+}
 
-
+.btn-chooseFood {
+    font-size: 28px;
+    font-weight: 900;
+    color: #32cd32;
+    background-color: #333333;
+    border-radius: 10px;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
+    box-shadow: 1px 1px 10px 1px #32cd32;
+    text-decoration: none;
+    padding: 5px 5px;
+    position: inherit;
+}
 
 /* NAVBAR */
 
