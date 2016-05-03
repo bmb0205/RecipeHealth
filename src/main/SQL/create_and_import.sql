@@ -2,26 +2,15 @@
 -- SQL script to create tables in recipehealth postgresql database and populate them from delimited files specified
 --
 
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+
 -- EXTENSIONS --
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 
--- CREATE SR TABLES IF NOT EXIST, THEN COPY DATA FROM PIPE DELIMITED FILE INTO TABLE --
-
-
--- STANDARD REFERENCE DATA --
-
--- -- SR_Food_Description --
--- -- DROP TABLE IF EXISTS SR_Food_Description CASCADE;
--- CREATE TABLE IF NOT EXISTS SR_Food_Description
--- (
---   NDB_No INT NOT NULL,
---   Food_Group_Cd INT NOT NULL,
---   Long_Description TEXT NOT NULL,
--- PRIMARY KEY (NDB_No)
--- );
--- \copy SR_Food_Description FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_FOOD_DES.txt.out' DELIMITER '|' CSV;
-
+-- CREATE TABLES AND COPY DELIMITED DATA TO POPULATE THEM --
 
 -- ALL_FOOD_DES --
 CREATE TABLE IF NOT EXISTS ALL_Food_Description
@@ -39,22 +28,10 @@ CREATE TABLE IF NOT EXISTS ALL_Nutrient_Definition
 (
   Nutrient_No INT NOT NULL,
   Unit VARCHAR NOT NULL,
-  Nutrient_Des VARCHAR NOT NULL,
+  Nutrient_Desc VARCHAR NOT NULL,
   PRIMARY KEY (Nutrient_No)
 );
 \copy ALL_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_NUTR_DEF.csv.out' DELIMITER '|' CSV;
-
-
--- -- SR_Nutrient_Definition --
--- -- DROP TABLE IF EXISTS SR_Nutrient_Definition CASCADE;
--- CREATE TABLE IF NOT EXISTS SR_Nutrient_Definition
--- (
---   Nutrient_No INT NOT NULL,
---   Units VARCHAR NOT NULL,
---   Nutrient_Des VARCHAR NOT NULL,
--- PRIMARY KEY (Nutrient_No)
--- );
--- \copy SR_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUTR_DEF.txt.out' DELIMITER '|' CSV;
 
 
 -- SR_Weight --
@@ -65,41 +42,11 @@ CREATE TABLE IF NOT EXISTS SR_Weight
   Seq INT NOT NULL,
   Amount VARCHAR NOT NULL,
   Measure_Des VARCHAR NOT NULL,
-  Gram_Weight VARCHAR NOT NULL,
+  Gram_Weight NUMERIC NOT NULL,
 PRIMARY KEY (NDB_No, Seq),
 CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES All_Food_Description (NDB_No)
 );
 \copy SR_WEIGHT FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_WEIGHT.txt.out' DELIMITER '|' CSV;
-
-
--- -- SR_Nutrient_Data --
--- -- DROP TABLE IF EXISTS SR_Nutrient_Data CASCADE;
--- CREATE TABLE IF NOT EXISTS SR_Nutrient_Data
--- (
---   NDB_No INT NOT NULL,
---   Nutrient_No INT NOT NULL,
---   Nutrient_Val VARCHAR NOT NULL,
---   CC VARCHAR,
--- PRIMARY KEY (NDB_No, Nutrient_No),
--- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
--- CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES SR_Nutrient_Definition (Nutrient_No)
--- );
--- \copy SR_Nutrient_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/StandardReference/SR_NUT_DATA.txt.out' DELIMITER '|' CSV;
-
-
--- FLAVONOID DATA --
-
--- -- FL_NUTRIENT_DEFINITION --
--- -- DROP TABLE IF EXISTS FL_Nutrient_Definition CASCADE;
--- CREATE TABLE IF NOT EXISTS FL_Nutrient_Definition
--- (
---   Nutrient_No INT NOT NULL,
---   Description VARCHAR NOT NULL,
---   Flav_Class VARCHAR NOT NULL,
---   Units VARCHAR NOT NULL,
--- PRIMARY KEY (Nutrient_No)
--- );
--- \copy FL_Nutrient_Definition FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_NUTR_DEF.txt.out' DELIMITER '|' CSV;
 
 
 -- FL_Fd_Group --
@@ -119,39 +66,11 @@ CREATE TABLE IF NOT EXISTS FL_Data_Src
 (
   DataSrc_ID VARCHAR NOT NULL,
   Title VARCHAR,
-  Year VARCHAR,
+  Year NUMERIC,
   Journal VARCHAR NOT NULL,
 PRIMARY KEY (DataSrc_ID)
 );
 \copy FL_Data_Src FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_DATA_SRC.txt.out' DELIMITER '|' CSV;
-
-
--- -- FL_Food_Description --
--- -- DROP TABLE IF EXISTS FL_Food_Description CASCADE;
--- CREATE TABLE IF NOT EXISTS FL_Food_Description
--- (
---   NDB_No INT NOT NULL,
---   FdGrp_Cd INT NOT NULL,
---   Long_Description VARCHAR NOT NULL,
--- PRIMARY KEY (NDB_No),
--- CONSTRAINT fk_FdGrp_Cd FOREIGN KEY (FdGrp_Cd) REFERENCES FL_Food_Group (FdGrp_Cd)
--- );
--- \copy FL_Food_Description FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FOOD_DES.txt.out' DELIMITER '|' CSV;
-
-
--- FL_FLAV_DATA --
--- DROP TABLE IF EXISTS FL_Flav_Data CASCADE;
--- CREATE TABLE IF NOT EXISTS FL_Flav_Data
--- (
---   NDB_No INT NOT NULL,
---   Nutrient_No INT NOT NULL,
---   Flav_Val VARCHAR NOT NULL,
---   CC VARCHAR,
--- PRIMARY KEY (NDB_No, Nutrient_No),
--- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
--- CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES FL_Nutrient_Definition (Nutrient_No)
--- );
--- \copy FL_Flav_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_DAT.txt.out' DELIMITER '|' CSV;
 
 
 -- -- FL_FLAV_IND --
@@ -192,7 +111,7 @@ CREATE TABLE IF NOT EXISTS ISO_Data_Src
 (
   DataSrc_ID VARCHAR NOT NULL,
   Title VARCHAR,
-  Year VARCHAR,
+  Year NUMERIC,
   Journal VARCHAR,
 PRIMARY KEY (DataSrc_ID)
 );
@@ -230,9 +149,6 @@ CREATE TABLE IF NOT EXISTS ISO_Data_Srcln_temp
   DataSrc_ID VARCHAR NOT NULL,
   iso_uuid UUID NOT NULL,
 PRIMARY KEY (iso_uuid)
--- CONSTRAINT fk_Nutr_No FOREIGN KEY (NDB_no, Nutrient_No) REFERENCES ISO_Isfl_Dat (NDB_No, Nutrient_No),
--- CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
--- CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES ISO_Data_Src (DataSrc_ID)
 );
 \copy ISO_Data_Srcln_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Isoflavone/ISO_DATA_SRCLN.csv.out' DELIMITER '|' CSV;
 
@@ -243,11 +159,11 @@ CREATE TABLE IF NOT EXISTS ISO_Data_Srcln
   Nutrient_No INT NOT NULL,
   DataSrc_ID VARCHAR NOT NULL,
   iso_uuid UUID NOT NULL,
-  PRIMARY KEY (iso_uuid),
+PRIMARY KEY (iso_uuid),
   -- CONSTRAINT fk_Nutr_No FOREIGN KEY (NDB_no, Nutrient_No) REFERENCES ISO_Isfl_Dat (NDB_No, Nutrient_No),
-  CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
-  CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES ISO_Data_Src (DataSrc_ID),
-  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Definition (Nutrient_No)
+CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
+CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES ISO_Data_Src (DataSrc_ID),
+CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Definition (Nutrient_No)
 );
 
 INSERT INTO ISO_Data_Srcln
@@ -265,11 +181,11 @@ CREATE TABLE IF NOT EXISTS ALL_Food_Data
 (
   NDB_No INT NOT NULL,
   Nutrient_No INT NOT NULL,
-  Nutrient_Val VARCHAR NOT NULL,
+  Nutrient_Val NUMERIC NOT NULL,
   CC VARCHAR,
-  PRIMARY KEY (NDB_No, Nutrient_No),
-  CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
-  CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Definition (Nutrient_No)
+PRIMARY KEY (NDB_No, Nutrient_No),
+CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No),
+CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Definition (Nutrient_No)
 --   CONSTRAINT fk_Nutrient_No_sr FOREIGN KEY (Nutrient_No) REFERENCES SR_Nutrient_Definition (Nutrient_No)
 );
 \copy ALL_Food_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_FOOD_DATA.csv.out' DELIMITER '|' CSV;
@@ -278,10 +194,10 @@ CREATE TABLE IF NOT EXISTS ALL_Food_Data
 
 CREATE TABLE IF NOT EXISTS pubmed_info
 (
-  PMID INT NOT NULL,
+  pmid INT NOT NULL,
   Title VARCHAR NOT NULL,
   Abstract VARCHAR NOT NULL,
-  PRIMARY KEY(PMID)
+PRIMARY KEY(pmid)
 );
 \copy pubmed_info FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_info.out' DELIMITER '|' CSV;
 
@@ -290,7 +206,7 @@ CREATE TABLE IF NOT EXISTS pmid_mesh_temp
   MeshTerm VARCHAR NOT NULL,
   PMID INT,
   pubmed_uuid uuid NOT NULL,
-  PRIMARY KEY(pubmed_uuid)
+PRIMARY KEY(pubmed_uuid)
 );
 \copy pmid_mesh_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_meshTerms.out' DELIMITER '|' CSV;
 
@@ -299,8 +215,8 @@ CREATE TABLE IF NOT EXISTS pmid_mesh
   MeshTerm VARCHAR NOT NULL,
   PMID INT,
   pubmed_uuid uuid NOT NULL,
-  PRIMARY KEY(pubmed_uuid),
-  CONSTRAINT fk_PMID FOREIGN KEY (PMID) REFERENCES pubmed_info (PMID)
+PRIMARY KEY(pubmed_uuid),
+CONSTRAINT fk_PMID FOREIGN KEY (PMID) REFERENCES pubmed_info (PMID)
 );
 
 CREATE TABLE IF NOT EXISTS mesh
@@ -327,13 +243,47 @@ CREATE INDEX pmid_mesh_meshterm_lc
 
 DROP TABLE IF EXISTS pmid_mesh_temp;
 
+
+CREATE TABLE IF NOT EXISTS entrez_gene
+(
+  gene_id VARCHAR NOT NULL,
+  gene_desc VARCHAR NOT NULL,
+  PRIMARY KEY (gene_id)
+);
+\copy entrez_gene FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/csv_out/condensed_All_Mammalia.gene_info.out' DELIMITER '|' CSV;
+
+
+CREATE TABLE IF NOT EXISTS gene_to_pubmed_temp
+(
+  tax_id INT NOT NULL,
+  gene_id VARCHAR NOT NULL,
+  pmid INT NOT NULL,
+PRIMARY KEY (gene_id, pmid)
+);
+
+\copy gene_to_pubmed_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/csv_out/geneToPubmed.csv' DELIMITER '|' CSV;
+
+CREATE TABLE IF NOT EXISTS gene_to_pubmed
+(
+  tax_id INT NOT NULL,
+  gene_id VARCHAR NOT NULL,
+  pmid INT NOT NULL,
+PRIMARY KEY (gene_id, pmid),
+CONSTRAINT fk_gene_id FOREIGN KEY (gene_id) REFERENCES entrez_gene (gene_id),
+CONSTRAINT fk_pubmed_id FOREIGN KEY (pmid) REFERENCES pubmed_info (pmid)
+);
+
+INSERT INTO gene_to_pubmed
+  SELECT tax_id, gene_id, pmid
+  FROM gene_to_pubmed_temp
+  WHERE gene_to_pubmed_temp.pmid IN
+        (
+          SELECT pmid FROM pubmed_info
+        );
+DROP TABLE IF EXISTS gene_to_pubmed_temp;
+
+
+
 -- ALTER TABLE mesh ADD CONSTRAINT fk_MeshTerm FOREIGN KEY (MeshTerm) REFERENCES pmid_mesh (MeshTerm)
 
 
--- TEST QUERIES --
-
--- SELECT SR_Nutrient_Data.NDB_No, SR_Nutrient_Data.Nutrient_No, ndef.Nutrient_Des
--- FROM SR_Nutrient_Definition AS ndef
---   INNER JOIN SR_Nutrient_Data
---     ON SR_Nutrient_Data.Nutrient_No = ndef.Nutrient_No
--- WHERE SR_Nutrient_Data.NDB_No = 01001;
