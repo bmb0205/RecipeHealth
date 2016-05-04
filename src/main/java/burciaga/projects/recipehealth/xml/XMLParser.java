@@ -3,14 +3,10 @@ package burciaga.projects.recipehealth.xml;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import burciaga.projects.recipehealth.xml.PubmedArticle;
-import burciaga.projects.recipehealth.xml.SAXHandler;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -19,29 +15,50 @@ import java.util.UUID;
 public class XMLParser {
 
     public static void main(String[] args) throws Exception {
-        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-        SAXParser saxParser = saxParserFactory.newSAXParser();
-        SAXHandler saxHandler = new SAXHandler();
-        saxParser.parse(new File(
-                "/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/flavonoid_inflammation_human.xml"), saxHandler);
-        List<PubmedArticle> articleList = saxHandler.getArticleList();
 
         BufferedWriter meshTermWriter = new BufferedWriter(new FileWriter(
                 new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_meshTerms.out")));
         BufferedWriter pubmedInfoWriter = new BufferedWriter(new FileWriter(
                 new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_info.out")));
+        List<PubmedArticle> articleList = new ArrayList<>();
+        Set<Integer> pmidSet = new HashSet<>();
+        List<File> xmlFiles = new ArrayList<>();
+        xmlFiles.add(new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/flavonoid_inflammation_human.xml"));
+        xmlFiles.add(new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/proanthocyanidins_inflammation_human.xml"));
+        xmlFiles.add(new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/blueberry_inflammation.xml"));
+        xmlFiles.add(new File("/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/blueberry_cardiovascular_disease.xml"));
 
+        for(File file : xmlFiles) {
+            SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            SAXHandler saxHandler = new SAXHandler();
+            saxParser.parse(file, saxHandler);
+            articleList.addAll(saxHandler.getArticleList());
+        }
 //        meshTermWriter.write("PMID|MeSH_Term\n");
 //        pubmedInfoWriter.write("PMID|Title|Abstract\n");
+
+        int count = 0;
         for (PubmedArticle article : articleList) {
             if (article.getTitle().startsWith("Reply:")) {
                 continue;
             }
-            pubmedInfoWriter.write(article.getPMID() + "|" + article.getTitle() + "|" + article.getAbs() + "\n");
+            StringBuilder builder =
+                    new StringBuilder().append(article.getPMID()).append("|").append(article.getTitle()).append("|").append(article.getAbs()).append("\n");
+            if (!pmidSet.contains(article.getPMID())) {
+                pubmedInfoWriter.write(builder.toString());
+                pmidSet.add(article.getPMID());
+            }
+            else {
+                //  do nothing
+            }
+
             for (String meshTerm : article.getMeshSet()) {
                 meshTermWriter.write( meshTerm + "|" + article.getPMID() + "|" + UUID.randomUUID() + "\n");
             }
         }
+        System.out.println(count);
+
         meshTermWriter.close();
         pubmedInfoWriter.close();
     }
