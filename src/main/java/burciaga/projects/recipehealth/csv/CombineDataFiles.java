@@ -10,7 +10,7 @@ import static org.apache.commons.lang3.ArrayUtils.remove;
 
 /**
  * Created by bmb0205 on 4/25/16.
- * Combines three pairs of files:
+ * Combines two pairs of files:
  *     * ALL_FOOD_DATA.csv.out
  *     * ALL_NUTR_DEF.csv.out
  */

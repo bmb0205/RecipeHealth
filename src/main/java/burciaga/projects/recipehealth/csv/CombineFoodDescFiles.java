@@ -56,18 +56,12 @@ public class CombineFoodDescFiles {
             String[] lineList = StringUtils.split(isoLine, "|");
             NDB_No = lineList[0];
             foodGroupCd = lineList[1];
-//            System.out.println(NDB_No);
             if (NDB_No.length() == 4) {
-//                System.out.println("yooo " + NDB_No + "  " + NDB_No.length());
                 lineList[0] = "0" + NDB_No;
                 lineList[1] = "0" + foodGroupCd;
-//                System.out.println(Arrays.toString(lineList));
                 if (!ndbSet.contains(lineList[0])) {
-//                    System.out.println("LOL" + Arrays.toString(lineList));
                     ndbSet.add(lineList[0]);
-//                    ndbSet.add(NDB_No);
                     outLines.add(StringUtils.join(lineList, '|'));
-//                    System.out.println(StringUtils.join(lineList, '|'));
                 } else {
                     //  do nothing
                 }
@@ -79,7 +73,6 @@ public class CombineFoodDescFiles {
             }
         }
         for (String line : outLines) {
-//                System.out.println("hehe" + line);
             writer.write(line + "\n");
         }
         writer.close();
