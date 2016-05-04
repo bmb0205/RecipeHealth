@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS SR_Weight
   NDB_No INT NOT NULL,
   Seq INT NOT NULL,
   Amount VARCHAR NOT NULL,
-  Measure_Des VARCHAR NOT NULL,
+  Measure_Desc VARCHAR NOT NULL,
   Gram_Weight NUMERIC NOT NULL,
 PRIMARY KEY (NDB_No, Seq),
 CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES All_Food_Description (NDB_No)
@@ -85,13 +85,25 @@ CREATE TABLE IF NOT EXISTS FL_Flav_Ind
   Compound_Val VARCHAR,
   uuid UUID NOT NULL,
 PRIMARY KEY(uuid),
-CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES FL_Data_Src (DataSrc_ID)
+CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES FL_Data_Src (DataSrc_ID),
+CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES ALL_Food_Description (NDB_No)
 );
 \copy FL_Flav_Ind FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_FLAV_IND.txt.out' DELIMITER '|' CSV;
 
 
 -- FL_DATA_SRCLN --
 -- DROP TABLE IF EXISTS FL_Data_Srcln CASCADE;
+CREATE TABLE IF NOT EXISTS FL_Data_Srcln_temp
+(
+  NDB_No INT NOT NULL,
+  Nutrient_No INT NOT NULL,
+  DataSrc_ID VARCHAR NOT NULL,
+  fl_uuid UUID NOT NULL,
+PRIMARY KEY (fl_uuid)
+);
+\copy FL_Data_Srcln_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_DATSRCLN.txt.out' DELIMITER '|' CSV;
+
+
 CREATE TABLE IF NOT EXISTS FL_Data_Srcln
 (
   NDB_No INT NOT NULL,
@@ -99,9 +111,19 @@ CREATE TABLE IF NOT EXISTS FL_Data_Srcln
   DataSrc_ID VARCHAR NOT NULL,
   fl_uuid UUID NOT NULL,
 PRIMARY KEY (fl_uuid),
-CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES FL_Data_Src (DataSrc_ID)
+CONSTRAINT fk_DataSrc_ID FOREIGN KEY (DataSrc_ID) REFERENCES FL_Data_Src (DataSrc_ID),
+CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES All_Nutrient_Definition (Nutrient_No),
+CONSTRAINT fk_NDB_No FOREIGN KEY (NDB_No) REFERENCES All_Food_Description (NDB_No)
 );
-\copy FL_Data_Srcln FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/Flavonoid/FL_DATSRCLN.txt.out' DELIMITER '|' CSV;
+
+INSERT INTO FL_Data_Srcln
+  SELECT NDB_No, Nutrient_No, DataSrc_ID, fl_uuid
+  FROM FL_Data_Srcln_temp
+  WHERE FL_Data_Srcln_temp.nutrient_no IN
+        (
+          SELECT nutrient_No FROM ALL_Nutrient_Definition
+        );
+DROP TABLE IF EXISTS FL_Data_Srcln_temp;
 
 
 -- ISOFLAVONE DATA --
@@ -191,7 +213,6 @@ CONSTRAINT fk_Nutrient_No FOREIGN KEY (Nutrient_No) REFERENCES ALL_Nutrient_Defi
 \copy ALL_Food_Data FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/USDA/ALL_FOOD_DATA.csv.out' DELIMITER '|' CSV;
 
 
-
 CREATE TABLE IF NOT EXISTS pubmed_info
 (
   pmid INT NOT NULL,
@@ -201,48 +222,51 @@ PRIMARY KEY(pmid)
 );
 \copy pubmed_info FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_info.out' DELIMITER '|' CSV;
 
-CREATE TABLE IF NOT EXISTS pmid_mesh_temp
+-- CREATE TABLE IF NOT EXISTS pmid_mesh_temp
+-- (
+--   MeshTerm VARCHAR NOT NULL,
+--   pmid INT,
+--   pubmed_uuid uuid NOT NULL,
+-- PRIMARY KEY(pubmed_uuid)
+-- );
+-- \copy pmid_mesh_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_meshTerms.out' DELIMITER '|' CSV;
+
+CREATE TABLE IF NOT EXISTS mesh
 (
   MeshTerm VARCHAR NOT NULL,
-  PMID INT,
-  pubmed_uuid uuid NOT NULL,
-PRIMARY KEY(pubmed_uuid)
+  MeshID VARCHAR NOT NULL,
+  PRIMARY KEY (MeshTerm)
 );
-\copy pmid_mesh_temp FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_meshTerms.out' DELIMITER '|' CSV;
+\copy mesh FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/csv_out/meshNodeOut.csv.out' DELIMITER '|' CSV;
+
 
 CREATE TABLE IF NOT EXISTS pmid_mesh
 (
   MeshTerm VARCHAR NOT NULL,
-  PMID INT,
+  pmid INT,
   pubmed_uuid uuid NOT NULL,
 PRIMARY KEY(pubmed_uuid),
-CONSTRAINT fk_PMID FOREIGN KEY (PMID) REFERENCES pubmed_info (PMID)
+-- CONSTRAINT fk_MeshTerm FOREIGN KEY (MeshTerm) REFERENCES mesh (MeshTerm),
+CONSTRAINT fk_PMID FOREIGN KEY (pmid) REFERENCES pubmed_info (pmid)
 );
-
-CREATE TABLE IF NOT EXISTS mesh
-(
-  MeshID VARCHAR NOT NULL,
-  MeshTerm VARCHAR NOT NULL,
-  PRIMARY KEY (MeshID)
-);
-\copy mesh FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/csv_out/meshNodeOut.csv.out' DELIMITER '|' CSV;
+\copy pmid_mesh FROM '/home/bmb0205/BiSD/KnowledgeBase/Sources/PubmedAdvancedSearch/pubmed_meshTerms.out' DELIMITER '|' CSV;
 
 CREATE INDEX mesh_meshterm_lc
   ON mesh (LOWER(meshterm));
 
-INSERT INTO pmid_mesh
-  SELECT MeshTerm, PMID, pubmed_uuid
-  FROM pmid_mesh_temp
-  WHERE pmid_mesh_temp.meshterm IN
-        (
-          SELECT meshterm FROM mesh
-        );
+-- INSERT INTO pmid_mesh
+--   SELECT MeshTerm, pmid, pubmed_uuid
+--   FROM pmid_mesh_temp
+--   WHERE pmid_mesh_temp.meshterm IN
+--         (
+--           SELECT meshterm FROM mesh
+--         );
 
 CREATE INDEX pmid_mesh_meshterm_lc
   ON pmid_mesh (LOWER(meshterm));
 
-DROP TABLE IF EXISTS pmid_mesh_temp;
-
+-- DROP TABLE IF EXISTS pmid_mesh_temp;
+-- ALTER TABLE mesh ADD CONSTRAINT fk_MeshTerm FOREIGN KEY (MeshTerm) REFERENCES pmid_mesh (MeshTerm);
 
 CREATE TABLE IF NOT EXISTS entrez_gene
 (

@@ -1,17 +1,17 @@
 ﻿
--- QUESTION: Since the year 2000, what foods (and specific nutrients within them) have been part of
--- quantitative analysis studies on various phytochemicals?
+-- -- What genes and pubmed articles are associated with the phytochemical 'catechin' in relation to cardiovascular disease or inflammation?
 
 SELECT
-	all_food_description.long_desc,
-	all_nutrient_definition.nutrient_desc,
-	fl_data_src.year, fl_data_src.title, fl_data_src.journal
-FROM all_food_description
-	JOIN fl_data_srcln
-		ON all_food_description.ndb_no = fl_data_srcln.ndb_no
-	JOIN fl_data_src
-		ON fl_data_src.datasrc_id = fl_data_srcln.datasrc_id
-	JOIN all_nutrient_definition
-		ON fl_data_srcln.nutrient_no = all_nutrient_definition.nutrient_no
-	WHERE fl_data_src.year > 2000
+	pmid_mesh.meshterm,
+	entrez_gene.gene_id, entrez_gene.gene_desc,
+	pubmed_info.pmid, pubmed_info.title, pubmed_info.abstract
+FROM pmid_mesh
+	JOIN pubmed_info
+		ON pmid_mesh.pmid = pubmed_info.pmid
+	JOIN gene_to_pubmed
+		ON pubmed_info.pmid = gene_to_pubmed.pmid
+	JOIN entrez_gene
+		ON gene_to_pubmed.gene_id = entrez_gene.gene_id
+
+WHERE pmid_mesh.meshterm = 'Catechin'
 ;

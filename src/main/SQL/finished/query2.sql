@@ -1,13 +1,19 @@
-﻿-- What are the titles and abstracts for all of the published articles involving 'Catechin'
+﻿
 
-SELECT 
-	mesh.meshid, mesh.meshterm,
-	pmid_mesh.pmid,
-	pubmed_info.title, pubmed_info.abstract
-FROM pmid_mesh
-	INNER JOIN mesh
-		ON LOWER(pmid_mesh.meshterm) = LOWER(mesh.meshterm)
-	INNER JOIN pubmed_info
-		ON pmid_mesh.pmid = pubmed_info.pmid
-	WHERE LOWER(pmid_mesh.meshterm) LIKE 'catechin' 
-;
+-- Since the year 2000, what studies were performed to analyze specific levels of the phytochemical Cyanidin?
+--  What were their titles, journals, year published, and what foods were analyzed specifically?
+
+SELECT
+	all_food_description.long_desc,
+	all_nutrient_definition.nutrient_desc,
+	fl_data_src.year, fl_data_src.title, fl_data_src.journal
+FROM all_food_description
+	JOIN fl_data_srcln
+		ON all_food_description.ndb_no = fl_data_srcln.ndb_no
+	JOIN fl_data_src
+		ON fl_data_src.datasrc_id = fl_data_srcln.datasrc_id
+	JOIN all_nutrient_definition
+		ON fl_data_srcln.nutrient_no = all_nutrient_definition.nutrient_no
+WHERE fl_data_src.year > 2000 AND all_nutrient_definition.nutrient_desc = 'Cyanidin';
+
+

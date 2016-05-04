@@ -1,8 +1,4 @@
 ﻿
--- This query will return the amount of all detected nutrients or this specified food item in the amount chosen,
--- along with any PMIDs published with full MeSH terms matching the nutrient description. (specificity still needs to be added e.g. matching 'Catechin-(+)' to 'Catechin'
--- In this example, I have chosen 'Blueberries, raw' as the desired food item
-
 -- QUESTION: What are the PMIDs and article titles that are associated with the phytochemicals found within this food (given they match exact MeSH Terms)?
 
 SELECT
@@ -24,6 +20,6 @@ FROM all_nutrient_definition
 		ON pmid_mesh.pmid = pubmed_info.pmid
 	WHERE all_food_description.long_desc LIKE 'Blueberries, raw'
 		AND sr_weight.amount = '1'
-		AND sr_weight.measure_des = 'cup'
+		AND sr_weight.measure_desc = 'cup'
 	AND all_food_data.nutrient_val != ANY ('{0, 0.0, 0.00, 0.000}'::numeric[])
 ;
