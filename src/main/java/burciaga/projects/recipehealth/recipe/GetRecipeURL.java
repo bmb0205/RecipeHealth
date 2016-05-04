@@ -31,16 +31,19 @@ public class GetRecipeURL extends HttpServlet {
         }
 
         String jsonString = builder.toString();
-
-        out.println(jsonString);
+//        JsonObject jObj = new JsonObject
+//        out.print(jsonString);
+//        out.close();
 
         Recipe recipe = new Gson().fromJson(jsonString, Recipe.class);
         String url = recipe.getUrl();
-
+////
         QueryIngredients parsedUrl = new QueryIngredients();
         Connection conn = parsedUrl.connectToDatabase();
         String omg = parsedUrl.queryRecipe(conn, url);
         out.println(omg);
+
+
 
         out.close();
     }
