@@ -76,8 +76,8 @@
 
                 <!--<div class="content"><span class="value"></span></div>-->
 
-                <select id="foodChoices" value="Please select a food option"></select>
-                <p><a class="btn-chooseFood" href="#" onclick="listSecondOptions()" role="button">Select food!</a></p>
+                <!--<select id="foodChoices" value="Please select a food option"></select>-->
+                <!--<p><a class="btn-chooseFood" href="#" onclick="listSecondOptions()" role="button">Select food!</a></p>-->
 
 
                 <!--<li class="dropdown" id="foodChoices">-->
@@ -103,8 +103,9 @@
                         dataType: "text",
                         data: jsonDataString,
                         success: function(data) {
+                            alert("did it first!");
                             alert(data);
-                            listOptions(data);
+//                            listOptions(data);
                         },
                         error: function(data) {
                             alert("oh no");
