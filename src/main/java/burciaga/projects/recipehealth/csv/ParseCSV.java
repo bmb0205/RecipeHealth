@@ -19,9 +19,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ParseCSV {
 
-    public static List<File> foodDescFileList = new ArrayList<File>();
-    public static List<File> foodDataFileList = new ArrayList<File>();
-    public static List<File> foodDefFileList = new ArrayList<File>();
+    public static List<File> foodDescFileList = new ArrayList<>();
+    public static List<File> foodDataFileList = new ArrayList<>();
+    public static List<File> foodDefFileList = new ArrayList<>();
 
     public static void parseMeSH(File meshFile) throws Exception {
         BufferedReader meshReader = new BufferedReader(new FileReader(meshFile));
