@@ -2,9 +2,7 @@ package burciaga.projects.recipehealth.db;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 
 /**
  * Class runs external process using Runtime.getRuntime().exec()

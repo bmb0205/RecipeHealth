@@ -2,6 +2,11 @@ package burciaga.projects.recipehealth.recipe;
 
 import java.io.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.Map;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +25,10 @@ public class GetRecipeURL extends HttpServlet {
 
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        response.setContentType("text/xml");
+        //response.setContentType("text/xml");
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
 
         BufferedReader reader = request.getReader();
         StringBuilder builder = new StringBuilder();
@@ -31,20 +38,36 @@ public class GetRecipeURL extends HttpServlet {
         }
 
         String jsonString = builder.toString();
-//        JsonObject jObj = new JsonObject
-//        out.print(jsonString);
-//        out.close();
-
         Recipe recipe = new Gson().fromJson(jsonString, Recipe.class);
         String url = recipe.getUrl();
-////
-        QueryIngredients parsedUrl = new QueryIngredients();
-        Connection conn = parsedUrl.connectToDatabase();
-        String omg = parsedUrl.queryRecipe(conn, url);
-        out.println(omg);
 
+        try {
+            QueryIngredients parsedUrl = new QueryIngredients();
+            Connection conn = parsedUrl.connectToDatabase();
+            ResultSet resultSet = parsedUrl.queryRecipe(conn, url);
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            out.println("<table id=\"resultstable\" border=\"1\" style=\"width:1200px\" height=\"400px\" overflow=\"auto\"");
+            out.println("<tr>");
 
+            // add column headers
+            out.println("<th>"+metaData.getColumnName(3)+"</th>");
+            out.println("<th>"+metaData.getColumnName(4)+"</th>");
+            out.println("<th>"+metaData.getColumnName(5)+"</th>");
+            out.println("</tr>");
 
+            while (resultSet.next()) {
+                out.println("<tr>");
+                out.println("  <td>"+ resultSet.getArray(3) + "</td>" +
+                        " <td>" + resultSet.getArray(4) + "</td>"+
+                        " <td>" + resultSet.getArray(5)+"</td>");
+                out.println("</tr");
+            }
+            out.println("</table>");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         out.close();
     }
 
