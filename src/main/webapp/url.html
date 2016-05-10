@@ -69,23 +69,13 @@
     <nav class="jumbo_bg">
         <div class="bgContainer">
             <div class="jumbotron" id="jumboframe">
+                <div id="results"></div>
                 <h1>Enter your recipe URL below</h1>
                 <input class="txtUrl" type="text" id="txtUrl" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
                 <p><a class="btn-submit" href="#" onclick="getURL()" role="button">Start searching!</a></p>
 
 
-                <!--<div class="content"><span class="value"></span></div>-->
 
-                <!--<select id="foodChoices" value="Please select a food option"></select>-->
-                <!--<p><a class="btn-chooseFood" href="#" onclick="listSecondOptions()" role="button">Select food!</a></p>-->
-
-
-                <!--<li class="dropdown" id="foodChoices">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phytochemicals<span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-
-                    <!--</ul>-->
-                <!--</li>-->
             </div>
 
             <script>
@@ -95,17 +85,15 @@
                     var params = {url: urlString};
 
                     var jsonDataString = JSON.stringify(params);
-
                     $.ajax({
                         type: "POST",
                         url: "GetRecipeURL.do",
                         contentType: "application/json",
+//                        context: '#results',
                         dataType: "text",
                         data: jsonDataString,
                         success: function(data) {
-                            alert("did it first!");
-                            alert(data);
-//                            listOptions(data);
+                            $("#jumboframe").html(data);
                         },
                         error: function(data) {
                             alert("oh no");
@@ -113,42 +101,42 @@
                     });
                 }
 
-                function listOptions(data) {
-                    var foodArray = data.split('\n');
-                    var select = document.getElementById('foodChoices');
-                    var fragment = document.createDocumentFragment();
+//                function listOptions(data) {
+//                    var foodArray = data.split('\n');
+//                    var select = document.getElementById('foodChoices');
+//                    var fragment = document.createDocumentFragment();
+//
+//                    foodArray.forEach(function(food) {
+//                        var foodOption = document.createElement('option');
+//                        foodOption.innerHTML = food;
+//                        foodOption.value = food;
+//                        fragment.appendChild(foodOption);
+//                    });
+//                    select.appendChild(fragment);
+//                }
 
-                    foodArray.forEach(function(food) {
-                        var foodOption = document.createElement('option');
-                        foodOption.innerHTML = food;
-                        foodOption.value = food;
-                        fragment.appendChild(foodOption);
-                    });
-                    select.appendChild(fragment);
-                }
-
-                function listSecondOptions() {
-                    var secondOption = document.getElementById('foodChoices').value;
-
-                    var foodParams = {selectedFood: secondOption};
-
-                    var jsonFoodString = JSON.stringify(foodParams);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "GetRecipeURL.do",
-                        contentType: "application/json",
-                        dataType: "text",
-                        data: jsonFoodString,
-                        success: function(data) {
-                            alert("did it!");
-                            alert(data);
-                        },
-                        error: function(data) {
-                            alert("oh no");
-                        }
-                    });
-                }
+//                function listSecondOptions() {
+//                    var secondOption = document.getElementById('foodChoices').value;
+//
+//                    var foodParams = {selectedFood: secondOption};
+//
+//                    var jsonFoodString = JSON.stringify(foodParams);
+//
+//                    $.ajax({
+//                        type: "POST",
+//                        url: "GetRecipeURL.do",
+//                        contentType: "application/json",
+//                        dataType: "text",
+//                        data: jsonFoodString,
+//                        success: function(data) {
+//                            alert("did it!");
+//                            alert(data);
+//                        },
+//                        error: function(data) {
+//                            alert("oh no");
+//                        }
+//                    });
+//                }
 
             </script>
         </div>
