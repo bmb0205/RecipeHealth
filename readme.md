@@ -1,1 +1,0 @@
-Source code for RecipeHealth web application. Please view 'dev' branch for current code in development
