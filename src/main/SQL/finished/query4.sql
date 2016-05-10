@@ -3,8 +3,7 @@
 
 SELECT
 	round((all_food_data.nutrient_val / 100.0) * sr_weight.gram_weight, 3),
-	all_nutrient_definition.unit, all_nutrient_definition.nutrient_desc,
-	all_food_description.long_desc
+	all_nutrient_definition.unit, all_nutrient_definition.nutrient_desc
 FROM all_nutrient_definition
 	JOIN all_food_data
 		ON all_food_data.nutrient_no = all_nutrient_definition.nutrient_no
