@@ -108,7 +108,9 @@
     width: 800px;
     color: #d9d9d9;
     font-weight: bolder;
-    margin: auto;
+    /*margin: auto;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
     text-shadow: 1px 1px rgba(0, 0, 0, .5);
 }
 
