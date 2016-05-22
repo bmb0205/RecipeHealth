@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 /**
  * Created by bburciag on 4/11/16.
+ * PubmedArticle class creates object that gets and sets pmid, title, abs and meshSet attributes
  */
 public class PubmedArticle {
 
@@ -15,7 +16,7 @@ public class PubmedArticle {
 
     public void PubmedArticle() { }
 
-    public void setPMID(int pmid) {
+    void setPMID(int pmid) {
         this.pmid = pmid;
     }
 
@@ -24,8 +25,7 @@ public class PubmedArticle {
     }
 
     public void setTitle(String title) {
-        String cleanedTitle = title.replace("]", "").replace("[", "").replace(".", "");
-        this.title = cleanedTitle;
+        this.title = title.replace("]", "").replace("[", "").replace(".", "");
     }
 
     public String getTitle() {
@@ -33,7 +33,8 @@ public class PubmedArticle {
     }
 
     public void setAbs(String abs) {
-            this.abs = abs;
+
+        this.abs = abs;
     }
 
     public String getAbs() {
@@ -44,10 +45,12 @@ public class PubmedArticle {
     }
 
     public void setMeshSet(HashSet<String> meshSet) {
+
         this.meshSet = meshSet;
     }
 
     public HashSet<String> getMeshSet() {
+
         return this.meshSet;
     }
 

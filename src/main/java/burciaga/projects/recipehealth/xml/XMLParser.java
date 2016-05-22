@@ -11,6 +11,10 @@ import java.util.*;
 
 /**
  * Created by bburciag on 4/11/16.
+ * XMLParser will parse XML files specified in main() for this specific instance using the SAX parser.
+ *      * To do: remove files in source directory that don't need to be parsed, and iterate files
+ *          in directory itself instead of hard coding file paths below
+ * Uses StringBuilder to build string of extracted XML attributes before writing to outfile
  */
 public class XMLParser {
 
@@ -38,13 +42,18 @@ public class XMLParser {
 //        meshTermWriter.write("PMID|MeSH_Term\n");
 //        pubmedInfoWriter.write("PMID|Title|Abstract\n");
 
-        int count = 0;
         for (PubmedArticle article : articleList) {
             if (article.getTitle().startsWith("Reply:")) {
                 continue;
             }
             StringBuilder builder =
-                    new StringBuilder().append(article.getPMID()).append("|").append(article.getTitle()).append("|").append(article.getAbs()).append("\n");
+                    new StringBuilder()
+                            .append(article.getPMID())
+                            .append("|")
+                            .append(article.getTitle())
+                            .append("|")
+                            .append(article.getAbs())
+                            .append("\n");
             if (!pmidSet.contains(article.getPMID())) {
                 pubmedInfoWriter.write(builder.toString());
                 pmidSet.add(article.getPMID());
@@ -57,8 +66,6 @@ public class XMLParser {
                 meshTermWriter.write( meshTerm + "|" + article.getPMID() + "|" + UUID.randomUUID() + "\n");
             }
         }
-        System.out.println(count);
-
         meshTermWriter.close();
         pubmedInfoWriter.close();
     }

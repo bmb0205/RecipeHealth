@@ -12,6 +12,7 @@ import java.util.HashSet;
 
 
 /**
+ * SAXHandler object is instantiated in XMLParser.java and is passed to a new SAXParser instance.
  * SAXHandler class overrides DefaultHandler methods to customize XML parsing.
  */
 public class SAXHandler extends DefaultHandler {
@@ -21,11 +22,11 @@ public class SAXHandler extends DefaultHandler {
     private HashSet<String> meshSet = null;
     private List<Integer> pmidList = null;
 
-    boolean pmid = false;
-    boolean title = false;
-    boolean abs = false;
-    boolean chemical = false;
-    boolean meshHeading = false;
+    private boolean pmid = false;
+    private boolean title = false;
+    private boolean abs = false;
+    private boolean chemical = false;
+    private boolean meshHeading = false;
 
 
     public List<PubmedArticle> getArticleList() {
