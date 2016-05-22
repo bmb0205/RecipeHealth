@@ -25,7 +25,6 @@ public class GetRecipeURL extends HttpServlet {
 
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        //response.setContentType("text/xml");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
