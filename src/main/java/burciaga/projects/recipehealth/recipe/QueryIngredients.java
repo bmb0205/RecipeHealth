@@ -104,7 +104,6 @@ public class QueryIngredients {
 
             Statement statement = conn.createStatement();
             resultSet = statement.executeQuery(query);
-//                System.out.println("here");
 
             return resultSet;
 //                StringBuilder sb = new StringBuilder();
