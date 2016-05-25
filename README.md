@@ -60,11 +60,12 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 	|	|	|--js/
 	|	|	|--less/
 	|	|	|--config.json
-	|	|	|--customindex.html
-	|	|	|--customurl.html
+	|	|	|--customindex.css
+	|	|	|--customurl.css
 	|	|	|--index.html
 	|	|	|--site_variables.less
 	|	|	|--url.html
+	|	|
 	|--target/
 	|	|
 	|	|--recipehealth.war
