@@ -1,13 +1,15 @@
 ## RecipeHealth Web Application
 
-Utilizes Apache Maven build tool, Apache Tomcat server, and Java, JavaScript, HTML, CSS, and SQL languages to deploy web application.
+Web application built using Apache Maven and deployed with Apache Tomcat that allows users to input a food recipe URL and receive detailed information for 60+ nutrients in the amounts specified in the recipe ingredients. The created PostgreSQL database connects the nutrients to medically backed research regarding human health and disease.
+
+Uses: Java, JavaScript, HTML, CSS, and SQL 
 
 Application uses RESTful architecture and client-server mode to communicate between the browser side JavaScript/HTML and a PostgreSQL database using a Java servlet.
 
-Natural Lanugage Processing difficulties were encountered and the project is on hold aside from front-end changes until a good direction is found to proceed in.
+Natural Lanugage Processing difficulties were encountered and the project is on hold aside from front-end changes until a good direction is found to proceed in. 
 
-**NOTICE -- work in progress **
-**major documentation needs to be added **
+**NOTICE -- work in progress...different directions can be taken **
+**more documentation needs to be added **
 
 **RecipeHealth**
 
