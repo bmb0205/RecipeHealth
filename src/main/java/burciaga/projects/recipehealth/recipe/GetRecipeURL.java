@@ -46,9 +46,9 @@ public class GetRecipeURL extends HttpServlet {
             ResultSet resultSet = parsedUrl.queryRecipe(conn, url);
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            out.println("<table id=\"resultstable\" border=\"1\" style=\"width:1200px\" height=\"400px\" overflow=\"auto\"");
+            out.println("<table id=\"resultstable\" value=\"sup\" border=\"1\""); // style=\"width:1200px\" height=\"400px\" overflow=\"auto\"");
             out.println("<tr>");
-
+            out.println("<h2>Nutrients found in this recipe and the research behind them</h2>");
             // add column headers
             out.println("<th>"+metaData.getColumnName(3)+"</th>");
             out.println("<th>"+metaData.getColumnName(4)+"</th>");
