@@ -49,12 +49,14 @@ public class GetRecipeURL extends HttpServlet {
             out.println("<table id=\"resultstable\" value=\"sup\" border=\"1\""); // style=\"width:1200px\" height=\"400px\" overflow=\"auto\"");
             out.println("<tr>");
             out.println("<h2>Nutrients found in this recipe and the research behind them</h2>");
+
             // add column headers
             out.println("<th>"+metaData.getColumnName(3)+"</th>");
             out.println("<th>"+metaData.getColumnName(4)+"</th>");
             out.println("<th>"+metaData.getColumnName(5)+"</th>");
             out.println("</tr>");
 
+            // add nutrient name, PMID and article title
             while (resultSet.next()) {
                 out.println("<tr>");
                 out.println("  <td>"+ resultSet.getArray(3) + "</td>" +

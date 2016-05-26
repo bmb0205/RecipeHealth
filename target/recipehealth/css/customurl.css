@@ -1,0 +1,187 @@
+/* JUMBOTRON */
+
+.jumbo_bg {
+    height: 750px;
+    position: relative;
+    width: 100%;
+    align-content: center;
+    z-index: 1;
+    background: url('https://www.babygizmo.com/wp-content/uploads/2014/02/Blueberry-Pie-000-2011-07-95.jpg-lo-rez.jpg') no-repeat center center;
+}
+
+#jumboframe {
+    color: #32cd32;
+    text-shadow: #32cd32;
+    height: 350px;
+    width: 1200px;
+    background: rgba(51, 51, 51, 0.92);
+    margin: 200px 425px;
+    position: absolute;
+    text-align: center;
+    overflow: auto;
+}
+
+#jumboframe h1 {
+    width: 900px;
+    font-weight: bolder;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
+    margin-top: 10px;
+    margin-left: 130px;
+    margin-right: 130px;
+    font-size: 42px;
+    color: #32cd32;
+}
+
+#jumboframe h2 {
+    font-weight: bolder;
+    color: #32cd32;
+    text-align: center;
+    font-size: 22px;
+}
+
+
+#jumboframe .txtUrl {
+    height: 50px;
+    width: 800px;
+    margin: 20px 130px;
+    border-radius: 15px;
+    z-index: 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.btn-submit, .btn-submit:hover {
+    font-size: 28px;
+    font-weight: 900;
+    color: #32cd32;
+    background-color: #333333;
+    border-radius: 10px;
+    margin-top: 15px;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
+    box-shadow: 1px 1px 10px 1px #32cd32;
+    text-decoration: none;
+    padding: 5px 5px;
+}
+
+
+/* FIRST FOOD OPTION DROP DOWN */
+
+#jumboframe #foodChoices,
+#jumboframe #foodChoices {
+    width: 500px;
+    height: 30px;
+    background: #333333;
+    font-size:  18px;
+    font-weight: bolder;
+    border-color: #32cd32;
+}
+
+#foodChoices > option > select {
+    background: #333333;
+    color: #FFFFFF;
+    font-weight: bolder;
+    margin-left: 10px;
+    font-size: 18px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+    border-color: #32cd32;
+    border-bottom: #32cd32;
+}
+
+.btn-chooseFood {
+    font-size: 28px;
+    font-weight: 900;
+    color: #32cd32;
+    background-color: #333333;
+    border-radius: 10px;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
+    box-shadow: 1px 1px 10px 1px #32cd32;
+    text-decoration: none;
+    padding: 5px 5px;
+    position: inherit;
+}
+
+
+#resultstable tbody {
+    background: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    vertical-align: middle;
+    text-align: center;
+    width: 800px;
+    height: 500px;
+    color: #32cd32;
+    overflow: auto;
+}
+
+#resultstable tbody tr > td {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 5px 5px 5px;
+    min-width: 100px;
+}
+
+
+/* footer */
+
+.footer {
+    height: 30px;
+    background: #333333;
+    color: #32cd32;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+/* NAVBAR */
+
+.container-fluid {
+    border-color: #333333;
+    color: #333333;
+    background: #333333;
+}
+
+/*// RecipeHealth title/header*/
+.navbar-nav,
+.navbar-header > a {
+    color: #32cd32;
+    background: #333333;
+    height: 60px;
+    margin-top: 5px;
+    margin-right: 15px;
+    font-weight: bolder;
+    font-size: 48px;
+    text-shadow: 0 3px 3px rgb(0, 0, 0);
+}
+
+/*// Slogan beneath title*/
+.navbar-header > p {
+    color: #d9d9d9;
+    font-weight: bolder;
+    font-size: 25px;
+    font-style: italic;
+    margin-left: 20px;
+    line-height: 1.3;
+    text-shadow: 0 2px 2px rgb(0, 0, 0);
+}
+
+/*navbar header links*/
+.navbar-inverse .navbar-nav .open .dropdown-menu,
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a,
+.navbar-inverse .navbar-nav>li>a {
+    margin-left: 125px;
+    margin-right: 125px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #d9d9d9!important;
+    text-shadow: 0 2px 2px #000;
+    background: #333;
+    border-color: #32cd32;
+}
+
+/*navbar header border separators*/
+.navbar-nav li,
+.navbar-nav li+li {
+    border-left: 2px solid #32cd32;
+    height: 75%;
+    margin-top: 37px;
+}
