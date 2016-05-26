@@ -17,7 +17,9 @@
 
 
     <!-- jQuery -->
-    <!--<link href="/webjars/jquery/3.0.0-alpha1/jquery.min.js">-->
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0-alpha1.min.js"></script>-->
+
+    <!--<link href="/webjars/jquery/2.2.4/jquery.min.js">-->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="./resources/dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
@@ -66,10 +68,11 @@
         </div><!-- /.container-fluid -->
     </nav>
     <!--btn btn-lg-->
+    <div id="results"></div>
+
     <nav class="jumbo_bg">
         <div class="bgContainer">
             <div class="jumbotron" id="jumboframe">
-                <div id="results"></div>
                 <h1>Enter your recipe URL below</h1>
                 <input class="txtUrl" type="text" id="txtUrl" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
                 <p><a class="btn-submit" href="#" onclick="getURL()" role="button">Start searching!</a></p>
@@ -79,19 +82,20 @@
             <script>
 
                 function getURL() {
-                    var urlString = document.getElementById("txtUrl").value;
+                    var urlString = $('#txtUrl').val();
                     var params = {url: urlString};
-
                     var jsonDataString = JSON.stringify(params);
+                    var $jumboFrame = $('#jumboframe');
                     $.ajax({
                         type: "POST",
                         url: "GetRecipeURL.do",
                         contentType: "application/json",
-//                        context: '#results',
                         dataType: "text",
                         data: jsonDataString,
                         success: function(data) {
-                            $("#jumboframe").html(data);
+                            $jumboFrame.empty();
+                            $jumboFrame.append(data);
+//                            $('jumboframe.h1').css("font-size", "22");
                         },
                         error: function(data) {
                             alert("oh no");
@@ -150,10 +154,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-    <!--<script>window.jQuery || document.write('<script src="./docs/assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="./dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0-alpha1.min.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="docs/assets/js/ie10-viewport-bug-workaround.js"></script>-->

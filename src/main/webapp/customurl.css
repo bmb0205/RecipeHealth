@@ -13,11 +13,12 @@
     color: #32cd32;
     text-shadow: #32cd32;
     height: 350px;
-    width: auto;
+    width: 1200px;
     background: rgba(51, 51, 51, 0.92);
     margin: 200px 425px;
     position: absolute;
     text-align: center;
+    overflow: auto;
 }
 
 #jumboframe h1 {
@@ -30,6 +31,14 @@
     font-size: 42px;
     color: #32cd32;
 }
+
+#jumboframe h2 {
+    font-weight: bolder;
+    color: #32cd32;
+    text-align: center;
+    font-size: 22px;
+}
+
 
 #jumboframe .txtUrl {
     height: 50px;
@@ -91,24 +100,21 @@
     position: inherit;
 }
 
-/*results*/
-/*#results tr td {*/
-    /*font-size: 14px;*/
-    /*font-weight: bold;*/
-    /*padding: 5px 5px;*/
-/*}*/
-
 
 #resultstable tbody {
-    background: rgba(51, 51, 51, 0.92);
+    background: transparent;
     font-size: 18px;
     font-weight: 700;
-    padding: 5px 5px 5px;
-    min-width: 800px;
+    vertical-align: middle;
+    text-align: center;
+    width: 800px;
+    height: 500px;
+    color: #32cd32;
+    overflow: auto;
+    text-align: center;
 }
 
 #resultstable tbody tr > td {
-    background: rgba(51, 51, 51, 0.92);
     font-size: 18px;
     font-weight: 700;
     padding: 5px 5px 5px;
