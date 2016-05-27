@@ -1,7 +1,8 @@
+
 /* JUMBOTRON */
 
 .jumbo_bg {
-    height: 750px;
+    height: 100%;
     position: relative;
     width: 100%;
     align-content: center;
@@ -66,39 +67,38 @@
 
 /* FIRST FOOD OPTION DROP DOWN */
 
-#jumboframe #foodChoices,
-#jumboframe #foodChoices {
-    width: 500px;
-    height: 30px;
-    background: #333333;
-    font-size:  18px;
-    font-weight: bolder;
-    border-color: #32cd32;
-}
+/*#jumboframe #foodChoices,*/
+/*#jumboframe #foodChoices {*/
+    /*width: 500px;*/
+    /*height: 30px;*/
+    /*background: #333333;*/
+    /*font-size:  18px;*/
+    /*font-weight: bolder;*/
+    /*border-color: #32cd32;*/
+/*}*/
 
-#foodChoices > option > select {
-    background: #333333;
-    color: #FFFFFF;
-    font-weight: bolder;
-    margin-left: 10px;
-    font-size: 18px;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
-    border-color: #32cd32;
-    border-bottom: #32cd32;
-}
+/*#foodChoices > option > select {*/
+    /*background: #333333;*/
+    /*color: #FFFFFF;*/
+    /*font-weight: bolder;*/
+    /*margin-left: 10px;*/
+    /*font-size: 18px;*/
+    /*text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);*/
+    /*border-color: #32cd32;*/
+/*}*/
 
-.btn-chooseFood {
-    font-size: 28px;
-    font-weight: 900;
-    color: #32cd32;
-    background-color: #333333;
-    border-radius: 10px;
-    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
-    box-shadow: 1px 1px 10px 1px #32cd32;
-    text-decoration: none;
-    padding: 5px 5px;
-    position: inherit;
-}
+/*.btn-chooseFood {*/
+    /*font-size: 28px;*/
+    /*font-weight: 900;*/
+    /*color: #32cd32;*/
+    /*background-color: #333333;*/
+    /*border-radius: 10px;*/
+    /*text-shadow: 0 3px 3px rgba(0, 0, 0, .7);*/
+    /*box-shadow: 1px 1px 10px 1px #32cd32;*/
+    /*text-decoration: none;*/
+    /*padding: 5px 5px;*/
+    /*position: inherit;*/
+/*}*/
 
 
 #resultstable tbody {
@@ -124,7 +124,7 @@
 /* footer */
 
 .footer {
-    height: 30px;
+    height: 100px;
     background: #333333;
     color: #32cd32;
     font-weight: bold;
@@ -132,56 +132,111 @@
 }
 
 
-/* NAVBAR */
 
 .container-fluid {
-    border-color: #333333;
-    color: #333333;
-    background: #333333;
+    background: #262626;
+    height: 100px;
 }
 
-/*// RecipeHealth title/header*/
-.navbar-nav,
-.navbar-header > a {
-    color: #32cd32;
-    background: #333333;
-    height: 60px;
-    margin-top: 5px;
-    margin-right: 15px;
-    font-weight: bolder;
-    font-size: 48px;
-    text-shadow: 0 3px 3px rgb(0, 0, 0);
+/*navbar header options*/
+.navbar-header .navbar-nav {
+    background: #262626;
+    font-size: 24px;
+    min-width: 100%;
+    padding-top: 20px;
+    position: absolute;
+    float: right;
 }
 
-/*// Slogan beneath title*/
-.navbar-header > p {
-    color: #d9d9d9;
-    font-weight: bolder;
-    font-size: 25px;
-    font-style: italic;
-    margin-left: 20px;
-    line-height: 1.3;
-    text-shadow: 0 2px 2px rgb(0, 0, 0);
-}
+/*.navbar-inverse {*/
+    /*margin-bottom: 0;*/
+/*}*/
 
-/*navbar header links*/
-.navbar-inverse .navbar-nav .open .dropdown-menu,
-.navbar-inverse .navbar-nav .open .dropdown-menu>li>a,
-.navbar-inverse .navbar-nav>li>a {
-    margin-left: 125px;
-    margin-right: 125px;
-    font-size: 20px;
-    font-weight: bolder;
-    color: #d9d9d9!important;
-    text-shadow: 0 2px 2px #000;
-    background: #333;
-    border-color: #32cd32;
-}
 
-/*navbar header border separators*/
 .navbar-nav li,
 .navbar-nav li+li {
     border-left: 2px solid #32cd32;
     height: 75%;
-    margin-top: 37px;
+    margin-top: 25px;
 }
+
+.navbar-default .navbar-nav li  a {
+    color: #f7f7f7;
+    padding-right: 100px;
+    padding-left: 100px;
+    font-size: 18px;
+    height: 50px;
+}
+
+.navbar-default .navbar-nav li  a:hover {
+    color: #32cd32;
+}
+
+.navbar-collapse {
+    background: #262626;
+}
+
+.navbar-header .navbar-brand {
+    color: #32cd32;
+    float: left;
+    background: #262626;
+    font-size: 56px;
+    font-weight: bolder;
+    text-shadow: 0 3px 3px rgb(0, 0, 0);
+    margin-top: 25px;
+    height: 50%;
+}
+
+/* NAVBAR */
+
+/*.container-fluid {*/
+    /*border-color: #333333;*/
+    /*color: #333333;*/
+    /*background: #333333;*/
+/*}*/
+
+/*// RecipeHealth title/header*/
+/*.navbar-nav,*/
+/*.navbar-header > a {*/
+    /*color: #32cd32;*/
+    /*background: #333333;*/
+    /*height: 60px;*/
+    /*margin-top: 5px;*/
+    /*margin-right: 15px;*/
+    /*font-weight: bolder;*/
+    /*font-size: 48px;*/
+    /*text-shadow: 0 3px 3px rgb(0, 0, 0);*/
+/*}*/
+
+/*// Slogan beneath title*!*!*/
+/*.navbar-header > p {*/
+    /*color: #d9d9d9;*/
+    /*font-weight: bolder;*/
+    /*font-size: 25px;*/
+    /*font-style: italic;*/
+    /*margin-left: 20px;*/
+    /*line-height: 1.3;*/
+    /*text-shadow: 0 2px 2px rgb(0, 0, 0);*/
+/*}*/
+
+/*!*navbar header links*!*/
+/*.navbar-inverse .navbar-nav .open .dropdown-menu,*/
+/*.navbar-inverse .navbar-nav .open .dropdown-menu>li>a,*/
+/*.navbar-inverse .navbar-nav>li>a {*/
+    /*margin-left: 125px;*/
+    /*margin-right: 125px;*/
+    /*font-size: 20px;*/
+    /*font-weight: bolder;*/
+    /*color: #d9d9d9!important;*/
+    /*text-shadow: 0 2px 2px #000;*/
+    /*background: #333;*/
+    /*border-color: #32cd32;*/
+/*}*/
+
+/*!*navbar header border separators*!*/
+/*.navbar-nav li,*/
+/*.navbar-nav li+li {*/
+    /*border-left: 2px solid #32cd32;*/
+    /*height: 75%;*/
+    /*margin-top: 37px;*/
+/*}*/

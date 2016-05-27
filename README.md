@@ -11,7 +11,13 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 **NOTICE -- work in progress...different directions can be taken **
 **more documentation needs to be added **
 
-![Alt text](http://i.imgur.com/2Iym4tX.png "RecipeHealth")
+![Image could not be loaded](home1.png "RecipeHealth")
+
+
+![Image could not be loaded](home2.png "RecipeHealth")
+
+
+![Image could not be loaded](home3.png "RecipeHealth")
 
 
 **RecipeHealth**
