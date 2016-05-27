@@ -11,6 +11,9 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 **NOTICE -- work in progress...different directions can be taken **
 **more documentation needs to be added **
 
+![Alt text](screen.png?raw=true "RecipeHealth")
+
+
 **RecipeHealth**
 
 	|--src/main/
