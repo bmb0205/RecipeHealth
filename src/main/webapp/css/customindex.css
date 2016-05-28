@@ -168,13 +168,14 @@ html {
      .transition(6s ease-in-out left);
 }
 
-/*// Circle images*/
+/*Circle images*/
 .img-circle {
     margin-top: 75px;
 }
 
 
-/* FEATURES */
+/* FEATURETTES */
+
 .featurette {
     background: #262626;
     height: 400px;
@@ -206,9 +207,11 @@ html {
 .row {
     color: #f7f7f7;
     margin-bottom: 100px;
-    /*border: 1px #32cd32;*/
 }
 
+.featurette .lead {
+    font-size: 24px;
+}
 
 
 
