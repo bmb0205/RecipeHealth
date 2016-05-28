@@ -12,7 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="customurl.css" type="text/css" rel="stylesheet">
+    <link href="css/customurl.css" type="text/css" rel="stylesheet">
     <!--<link href="site_variables.less" type="text/css" rel="stylesheet">-->
 
 
@@ -34,78 +34,90 @@
     <link href="js/carousel.js" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
+
+
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">RecipeHealth</a>
-                <p>"Supporting your food choices <br> with science based evidence"</p>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" href="index.html">RecipeHealth</div>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="middle">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="#">Why RecipeHealth?</a></li>
                     <li><a href="url.html">RecipeHealth Database</a></li>
-                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">About us</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    
     <!--btn btn-lg-->
     <div id="results"></div>
 
-    <nav class="jumbo_bg">
-        <div class="bgContainer">
-            <div class="jumbotron" id="jumboframe">
-                <h1>Enter your recipe URL below</h1>
-                <input class="txtUrl" type="text" id="txtUrl" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
-                <p><a class="btn-submit" href="#" onclick="getURL()" role="button">Start searching!</a></p>
-
-            </div>
-
-            <script>
-
-                function getURL() {
-                    var urlString = $('#txtUrl').val();
-                    var params = {url: urlString};
-                    var jsonDataString = JSON.stringify(params);
-                    var $jumboFrame = $('#jumboframe');
-                    $.ajax({
-                        type: "POST",
-                        url: "GetRecipeURL.do",
-                        contentType: "application/json",
-                        dataType: "text",
-                        data: jsonDataString,
-                        success: function(data) {
-                            $jumboFrame.empty();
-                            $jumboFrame.append(data);
-//                            $('jumboframe.h1').css("font-size", "22");
-                        },
-                        error: function(data) {
-                            alert("oh no");
-                        }
-                    });
-                }
-
-//                function listOptions(data) {
-//                    var foodArray = data.split('\n');
-//                    var select = document.getElementById('foodChoices');
-//                    var fragment = document.createDocumentFragment();
-//
-//                    foodArray.forEach(function(food) {
-//                        var foodOption = document.createElement('option');
-//                        foodOption.innerHTML = food;
-//                        foodOption.value = food;
-//                        fragment.appendChild(foodOption);
-//                    });
-//                    select.appendChild(fragment);
-//                }
-
-            </script>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="jumboContainer">
+            <h1>Enter your recipe URL below</h1>
+            <input class="txtUrl" type="text" id="txtUrl" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
+            <p><a class="btn btn-primary btn-lg" href="#" onClick="getURL()" role="button">Start searching!</a></p>
         </div>
-    </nav>
+    </div>
 
+    <script>
+        function getURL() {
+            var urlString = $('#txtUrl').val();
+            var params = {url: urlString};
+            var jsonDataString = JSON.stringify(params);
+            var $jumboContainer = $('.jumboContainer');
+            $.ajax({
+                type: "POST",
+                url: "GetRecipeURL.do",
+                contentType: "application/json",
+                dataType: "text",
+                data: jsonDataString,
+                success: function(data) {
+                    $jumboContainer.empty();
+                    $jumboContainer.append(data);
+                    $jumboContainer.css("font-size", "18");
+                },
+                error: function(data) {
+                    $jumboContainer.append("Could not load the data!")
+                }
+            });
+        }
+        </script>
+
+    <!--Natural language processing speedbumps. Decide on project direction-->
+<!--//                function listOptions(data) {-->
+<!--//                    var foodArray = data.split('\n');-->
+<!--//                    var select = document.getElementById('foodChoices');-->
+<!--//                    var fragment = document.createDocumentFragment();-->
+<!--//-->
+<!--//                    foodArray.forEach(function(food) {-->
+<!--//                        var foodOption = document.createElement('option');-->
+<!--//                        foodOption.innerHTML = food;-->
+<!--//                        foodOption.value = food;-->
+<!--//                        fragment.appendChild(foodOption);-->
+<!--//                    });-->
+<!--//                    select.appendChild(fragment);-->
+<!--//                }-->
+
+            <!--</script>-->
+        <!--</div>-->
+    <!--</nav>-->
+
+    <div class="footer">
+
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
