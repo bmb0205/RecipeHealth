@@ -29,7 +29,6 @@ public class GetRecipeURL extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-
         BufferedReader reader = request.getReader();
         StringBuilder builder = new StringBuilder();
         String line;
@@ -41,26 +40,27 @@ public class GetRecipeURL extends HttpServlet {
         Recipe recipe = new Gson().fromJson(jsonString, Recipe.class);
         String url = recipe.getUrl();
 
+
+        // write response by putting data into HTML table
         try {
             QueryIngredients parsedUrl = new QueryIngredients();
             Connection conn = parsedUrl.connectToDatabase();
             ResultSet resultSet = parsedUrl.queryRecipe(conn, url);
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            out.println("<table id=\"resultstable\" value=\"sup\" border=\"1\"");
+//            ResultSetMetaData metaData = resultSet.getMetaData();
+            out.println("<table class=\"resultstable\" border=\"1\"");
             out.println("<tr>");
             out.println("<h2>Nutrients found in this recipe and the research behind them</h2>");
-            // add column headers
-            out.println("<th>"+metaData.getColumnName(3)+"</th>");
-            out.println("<th>"+metaData.getColumnName(4)+"</th>");
-            out.println("<th>"+metaData.getColumnName(5)+"</th>");
+            out.println("<th>Nutrient Description</th>");
+            out.println("<th>PubMed ID</th>");
+            out.println("<th>Research article title</th>");
             out.println("</tr>");
 
+            // Nutrient, PMID, Article title
             while (resultSet.next()) {
                 out.println("<tr>");
-                out.println("  <td>"+ resultSet.getArray(3) + "</td>" +
-                        " <td>" + resultSet.getArray(4) + "</td>"+
-                        " <td>" + resultSet.getArray(5)+"</td>");
+                out.println("<td>"+ resultSet.getArray(3) + "</td>" +
+                        "<td>" + resultSet.getArray(4) + "</td>"+
+                        "<td><a href=\"http://www.ncbi.nlm.nih.gov/pubmed/"+ resultSet.getArray(4) + "\">" + resultSet.getArray(5)+"</td>");
                 out.println("</tr");
             }
             out.println("</table>");

@@ -60,21 +60,20 @@
         </div><!-- /.container-fluid -->
     </nav>
     
-    <!--btn btn-lg-->
-    <div id="results"></div>
+    <!--<div class="results"></div>-->
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="jumboContainer">
             <h1>Enter your recipe URL below</h1>
-            <input class="txtUrl" type="text" id="txtUrl" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
+            <input class="txtUrl" type="text" value="...." onfocus="if(this.value == '....') { this.value = ''; }"/>
             <p><a class="btn btn-primary btn-lg" href="#" onClick="getURL()" role="button">Start searching!</a></p>
         </div>
     </div>
 
     <script>
         function getURL() {
-            var urlString = $('#txtUrl').val();
+            var urlString = $('.txtUrl').val();
             var params = {url: urlString};
             var jsonDataString = JSON.stringify(params);
             var $jumboContainer = $('.jumboContainer');
@@ -90,6 +89,7 @@
                     $jumboContainer.css("font-size", "18");
                 },
                 error: function(data) {
+                    $jumboContainer.clear();
                     $jumboContainer.append("Could not load the data!")
                 }
             });
