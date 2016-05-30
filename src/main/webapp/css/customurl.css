@@ -1,7 +1,78 @@
-/* JUMBOTRON */
+/*// contains all custom CSS selectors and rules*/
 
-.jumbo_bg {
-    height: 750px;
+html {
+    background: #262626;
+}
+body {
+    background: #575757;
+}
+
+/* NAVBAR*/
+
+.container-fluid {
+    background: #262626;
+    height: 100px;
+}
+
+.navbar {
+    border-color: #32cd32;
+    margin-bottom: 0;
+}
+
+.mavbar-default {
+    border-color: #32cd32;
+}
+
+/*navbar header options*/
+.navbar-header .navbar-nav {
+    background: #262626;
+    font-size: 24px;
+    min-width: 100%;
+    padding-top: 20px;
+    position: absolute;
+    float: right;
+}
+
+/* menu dividers */
+.navbar-nav li,
+.navbar-nav li+li {
+    border-left: 2px solid #32cd32;
+    height: 75%;
+    margin-top: 25px;
+}
+
+.navbar-default .navbar-nav li  a {
+    color: #f7f7f7;
+    padding-right: 100px;
+    padding-left: 100px;
+    font-size: 22px;
+    height: 50px;
+}
+
+.navbar-default .navbar-nav li  a:hover {
+    color: #32cd32;
+}
+
+.navbar-collapse {
+    background: #262626;
+}
+
+.navbar-header .navbar-brand {
+    color: #32cd32;
+    float: left;
+    background: #262626;
+    font-size: 56px;
+    font-weight: bolder;
+    text-shadow: 0 3px 3px rgb(0, 0, 0);
+    margin-top: 25px;
+    height: 50%;
+}
+
+
+/*!* JUMBOTRON *!*/
+
+.jumbotron {
+    height: 700px;
     position: relative;
     width: 100%;
     align-content: center;
@@ -9,99 +80,56 @@
     background: url('https://www.babygizmo.com/wp-content/uploads/2014/02/Blueberry-Pie-000-2011-07-95.jpg-lo-rez.jpg') no-repeat center center;
 }
 
-#jumboframe {
+.jumboContainer {
     color: #32cd32;
     text-shadow: #32cd32;
     height: 350px;
     width: 1200px;
     background: rgba(51, 51, 51, 0.92);
-    margin: 200px 425px;
+    margin: 125px 400px 200px 350px;
     position: absolute;
     text-align: center;
     overflow: auto;
+    font-size: 32px;
 }
 
-#jumboframe h1 {
-    width: 900px;
+.jumboContainer h1 {
+    margin-top: 50px;
+    font-size: 36px;
     font-weight: bolder;
-    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
-    margin-top: 10px;
-    margin-left: 130px;
-    margin-right: 130px;
-    font-size: 42px;
-    color: #32cd32;
+    text-shadow: 0 3px 3px rgb(0, 0, 0);
 }
 
-#jumboframe h2 {
-    font-weight: bolder;
-    color: #32cd32;
-    text-align: center;
-    font-size: 22px;
-}
-
-
-#jumboframe .txtUrl {
+.txtUrl {
     height: 50px;
     width: 800px;
-    margin: 20px 130px;
+    margin: 25px 130px;
     border-radius: 15px;
     z-index: 0;
     font-size: 24px;
     text-align: center;
 }
 
-.btn-submit, .btn-submit:hover {
+.btn-primary, .btn-submit, .btn-submit:hover {
     font-size: 28px;
     font-weight: 900;
     color: #32cd32;
-    background-color: #333333;
-    border-radius: 10px;
+    background-color: #262626;
+    border-radius: 15px;
+    border-color: #32cd32;
     margin-top: 15px;
-    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
-    box-shadow: 1px 1px 10px 1px #32cd32;
-    text-decoration: none;
-    padding: 5px 5px;
+    box-shadow: 1px 1px 5px #32cd32;
 }
 
+/* SERVLET RESPONSE HEADER AND TABLE */
 
-/* FIRST FOOD OPTION DROP DOWN */
-
-#jumboframe #foodChoices,
-#jumboframe #foodChoices {
-    width: 500px;
-    height: 30px;
-    background: #333333;
-    font-size:  18px;
+.jumboContainer h2 {
+    color: #f7f7f7;
     font-weight: bolder;
-    border-color: #32cd32;
+    text-align: center;
 }
 
-#foodChoices > option > select {
-    background: #333333;
-    color: #FFFFFF;
-    font-weight: bolder;
-    margin-left: 10px;
-    font-size: 18px;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
-    border-color: #32cd32;
-    border-bottom: #32cd32;
-}
-
-.btn-chooseFood {
-    font-size: 28px;
-    font-weight: 900;
-    color: #32cd32;
-    background-color: #333333;
-    border-radius: 10px;
-    text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
-    box-shadow: 1px 1px 10px 1px #32cd32;
-    text-decoration: none;
-    padding: 5px 5px;
-    position: inherit;
-}
-
-
-#resultstable tbody {
+.resultstable tbody {
     background: transparent;
     font-size: 18px;
     font-weight: 700;
@@ -113,75 +141,17 @@
     overflow: auto;
 }
 
-#resultstable tbody tr > td {
+.resultstable th {
+    font-size: 22px;
+    text-align: center;
+    width: 160px;
+}
+
+.resultstable tbody tr > td > a {
     font-size: 18px;
     font-weight: 700;
     padding: 5px 5px 5px;
     min-width: 100px;
-}
-
-
-/* footer */
-
-.footer {
-    height: 30px;
-    background: #333333;
     color: #32cd32;
-    font-weight: bold;
-    font-size: 14px;
 }
-
-
-/* NAVBAR */
-
-.container-fluid {
-    border-color: #333333;
-    color: #333333;
-    background: #333333;
-}
-
-/*// RecipeHealth title/header*/
-.navbar-nav,
-.navbar-header > a {
-    color: #32cd32;
-    background: #333333;
-    height: 60px;
-    margin-top: 5px;
-    margin-right: 15px;
-    font-weight: bolder;
-    font-size: 48px;
-    text-shadow: 0 3px 3px rgb(0, 0, 0);
-}
-
-/*// Slogan beneath title*/
-.navbar-header > p {
-    color: #d9d9d9;
-    font-weight: bolder;
-    font-size: 25px;
-    font-style: italic;
-    margin-left: 20px;
-    line-height: 1.3;
-    text-shadow: 0 2px 2px rgb(0, 0, 0);
-}
-
-/*navbar header links*/
-.navbar-inverse .navbar-nav .open .dropdown-menu,
-.navbar-inverse .navbar-nav .open .dropdown-menu>li>a,
-.navbar-inverse .navbar-nav>li>a {
-    margin-left: 125px;
-    margin-right: 125px;
-    font-size: 20px;
-    font-weight: bolder;
-    color: #d9d9d9!important;
-    text-shadow: 0 2px 2px #000;
-    background: #333;
-    border-color: #32cd32;
-}
-
-/*navbar header border separators*/
-.navbar-nav li,
-.navbar-nav li+li {
-    border-left: 2px solid #32cd32;
-    height: 75%;
-    margin-top: 37px;
 }
