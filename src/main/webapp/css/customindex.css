@@ -41,7 +41,7 @@ html {
     color: #f7f7f7;
     padding-right: 100px;
     padding-left: 100px;
-    font-size: 18px;
+    font-size: 22px;
     height: 50px;
 }
 
@@ -64,14 +64,12 @@ html {
     height: 50%;
 }
 
-
-/*// CAROUSEL*/
+/* CAROUSEL*/
 
 .carousel {
     position: relative;
     border-bottom: #32cd32;
 }
-
 
 .carousel img {
     min-width: 100%;
@@ -90,8 +88,7 @@ html {
     background: #262626;
 }
 
-
-/*// Box for each slide*/
+/* Box for each slide*/
 .carousel-caption {
     background: rgba(51, 51, 51, 0.9);
     background-size: 800px;
@@ -103,7 +100,7 @@ html {
     /*z-index: 1;*/
 }
 
-/*// Header for each slide*/
+/* Header for each slide*/
 .carousel-caption h1 {
     line-height: 1.25;
     width: 800px;
@@ -113,19 +110,18 @@ html {
     text-shadow: 0 3px 3px rgba(0, 0, 0, .7);
 }
 
-/*// Text for each slide*/
+/* Text for each slide*/
 .carousel-caption .lead {
     line-height: 1.25;
     max-width: 720px;
     color: #d9d9d9;
     font-weight: bolder;
-    /*margin: auto;*/
     margin-top: 5px;
     margin-bottom: 5px;
     text-shadow: 1px 1px rgba(0, 0, 0, .5);
 }
 
-/*// Slide button*/
+/* Slide button*/
 .carousel-caption .btn,
 .carousel-caption .btn-primary,
 .carousel-caption .btn-lg {
@@ -139,6 +135,18 @@ html {
     box-shadow: 1px 1px 5px #32cd32;
 }
 
+.carousel .item {
+     height: 400px;
+     .transition(6s ease-in-out left);
+}
+
+/* Circle images*/
+
+.img-circle {
+    margin-top: 50px;
+    width: 150px;
+    height: 150px;
+}
 
 /* Float circle images */
 .hvr-float {
@@ -157,20 +165,11 @@ html {
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
 }
+
 .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
     -webkit-transform: translateY(-12px);
-    transform: translateY(-12px);
+    transform: translateY(-20px);
     box-shadow: 10px 10px 5px #32cd32;
-}
-
-.carousel .item {
-     height: 400px;
-     .transition(6s ease-in-out left);
-}
-
-/*Circle images*/
-.img-circle {
-    margin-top: 75px;
 }
 
 
@@ -178,7 +177,7 @@ html {
 
 .featurette {
     background: #262626;
-    height: 400px;
+    height: 600px;
     width: 100%;
 }
 

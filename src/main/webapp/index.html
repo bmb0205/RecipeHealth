@@ -44,9 +44,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Why RecipeHealth?</a></li>
+                    <li><a onclick="scrollToWhy()">Why RecipeHealth?</a></li>
                     <li><a href="url.html">RecipeHealth Database</a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a onclick="scrollToAbout()">About us</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -62,7 +62,7 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="img-responsive center-block" src="https://visualizedrecipes.files.wordpress.com/2014/08/blueberries.jpg" width="700" height="300" align="middle" alt="First slide">
+                <img class="img-responsive center-block" src="images/bbHome.jpg" width="700" height="300" align="middle" alt="First slide">
                 <div class="container">
                     <div class="carousel-caption" align="top">
                         <h1>Why RecipeHealth?</h1>
@@ -71,12 +71,12 @@
                             Are you tired of inaccurate nutritional health information and want something
                             that goes beyond your typical macro and micro nutrients reports?
                         </p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Find out more</a></p>
+                        <p><a class="btn btn-lg btn-primary" onclick="scrollToWhy()" role="button">Find out more</a></p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img class="img-responsive center-block" src="http://thelibertarianrepublic.com/wp-content/uploads/2015/02/science-wallpapers.jpg" width="700" height="300" align="middle" alt="Second slide">
+                <img class="img-responsive center-block" src="images/sciHome.jpg" width="700" height="300" align="middle" alt="Second slide">
                 <div class="container" align="center">
                     <div class="carousel-caption" align="top">
                         <h1>Real food. Real data. Real science.</h1>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="item">
-                <img class="img-responsive center-block" src="http://marilynmckenna.com/wp-content/uploads/2016/01/Dollarphotoclub_79609037.jpg" width="700" height="300" align="middle" alt="Third slide">
+                <img class="img-responsive center-block" src="images/fitHome.jpg" width="700" height="300" align="middle" alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption" align="top">
                         <h1>About our team</h1>
@@ -98,7 +98,7 @@
                             Fitness and nutrition enthusiasts, <br>food lovers, biologists, and computer scientists.
                             <br>Our team is just like you.
                         </p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more about us</a></p>
+                        <p><a class="btn btn-lg btn-primary" onclick="scrollToAbout()" role="button">Learn more about us</a></p>
                     </div>
                 </div>
             </div>
@@ -124,44 +124,82 @@
         <!-- Three columns of text below the carousel -->
         <div class="row" align="center">
             <div class="col-lg-4">
-                <img class="img-circle hvr-float" src="images/bbCirc.jpg" alt="Generic placeholder image" width="140" height="140">
+                <img class="img-circle hvr-float" onclick="scrollToFlav() "src="images/bbCirc.jpg" alt="Generic placeholder image">
                 <h2>Flavonoids</h2>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <img class="img-circle hvr-float" src="images/cbCirc.jpg" alt="Generic placeholder image" width="140" height="140">
-                <h2>Proanthocyanidins</h2>
+                <img class="img-circle hvr-float" onclick="scrollToIso()" src="images/soyCirc.jpg" alt="Generic placeholder image">
+                <h2>Isoflavones</h2>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <img class="img-circle hvr-float" src="images/soyCirc.jpg" alt="Generic placeholder image" width="140" height="140">
-                <h2>Isoflavones</h2>
+                <img class="img-circle hvr-float" onclick="scrollToPro()" src="images/cbCirc.jpg" alt="Generic placeholder image">
+                <h2>Proanthocyanidins</h2>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
+        <!--<script>-->
+            <!--function scrollToWhy() {-->
+                <!--$('html, body').animate({scrollTop: $('.why').offset().top }, 1000);-->
+                <!--return false;-->
+            <!--}-->
+            <!--function scrollToFlav() {-->
+                <!--$('html, body').animate({scrollTop: $('.flav').offset().top }, 1000);-->
+                <!--return false;-->
+            <!--}-->
+            <!--function scrollToIso() {-->
+                <!--$('html, body').animate({scrollTop: $('.iso').offset().top }, 1000);-->
+                <!--return false;-->
+            <!--}-->
+            <!--function scrollToPro() {-->
+                <!--$('html, body').animate({scrollTop: $('.pro').offset().top }, 1000);-->
+                <!--return false;-->
+            <!--}-->
+            <!--function scrollToAbout() {-->
+                <!--$('html, body').animate({scrollTop: $('.about').offset().top }, 1000);-->
+                <!--return false;-->
+            <!--}-->
+        <!--</script>-->
 
         <!-- START THE FEATURETTES -->
 
         <hr class="featurette-divider">
 
-        <div class="featurette">
-            <img class="featurette-image pull-right" src="../assets/img/examples/browser-icon-chrome.png">
+        <div class="featurette why">
+            <img class="featurette-image pull-right" src="../assets/img/examples/browser-icon-safari.png" alt="Why recipehealth?">
+            <h2 class="featurette-heading">Why RecipeHealth?<span class="muted"></span></h2>
+            <p class="lead"></p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="featurette flav">
+            <img class="featurette-image pull-right" src="../assets/img/examples/browser-icon-chrome.png" alt="Flavonoids">
             <h2 class="featurette-heading">Flavonoids<span class="muted"></span></h2>
             <p class="lead">Flavonoids are naturally occurring compounds that are found in fruit (especially darker berries), wine and even chocolate...</p>
         </div>
 
         <hr class="featurette-divider">
 
-        <div class="featurette">
-            <img class="featurette-image pull-left" src="../assets/img/examples/browser-icon-firefox.png">
+        <div class="featurette iso">
+            <img class="featurette-image pull-left" src="../assets/img/examples/browser-icon-firefox.png" alt="Isoflavones">
             <h2 class="featurette-heading">Isoflavones<span class="muted"></span></h2>
             <p class="lead">Proanthocyanidins are another class of polyphenolic compounds derived from various fruits and vegetables. Often overlooked in research...</p>
         </div>
 
         <hr class="featurette-divider">
 
-        <div class="featurette">
-            <img class="featurette-image pull-right" src="../assets/img/examples/browser-icon-safari.png">
+        <div class="featurette pro">
+            <img class="featurette-image pull-right" src="../assets/img/examples/browser-icon-safari.png" alt="Proanthocyanidins">
             <h2 class="featurette-heading">Proanthocyanidins<span class="muted"></span></h2>
             <p class="lead">Isoflavones are phytoestrogens found in high concentrations in soybeans. There is a lack of data regarding isoflavones, therefore...</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="featurette about">
+            <img class="featurette-image pull-left" src="../assets/img/examples/browser-icon-safari.png" alt="About us">
+            <h2 class="featurette-heading">About us<span class="muted"></span></h2>
+            <p class="lead"></p>
         </div>
 
         <hr class="featurette-divider">
@@ -180,9 +218,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js" integrity="sha256-e9gNBsAcA0DBuRWbm0oZfbiCyhjLrI6bmqAl5o+ZjUA=" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="./docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./js/scrollFunctions.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="docs/assets/js/ie10-viewport-bug-workaround.js"></script>-->
 </body>
