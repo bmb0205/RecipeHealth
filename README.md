@@ -20,7 +20,7 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 ![Image could not be loaded](home3.png "RecipeHealth_Home")
 
 
-![Image could not be loaded](db.png "RecipeHealth_Search")
+![Image could not be loaded](db1.png "RecipeHealth_Search")
 
 
 ![Image could not be loaded](db2.png "RecipeHealth_Search")
