@@ -73,13 +73,16 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 	|	|	|	|--web.xml
 	|	|	|
 	|	|	|--css/
+	|	|	|	|--customurl.css
+	|	|	|	|--customindex.css
+	|	|	|
 	|	|	|--dist/
 	|	|	|--grunt/
 	|	|	|--js/
+	|	|	|	|--jsfunc.js
+	|	|	|
 	|	|	|--less/
 	|	|	|--config.json
-	|	|	|--customindex.css
-	|	|	|--customurl.css
 	|	|	|--index.html
 	|	|	|--site_variables.less
 	|	|	|--url.html
