@@ -1,5 +1,6 @@
 ## RecipeHealth Web Application
 
+## **Please see dev branch for most current code**
 Web application built and deployed using Apache Maven and Tomcat that allows users to input a food recipe URL and receive detailed information for 60+ nutrients in the amounts specified in the recipe ingredients. The created PostgreSQL database connects the nutrients to medically backed research regarding human health and disease.
 
 Uses: Java, JavaScript, HTML, CSS, and SQL 

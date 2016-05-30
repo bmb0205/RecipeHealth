@@ -50,12 +50,23 @@ public class GetRecipeURL extends HttpServlet {
             out.println("<table class=\"resultstable\" border=\"1\"");
             out.println("<tr>");
             out.println("<h2>Nutrients found in this recipe and the research behind them</h2>");
+<<<<<<< HEAD
             out.println("<th>Nutrient Description</th>");
             out.println("<th>PubMed ID</th>");
             out.println("<th>Research article title</th>");
             out.println("</tr>");
 
             // Nutrient, PMID, Article title
+=======
+
+            // add column headers
+            out.println("<th>"+metaData.getColumnName(3)+"</th>");
+            out.println("<th>"+metaData.getColumnName(4)+"</th>");
+            out.println("<th>"+metaData.getColumnName(5)+"</th>");
+            out.println("</tr>");
+
+            // add nutrient name, PMID and article title
+>>>>>>> master
             while (resultSet.next()) {
                 out.println("<tr>");
                 out.println("<td>"+ resultSet.getArray(3) + "</td>" +
