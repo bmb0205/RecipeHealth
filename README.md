@@ -12,19 +12,19 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 **NOTICE -- work in progress...different directions can be taken **
 **more documentation needs to be added **
 
-![Image could not be loaded](home1.png "RecipeHealth_Home")
+![Image could not be loaded](images/home1.png "RecipeHealth_Home")
 
 
-![Image could not be loaded](home2.png "RecipeHealth_Home")
+![Image could not be loaded](images/home2.png "RecipeHealth_Home")
 
 
-![Image could not be loaded](home3.png "RecipeHealth_Home")
+![Image could not be loaded](images/home3.png "RecipeHealth_Home")
 
 
-![Image could not be loaded](db1.png "RecipeHealth_Search")
+![Image could not be loaded](images/db1.png "RecipeHealth_Search")
 
 
-![Image could not be loaded](db2.png "RecipeHealth_Search")
+![Image could not be loaded](images/db2.png "RecipeHealth_Search")
 
 
 **RecipeHealth**
@@ -88,4 +88,14 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 	|	|
 	|	|--recipehealth.war
 	|
+	|--images/
+	|	|
+	|	|--db1.png
+	|	|--db2.png
+	|	|--home1.png
+	|	|--home2.png
+	|	|--home3.png
+	|
 	|--pom.xml
+	|--mvnCleanPackageDeploy.sh
+
