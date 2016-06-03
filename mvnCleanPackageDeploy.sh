@@ -10,4 +10,4 @@ mvn package
 rm -rf $tomcat'recipehealth'
 rm -f $tomcat'recipehealth.war'
 
-cp $appbase'target/recipehealth.war' $tomcat'webapps/'
+cp $appbase'target/recipehealth.war' $tomcat
