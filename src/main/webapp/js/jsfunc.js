@@ -46,7 +46,7 @@ function scrollToAbout() {
 
 /*
 AJAX POST request connecting to GetRecipeURL.do Java servlet which handles request
-and queries PostgreSQL database before writing results to a table
+and queries PostgreSQL database before writing results to a table and appending to DOM
 */
 function getURL() {
     var $urlString = $('.txtUrl').val();
