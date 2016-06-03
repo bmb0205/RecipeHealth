@@ -1,6 +1,5 @@
 ## RecipeHealth Web Application
 
-## **Please see dev branch for most current code**
 Web application built and deployed using Apache Maven and Tomcat that allows users to input a food recipe URL and receive detailed information for 60+ nutrients in the amounts specified in the recipe ingredients. The created PostgreSQL database connects the nutrients to medically backed research regarding human health and disease.
 
 Uses: Java, JavaScript, HTML, CSS, and SQL 
@@ -26,7 +25,7 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 
 ![Image could not be loaded](images/db2.png "RecipeHealth_Search")
 
-
+!TODO: update directory tree with new gruntfile etc
 **RecipeHealth**
 
 	|--src/main/
@@ -73,13 +72,14 @@ Natural Lanugage Processing difficulties were encountered and the project is on 
 	|	|	|	|--web.xml
 	|	|	|
 	|	|	|--css/
+	|	|	|	|--customindex.css
+	|	|	|	|--customurl.css
+	|	|	|
 	|	|	|--dist/
 	|	|	|--grunt/
 	|	|	|--js/
 	|	|	|--less/
 	|	|	|--config.json
-	|	|	|--customindex.css
-	|	|	|--customurl.css
 	|	|	|--index.html
 	|	|	|--site_variables.less
 	|	|	|--url.html
