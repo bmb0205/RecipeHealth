@@ -39,8 +39,6 @@ public class XMLParser {
             saxParser.parse(file, saxHandler);
             articleList.addAll(saxHandler.getArticleList());
         }
-//        meshTermWriter.write("PMID|MeSH_Term\n");
-//        pubmedInfoWriter.write("PMID|Title|Abstract\n");
 
         for (PubmedArticle article : articleList) {
             if (article.getTitle().startsWith("Reply:")) {
@@ -57,9 +55,6 @@ public class XMLParser {
             if (!pmidSet.contains(article.getPMID())) {
                 pubmedInfoWriter.write(builder.toString());
                 pmidSet.add(article.getPMID());
-            }
-            else {
-                //  do nothing
             }
 
             for (String meshTerm : article.getMeshSet()) {

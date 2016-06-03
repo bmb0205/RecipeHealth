@@ -19,10 +19,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ParseCSV {
 
-    public static List<File> foodDescFileList = new ArrayList<>();
+    private static List<File> foodDescFileList = new ArrayList<>();
     public static List<File> foodDataFileList = new ArrayList<>();
     public static List<File> foodDefFileList = new ArrayList<>();
 
+    // parses mesh nodes originally created for neo4j graph database and writes to new outfile after transform
     public static void parseMeSH(File meshFile) throws Exception {
         BufferedReader meshReader = new BufferedReader(new FileReader(meshFile));
         BufferedWriter meshWriter = new BufferedWriter(new FileWriter(meshFile + ".out"));

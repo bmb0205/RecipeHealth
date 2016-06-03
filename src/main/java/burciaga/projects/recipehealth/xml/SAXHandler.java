@@ -1,7 +1,6 @@
 package burciaga.projects.recipehealth.xml;
 
 
-import burciaga.projects.recipehealth.xml.PubmedArticle;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -9,7 +8,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 
 /**
  * SAXHandler object is instantiated in XMLParser.java and is passed to a new SAXParser instance.
@@ -28,15 +26,15 @@ public class SAXHandler extends DefaultHandler {
     private boolean chemical = false;
     private boolean meshHeading = false;
 
-
     public List<PubmedArticle> getArticleList() {
         return pubmedArticleList;
     }
 
-    public HashSet<String> meshSet() {
-        return meshSet;
-    }
-
+    /*
+    Identifies start element according to desired attributes needing to be parsed.
+    At start of new PubMed article, creates instance of PubmedArticle(), hashset for mesh terms
+    and arraylist for pubmed articles
+     */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attribute)
             throws SAXException {
@@ -69,6 +67,7 @@ public class SAXHandler extends DefaultHandler {
         }
     }
 
+    // sets created mesh term set to article instance and adds instance to article list
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equalsIgnoreCase("PubmedArticle")) {
@@ -77,6 +76,7 @@ public class SAXHandler extends DefaultHandler {
         }
     }
 
+    // sets instance attributes for article object
     @Override
     public void characters(char ch[], int start, int length) throws SAXException {
         String newString = new String(ch, start, length);
@@ -98,6 +98,4 @@ public class SAXHandler extends DefaultHandler {
             meshHeading = false;
         }
     }
-
-
 }

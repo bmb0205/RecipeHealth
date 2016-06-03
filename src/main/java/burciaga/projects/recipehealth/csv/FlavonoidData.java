@@ -160,7 +160,7 @@ public class FlavonoidData {
                 }
             }
 
-            // add logic for if row should be written/filtered
+            // add logic for if row should be written/filtered...ignore 0.00 nutrient values
             private boolean shouldWriteRow(String[] row) {
                 if (inFileName.equals("FLAV_FLAV_IND.txt")) {
                     if (!row[5].equals("0.00")) {

@@ -17,7 +17,10 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Created by bmb0205 on 4/22/16.
+ * IsoflavoneData class is called from ParseCSV class in ParseCSV.java.
+ * This class sets CsvParser and CsvWriter settings for UniVocity Parser library, and
+ * overrides the parser's row processing methods for custom CSV parsing
+ * processor methods.
  */
 public class IsoflavoneData {
 
@@ -139,7 +142,7 @@ public class IsoflavoneData {
                 }
             }
 
-            // add logic for if row should be written/filtered
+            // add logic for if row should be written/filtered...leaving logic I may use later
             private boolean shouldWriteRow(String[] row) {
                 String NDB_No;
 //                System.out.println(inFileName);

@@ -24,11 +24,14 @@ public class GetRecipeURL extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    // handles requests from client
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        // set response type and create PrintWriter for writing response
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
+        // use StringBuilder to access HttpServletRequest object payload
         BufferedReader reader = request.getReader();
         StringBuilder builder = new StringBuilder();
         String line;
@@ -36,17 +39,17 @@ public class GetRecipeURL extends HttpServlet {
             builder.append(line);
         }
 
+        // Convert JSON to Java object using Recipe class
         String jsonString = builder.toString();
         Recipe recipe = new Gson().fromJson(jsonString, Recipe.class);
         String url = recipe.getUrl();
 
 
-        // write response by putting data into HTML table
+        // write response by putting data into HTML table which gets appended to DOM element
         try {
             QueryIngredients parsedUrl = new QueryIngredients();
             Connection conn = parsedUrl.connectToDatabase();
             ResultSet resultSet = parsedUrl.queryRecipe(conn, url);
-//            ResultSetMetaData metaData = resultSet.getMetaData();
             out.println("<table class=\"resultstable\" border=\"1\"");
             out.println("<tr>");
             out.println("<h2>Nutrients found in this recipe and the research behind them</h2>");
@@ -55,7 +58,7 @@ public class GetRecipeURL extends HttpServlet {
             out.println("<th>Research article title</th>");
             out.println("</tr>");
 
-            // Nutrient, PMID, Article title
+            // Nutrient, PMID, Article title (title is hyperlink to actual article on PMID)
             while (resultSet.next()) {
                 out.println("<tr>");
                 out.println("<td>"+ resultSet.getArray(3) + "</td>" +

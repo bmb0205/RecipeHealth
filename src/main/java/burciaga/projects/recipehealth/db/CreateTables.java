@@ -14,25 +14,14 @@ public class CreateTables {
 
     public static void main(String[] args) throws Exception {
 
-        //  Leave only desired SQL script uncommented
-
         //  create_and_import.sql
         String psqlScript =
                 "psql -U bmb0205 -d recipehealth -f /home/bmb0205/Resume/Java/RecipeHealth/src/main/SQL/create_and_import.sql";
 
-//         query1.sql
-//        String psqlScript =
-//                "psql -U bmb0205 -d recipehealth -f /home/bmb0205/Resume/Java/RecipeHealth/src/main/SQL/query1.sql";
-
-//        String psqlScript =
-//                "psql -U bmb0205 -d recipehealth -f /home/bmb0205/Resume/Java/RecipeHealth/src/main/SQL/query2.sql";
-
-//        String psqlScript =
-//                "psql -U bmb0205 -d recipehealth -f /home/bmb0205/Resume/Java/RecipeHealth/src/main/SQL/query3.sql";
-
-        runSQLScript(psqlScript);  // runs SQL script that is not commented out above
+        runSQLScript(psqlScript);
     }
 
+    // runs external program, in this case SQL script via psql
     private static void runSQLScript(String psqlScript) {
         try {
             Process extProcess = Runtime.getRuntime().exec(psqlScript);

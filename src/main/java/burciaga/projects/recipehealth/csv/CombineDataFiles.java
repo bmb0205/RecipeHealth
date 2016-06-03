@@ -26,6 +26,7 @@ public class CombineDataFiles {
         this.f3 = fileList.get(2);
     }
 
+    // appends the three data files together into one outfile
     public void appendDataFiles() throws Exception {
 
         Set<String> outLines = new HashSet<>();

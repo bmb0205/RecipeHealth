@@ -2,6 +2,7 @@ package burciaga.projects.recipehealth.recipe;
 
 /**
  * Created by bmb0205 on 5/1/16.
+ * 
  */
 public class Recipe {
 

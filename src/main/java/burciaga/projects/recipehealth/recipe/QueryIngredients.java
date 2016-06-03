@@ -14,6 +14,7 @@ import java.util.Set;
 
 /**
  * Created by bmb0205 on 4/26/16.
+
  */
 public class QueryIngredients {
 
@@ -27,6 +28,12 @@ public class QueryIngredients {
         url.queryRecipe(conn, holder);
     }
 
+    /*
+    JSoup HTML parser used to parse ingredient list out of recipe website
+    based on standardized recipe schema used by most online recipe websites.
+    This is where NLP decisions must be made in order to provide the user with the
+    smoothest user experience with minimal effort to obtain their results.
+    */
     public ResultSet queryRecipe(Connection conn, String url) throws IOException {
         Document recipeDoc;
         Set<String> bbSet = new HashSet<>();
@@ -45,42 +52,11 @@ public class QueryIngredients {
                     ingredient = StringUtils.join(multiWordIngredientList, '%');
                 }
             }
-//                System.out.println(ingredient);
-//                String query = "SELECT\n" +
-//                        "    all_nutrient_definition.nutrient_desc,\n" +
-//                        "    all_food_data.ndb_no, all_food_data.nutrient_no, all_food_data.nutrient_val, all_food_description.long_desc\n" +
-//                        "        --fl_flav_ind.food_indiv_description\n" +
-//                        "FROM all_nutrient_definition\n" +
-//                        "    JOIN all_food_data\n" +
-//                        "        ON all_food_data.nutrient_no = all_nutrient_definition.nutrient_no\n" +
-//                        "    JOIN all_food_description\n" +
-//                        "        ON all_food_description.ndb_no = all_food_data.ndb_no\n" +
-//                        "    WHERE LOWER(all_food_description.long_desc) == LOWER('Blueberries, raw')\n" +
-//                        "    AND all_food_data.ndb_no = all_food_description.ndb_no\n" +
-//                        "    AND all_food_data.nutrient_no = all_nutrient_definition.nutrient_no;";
-////                        "    AND all_food_data.nutrient_val != '0'\n" +
-////                        "    AND all_food_data.nutrient_val != '0.0'\n" +
-////                        "    AND all_food_data.nutrient_val != '0.00'\n" +
-////                        "    AND all_food_data.nutrient_val != '0.000';";
 
-//                String query =
-//                    "SELECT "+
-//                    "round((all_food_data.nutrient_val / 100.0) * sr_weight.gram_weight, 3),"+
-//                    "all_nutrient_definition.unit, all_nutrient_definition.nutrient_desc,"+
-//                    "all_food_description.long_desc "+
-//                        "FROM all_nutrient_definition "+
-//                            "JOIN all_food_data "+
-//                                "ON all_food_data.nutrient_no = all_nutrient_definition.nutrient_no "+
-//                            "JOIN all_food_description "+
-//                                "ON all_food_description.ndb_no = all_food_data.ndb_no "+
-//                            "JOIN sr_weight "+
-//                                "ON all_food_description.ndb_no = sr_weight.ndb_no "+
-//                    "WHERE all_food_description.long_desc LIKE 'Blueberries, raw'"+
-//                    "AND sr_weight.amount = '1'"+
-//                    "AND sr_weight.measure_desc = 'cup'"+
-//                    "AND all_food_data.nutrient_val != ANY ('{0, 0.0, 0.00, 0.000}'::numeric[]);";
-
-            //  Query for pubmed info from nutrient in blueberry
+            /*
+            SQL query for specific use case for blueberries
+            Returns result set to java servlet as response
+            */
             String query = "SELECT "+
                     "	round((all_food_data.nutrient_val / 100.0) * sr_weight.gram_weight, 3), "+
                     "	all_nutrient_definition.unit, all_nutrient_definition.nutrient_desc, "+
@@ -104,15 +80,7 @@ public class QueryIngredients {
 
             Statement statement = conn.createStatement();
             resultSet = statement.executeQuery(query);
-
             return resultSet;
-//                StringBuilder sb = new StringBuilder();
-//                for (String option : bbSet) {
-//                    sb.append(option);
-//                    sb.append("\n");
-//                }
-//                return sb.toString();
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,6 +88,7 @@ public class QueryIngredients {
         return resultSet;
     }
 
+    // connects to PostgreSQL database using jdbc driver
     public Connection connectToDatabase() {
         Connection conn = null;
         try {
