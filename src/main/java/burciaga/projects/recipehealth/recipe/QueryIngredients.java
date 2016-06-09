@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * Created by bmb0205 on 4/26/16.
-
+ * Class queries PostgreSQL database and returns result set
  */
 public class QueryIngredients {
 
@@ -56,6 +56,11 @@ public class QueryIngredients {
             /*
             SQL query for specific use case for blueberries
             Returns result set to java servlet as response
+
+            NLP issue example: '3/4 c blueberries' ingredient, while we have sometimes a dozen
+            different types of blueberries tested. Allow users to select from options? Lots of work for them...
+
+            Can make assumptions for most commonly picked items using statistics once app is deployed.
             */
             String query = "SELECT "+
                     "	round((all_food_data.nutrient_val / 100.0) * sr_weight.gram_weight, 3), "+
