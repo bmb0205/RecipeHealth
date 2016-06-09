@@ -12,7 +12,7 @@ function scrollToWhy() {
     return false;
 }
 
-// auto-scrolls to 'Why RecipeHealth?' div
+// auto-scrolls to 'Flavonoids' div
 function scrollToFlav() {
     $('html, body').animate({
         scrollTop: $('.flav').offset().top
@@ -70,4 +70,17 @@ function getURL() {
         }
     });
     return false;
+}
+
+window.onscroll = stickToTop();
+
+function stickToTop() {
+    var $navbar = $('.navbar-header .navbar-nav');
+    if (window.pageYOffSet > 100) {
+        $navbar.css('position', 'fixed');
+        $navbar.css('top', '0');
+    } else {
+        $nvarbar.css('position', '');
+        $navbar.css('top', '');
+    }
 }
